@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+	<input name="rawMaterialServiceRequest" required="true" />
+<!-- 	<input name="rawMaterialServiceResponse" required="true" /> -->
+
+	<!-- <action-state id="validate"> -->
+	<!-- <evaluate -->
+	<!-- expression="studentValidator.duplicateStudent(rawMaterialServiceRequest)" 
+		/> -->
+	<!-- <evaluate -->
+	<!-- expression="studentValidator.checkStudentAuth(rawMaterialServiceRequest)" 
+		/> -->
+	<!-- <evaluate expression="endValidation"> -->
+	<!-- <attribute name="name" value="endValidation"></attribute> -->
+	<!-- </evaluate> -->
+	<!-- <transition on="endValidation.success" to="saveStudent" /> -->
+	<!-- <transition on="endValidation.fail" to="exit" /> -->
+	<!-- </action-state> -->
+
+	<action-state id="getRawMaterials">
+		<evaluate
+			expression="rawMaterialComponent.getRawMaterials(rawMaterialServiceRequest)"
+			result="flowScope.rawMaterialServiceResponse" />
+		<transition to="exit" />
+	</action-state>
+
+	<end-state id="exit">
+		<output name="rawMaterialServiceResponse" />
+	</end-state>
+</flow>

@@ -1,0 +1,12 @@
+package com.vme.precast.labouractivity.api;
+
+public interface LabourActivityService {
+
+	public LabourActivityServiceResponse createLabourActivity(LabourActivityServiceRequest serviceRequest);
+
+	public LabourActivityServiceResponse getLabourActivitys(LabourActivityServiceRequest serviceRequest);
+
+	public LabourActivityServiceResponse updateLabourActivity(LabourActivityServiceRequest serviceRequest);
+
+	public LabourActivityServiceResponse deleteLabourActivity(LabourActivityServiceRequest serviceRequest);
+}

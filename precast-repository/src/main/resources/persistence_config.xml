@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:orm="http://www.springframework.org/schema/orm"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+  	http://www.springframework.org/schema/beans/spring-beans.xsd
+  	http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+  	http://www.springframework.org/schema/util 
+ 	http://www.springframework.org/schema/util/spring-util.xsd
+ 	http://www.springframework.org/schema/context 
+  	http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/data/jpa
+    http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+    http://www.springframework.org/schema/orm
+    http://www.springframework.org/schema/orm/spring-orm.xsd
+    http://www.springframework.org/schema/jdbc
+    http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+	<!-- Scans for repositories that will be auto-registered -->
+	<jpa:repositories
+		base-package="com.vme.precast.repository"
+		base-class="coliseum.jpa.BaseRepoImpl" />
+
+	<jpa:auditing auditor-aware-ref="customAuditorAware" />
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="com.mysql.cj.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1/precastdb" />
+		<property name="username" value="jameel" />
+		<property name="password" value="jameel" />
+		<!-- <property name="url" -->
+		<!-- value="jdbc:mysql://precast-db-instance.cikwoyhpscwf.ap-south-1.rds.amazonaws.com:3306/precastdb" 
+			/> -->
+		<!-- <property name="username" value="precast_admin" /> -->
+		<!-- <property name="password" value="precast_admin" /> -->
+	</bean>
+
+	<!-- EntityManagerFactory -->
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan"
+			value="com.vme.precast.domain" />
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+			</props>
+		</property>
+		<property name="jpaVendorAdapter">
+			<bean
+				class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="generateDdl" value="true" />
+				<property name="showSql" value="true" />
+			</bean>
+		</property>
+	</bean>
+
+	<!-- Transactions -->
+	<tx:annotation-driven
+		transaction-manager="transactionManager" />
+
+	<bean id="transactionManager"
+		class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory"
+			ref="entityManagerFactory" />
+	</bean>
+
+	<bean id="customAuditorAware"
+		class="coliseum.jpa.CustomAuditorAware" />
+</beans>
