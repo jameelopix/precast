@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+ <input name="orderItemServiceRequest" required="true" />
+
+ <action-state id="validate">
+ <evaluate
+ expression="orderItemValidator.checkOrderItemDuplicate(orderItemServiceRequest)" />
+ <evaluate expression="endValidation">
+ <attribute name="name" value="endValidation"></attribute>
+ </evaluate>
+ <transition on="endValidation.success" to="createOrderItem" />
+ </action-state>
+
+ <action-state id="createOrderItem">
+ <evaluate
+ expression="orderItemComponent.createOrderItem(orderItemServiceRequest)"
+ result="flowScope.orderItemServiceResponse" />
+ <transition to="exit" />
+ </action-state>
+
+ <end-state id="exit">
+ <output name="orderItemServiceResponse" />
+ </end-state>
+</flow>
