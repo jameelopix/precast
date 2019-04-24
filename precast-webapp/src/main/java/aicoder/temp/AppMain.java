@@ -29,15 +29,19 @@ public class AppMain {
 	String upperCase = "_upperCase";
 	String camelCase = "_camelCase";
 
+	String repoFile_suffix = "Repo";
 	String componentFile_suffix = "Component";
 	String componentImplFile_suffix = "ComponentImpl";
 	String serviceFile_suffix = "Service";
 	String serviceRequestFile_suffix = "ServiceRequest";
 	String serviceResponseFile_suffix = "ServiceResponse";
 	String validatorFile_suffix = "Validator";
+	String dtoFile_suffix = "DTO";
+	String searchDtoFile_suffix = "SearchDTO";
 	String validatorImplFile_suffix = "ValidatorImpl";
 	String genericConvertorFile_suffix = "GenericConvertor";
 	String controllerFile_suffix = "Controller";
+	String clientModelFile_suffix = "ClientModel";
 	String configFile_suffix = "_config";
 	String flowFile_suffix = "_flow";
 
@@ -122,28 +126,29 @@ public class AppMain {
 		folder_repository = projectBaseFolder + repositoryFolder + javaSrcFolder + packagePrefixFolder
 				+ packageSuffixFolder_repository;
 
-//		System.out.println(folder_controller);
-//		System.out.println(folder_api);
-//		System.out.println(folder_impl);
-//		System.out.println(folder_repository);
-//		System.out.println(folder_config);
-//		System.out.println(folder_process);
+// System.out.println(folder_controller);
+// System.out.println(folder_api);
+// System.out.println(folder_impl);
+// System.out.println(folder_repository);
+// System.out.println(folder_config);
+// System.out.println(folder_process);
 
-//		file_controller = variableNameMap.get("entityName")  + packageSuffixFolder_impl;;
-//		file_clientmodel = null;
-//		file_component = null;
-//		file_componentimpl = null;
-//		file_validator = null;
-//		file_validatorimpl = null;
-//		file_service = null;
-//		file_dto = null;
-//		file_servicerequest = null;
-//		file_serviceresponse = null;
-//		file_config = null;
-//		file_createxml = null;
-//		file_updatexml = null;
-//		file_deletexml = null;
-//		file_getxml = null;
+// file_controller = variableNameMap.get("entityName") +
+// packageSuffixFolder_impl;;
+// file_clientmodel = null;
+// file_component = null;
+// file_componentimpl = null;
+// file_validator = null;
+// file_validatorimpl = null;
+// file_service = null;
+// file_dto = null;
+// file_servicerequest = null;
+// file_serviceresponse = null;
+// file_config = null;
+// file_createxml = null;
+// file_updatexml = null;
+// file_deletexml = null;
+// file_getxml = null;
 	}
 
 	public AppMain() {
@@ -154,34 +159,48 @@ public class AppMain {
 // System.out.println(entry.getKey() + ":" + entry.getValue());
 // }
 
-//TODO repository code
+// TODO repository code
+		List<String> repoCode = this.templateBuilder(Arrays.asList(repoTemplate), variableNameMap);
+
 		List<String> componentCode = this.templateBuilder(Arrays.asList(componentTemplate), variableNameMap);
 		List<String> serviceCode = this.templateBuilder(Arrays.asList(serviceTemplate), variableNameMap);
 		List<String> serviceRequestCode = this.templateBuilder(Arrays.asList(serviceRequestTemplate), variableNameMap);
 		List<String> serviceResponseCode = this.templateBuilder(Arrays.asList(serviceResponseTemplate),
 				variableNameMap);
 		List<String> validatorCode = this.templateBuilder(Arrays.asList(validatorTemplate), variableNameMap);
+		List<String> dtoCode = constructDtoCode();
+		List<String> searchDtoCode = constructSearchDtoCode();
 
 		List<String> genericConvertorcode = constructGenericConvertor();
+		List<String> componentImplCode = constructComponentImplCode();
+		List<String> validatorImplCode = constructValidatorImplCode();
 
 		List<String> controllerCode = this.templateBuilder(Arrays.asList(controllerTemplate), variableNameMap);
+		List<String> clientModelCode = this.templateBuilder(Arrays.asList(clientModelTemplate), variableNameMap);
 
 		List<String> configXmlcode = this.templateBuilder(Arrays.asList(configXmlTemplate), variableNameMap);
-
 		List<String> createXmlcode = this.templateBuilder(Arrays.asList(createXml), variableNameMap);
 		List<String> updatexmlcode = this.templateBuilder(Arrays.asList(updatexml), variableNameMap);
 		List<String> deletexmlcode = this.templateBuilder(Arrays.asList(deletexml), variableNameMap);
 		List<String> getxmlcode = this.templateBuilder(Arrays.asList(getxml), variableNameMap);
+
+		saveFile(repoCode, folder_repository, entityName + repoFile_suffix + JAVA);
 
 		saveFile(componentCode, folder_api, entityName + componentFile_suffix + JAVA);
 		saveFile(serviceCode, folder_api, entityName + serviceFile_suffix + JAVA);
 		saveFile(serviceRequestCode, folder_api, entityName + serviceRequestFile_suffix + JAVA);
 		saveFile(serviceResponseCode, folder_api, entityName + serviceResponseFile_suffix + JAVA);
 		saveFile(validatorCode, folder_api, entityName + validatorFile_suffix + JAVA);
+		saveFile(dtoCode, folder_api, entityName + dtoFile_suffix + JAVA);
+		saveFile(searchDtoCode, folder_api, entityName + searchDtoFile_suffix + JAVA);
 
 		saveFile(genericConvertorcode, folder_impl, entityName + genericConvertorFile_suffix + JAVA);
+		saveFile(componentImplCode, folder_impl, entityName + componentImplFile_suffix + JAVA);
+		saveFile(validatorImplCode, folder_impl, entityName + validatorImplFile_suffix + JAVA);
 
 		saveFile(controllerCode, folder_controller, entityName + controllerFile_suffix + JAVA);
+		saveFile(clientModelCode, folder_controller, entityName + clientModelFile_suffix + JAVA);
+
 		saveFile(configXmlcode, folder_config, entityName.toLowerCase() + configFile_suffix + XML);
 		saveFile(createXmlcode, folder_process, "create" + entityName.toLowerCase() + flowFile_suffix + XML);
 		saveFile(updatexmlcode, folder_process, "update" + entityName.toLowerCase() + flowFile_suffix + XML);
@@ -189,9 +208,66 @@ public class AppMain {
 		saveFile(getxmlcode, folder_process, "get" + entityName.toLowerCase() + "s" + flowFile_suffix + XML);
 	}
 
+	private List<String> constructDtoCode() {
+		List<String> code = this.templateBuilder(Arrays.asList(dtoHeaderTemplate), variableNameMap);
+
+		for (Field field : entity.getDeclaredFields()) {
+			if (!"serialVersionUID".equals(field.getName())) {
+				StringBuilder sb = new StringBuilder("private ");
+				sb.append(field.getType());
+				sb.append(" ");
+				sb.append(getFirstCharLower(field.getName()));
+				sb.append(";");
+				code.add(sb.toString());
+			}
+		}
+		code.add(footerTemplate);
+		return code;
+	}
+
+	private List<String> constructSearchDtoCode() {
+		List<String> code = this.templateBuilder(Arrays.asList(searchDtoHeaderTemplate), variableNameMap);
+
+		for (Field field : entity.getDeclaredFields()) {
+			if (!"serialVersionUID".equals(field.getName())) {
+				StringBuilder sb = new StringBuilder("private List<");
+				sb.append(field.getType());
+				sb.append("> ");
+				sb.append(getFirstCharLower(field.getName()));
+				sb.append("List;");
+				code.add(sb.toString());
+			}
+		}
+		code.add("\r\n");
+
+		for (Field field : entity.getDeclaredFields()) {
+			if (!"serialVersionUID".equals(field.getName())) {
+				StringBuilder sb = new StringBuilder("public static String ");
+				sb.append(field.getName().toUpperCase());
+				sb.append(" = \"");
+				sb.append(field.getName());
+				sb.append("\";");
+				code.add(sb.toString());
+			}
+		}
+		code.add("\r\n");
+		code.add(footerTemplate);
+		return code;
+	}
+
+	private List<String> constructValidatorImplCode() {
+// TODO Auto-generated method stub
+		return null;
+	}
+
+	private List<String> constructComponentImplCode() {
+// TODO Auto-generated method stub
+		return null;
+	}
+
 	private void saveFile1(List<String> code, String dirPath, String fileName) {
 		System.out.println(dirPath + fileName);
-//		System.out.println(fileName);
+// System.out.println(fileName);
 
 		dirPath = "D:\\final\\vme\\precast-webapp\\src\\main\\java\\aicoder\\temp\\kdjsnckdsjncdsjk\\";
 
@@ -237,15 +313,15 @@ public class AppMain {
 				}
 			}
 
-//			File directory = new File(String.valueOf(dirPath));
-//			if (!directory.exists()) {
-//				Path dir = Paths.get(directory.toURI());
-//				System.out.println(Files.createDirectory(dir));
-//			}
+// File directory = new File(String.valueOf(dirPath));
+// if (!directory.exists()) {
+// Path dir = Paths.get(directory.toURI());
+// System.out.println(Files.createDirectory(dir));
+// }
 			File file = new File(String.valueOf(dirPath + fileName));
 			if (!file.exists()) {
-//				System.out.println(file.createNewFile());
-//				Files.createFile(path);
+// System.out.println(file.createNewFile());
+// Files.createFile(path);
 
 				Path fileuri = Paths.get(file.toURI());
 				System.out.println(Files.createFile(fileuri));
@@ -493,6 +569,12 @@ public class AppMain {
 			+ " public ErrorDTO check{{entityName}}Duplicate({{serviceRequest}} {{serviceRequest_camelCase}});\r\n"
 			+ "}\r\n" + "";
 
+	private static String repoTemplate = "package com.vme.precast.repository;\r\n" + "\r\n"
+			+ "import org.springframework.stereotype.Repository;\r\n" + "\r\n"
+			+ "import com.vme.precast.domain.{{entityName}};\r\n" + "\r\n" + "import coliseum.jpa.repo.BaseRepo;\r\n"
+			+ "\r\n" + "@Repository\r\n"
+			+ "public interface {{entityName}}Repo extends BaseRepo<{{entityName}}, Long> {\r\n" + "}\r\n" + "";
+
 	private static String componentTemplate = "package com.vme.precast.{{entityName_lowerCase}}.api;\r\n" + "\r\n"
 			+ "import coliseum.service.ColiseumInterface;\r\n" + "\r\n"
 			+ "public interface {{component}} extends ColiseumInterface {\r\n" + "\r\n"
@@ -625,6 +707,24 @@ public class AppMain {
 			+ " result=\"flowScope.{{serviceResponse_camelCase}}\" />\r\n" + " <transition to=\"exit\" />\r\n"
 			+ " </action-state>\r\n" + "\r\n" + " <end-state id=\"exit\">\r\n"
 			+ " <output name=\"{{serviceResponse_camelCase}}\" />\r\n" + " </end-state>\r\n" + "</flow>";
+
+	private static String clientModelTemplate = "package com.vme.precast.{{entityName_lowerCase}}.model;\r\n" + "\r\n"
+			+ "import java.util.List;\r\n" + "\r\n" + "import com.vme.precast.{{entityName_lowerCase}}.api.{{dto}};\r\n"
+			+ "import com.vme.precast.{{entityName_lowerCase}}.api.{{searchDTO}};\r\n" + "\r\n"
+			+ "import coliseum.web.BaseWidgetModel;\r\n" + "\r\n"
+			+ "public class {{clientModel}} extends BaseWidgetModel {\r\n" + "\r\n"
+			+ " private static final long serialVersionUID = 1L;\r\n" + "\r\n"
+			+ " private {{dto}} {{dto_camelCase}};\r\n" + "\r\n" + " private {{searchDTO}} {{searchDTO_camelCase}};\r\n"
+			+ "\r\n" + " private List<{{dto}}> {{dto_camelCase}}s;\r\n" + "\r\n" + " public {{dto}} get{{dto}}() {\r\n"
+			+ " return {{dto_camelCase}};\r\n" + " }\r\n" + "\r\n"
+			+ " public void set{{dto}}({{dto}} {{dto_camelCase}}) {\r\n"
+			+ " this.{{dto_camelCase}} = {{dto_camelCase}};\r\n" + " }\r\n" + "\r\n"
+			+ " public List<{{dto}}> get{{dto}}s() {\r\n" + " return {{dto_camelCase}}s;\r\n" + " }\r\n" + "\r\n"
+			+ " public void set{{dto}}s(List<{{dto}}> {{dto_camelCase}}s) {\r\n"
+			+ " this.{{dto_camelCase}}s = {{dto_camelCase}}s;\r\n" + " }\r\n" + "\r\n"
+			+ " public {{searchDTO}} get{{searchDTO}}() {\r\n" + " return {{searchDTO_camelCase}};\r\n" + " }\r\n"
+			+ "\r\n" + " public void set{{searchDTO}}({{searchDTO}} {{searchDTO_camelCase}}) {\r\n"
+			+ " this.{{searchDTO_camelCase}} = {{searchDTO_camelCase}};\r\n" + " }\r\n" + "\r\n" + "}";
 
 	private static String controllerTemplate = "package com.vme.precast.{{entityName_lowerCase}}.controller;\r\n"
 			+ "\r\n" + "import javax.validation.Valid;\r\n" + "\r\n"

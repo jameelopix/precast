@@ -1,0 +1,73 @@
+package com.vme.precast.{{entityName_lowerCase}}.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.vme.precast.{{entityName_lowerCase}}.api.{{dto}};
+import com.vme.precast.{{entityName_lowerCase}}.api.{{service}};
+import com.vme.precast.{{entityName_lowerCase}}.api.{{serviceRequest}};
+import com.vme.precast.{{entityName_lowerCase}}.api.{{entityName}}ServiceResponse;
+import com.vme.precast.{{entityName_lowerCase}}.model.{{clientModel}};
+
+@Controller
+public class {{entityName}}Controller {
+
+    @Autowired
+    {{service}} {{service_camelCase}};
+
+    @RequestMapping(value = "delete{{entityName}}", method = RequestMethod.POST)
+    @ResponseBody
+    public {{clientModel}} delete{{entityName}}(@RequestBody {{clientModel}} {{clientModel_camelCase}}) {
+        {{serviceRequest}} {{serviceRequest_camelCase}} = new {{serviceRequest}}();
+        for (Long id : {{clientModel_camelCase}}.getIdsToDelete()) {
+            {{dto}} {{dto_camelCase}} = new {{dto}}();
+            {{dto_camelCase}}.setId(id);
+            {{serviceRequest_camelCase}}.set{{entityName}}DTO({{dto_camelCase}});
+            {{service_camelCase}}.delete{{entityName}}({{serviceRequest_camelCase}});
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "create{{entityName}}", method = RequestMethod.POST)
+    @ResponseBody
+    public {{clientModel}} create{{entityName}}(@Valid @RequestBody {{clientModel}} {{clientModel_camelCase}}) {
+        return this.constructClientModel({{service_camelCase}}.create{{entityName}}(this.constructServiceRequest({{clientModel_camelCase}})));
+    }
+
+    @RequestMapping(value = "update{{entityName}}", method = RequestMethod.POST)
+    @ResponseBody
+    public {{clientModel}} update{{entityName}}(@Valid @RequestBody {{clientModel}} {{clientModel_camelCase}}) {
+        return this.constructClientModel({{service_camelCase}}.update{{entityName}}(this.constructServiceRequest({{clientModel_camelCase}})));
+    }
+
+    @RequestMapping(value = "get{{entityName}}", method = RequestMethod.POST)
+    @ResponseBody
+    public {{clientModel}} get{{entityName}}(@RequestBody {{clientModel}} {{clientModel_camelCase}}) {
+        return this.constructClientModel({{service_camelCase}}.get{{entityName}}s(this.constructServiceRequest({{clientModel_camelCase}})));
+    }
+
+    private {{clientModel}} constructClientModel({{entityName}}ServiceResponse serviceResponse) {
+        {{clientModel}} {{clientModel_camelCase}} = null;
+        if (serviceResponse != null) {
+            {{clientModel_camelCase}} = new {{clientModel}}();
+            {{clientModel_camelCase}}.set{{entityName}}DTOList(serviceResponse.get{{entityName}}DTOList());
+            {{clientModel_camelCase}}.setTotalRecords(serviceResponse.getTotalRecords());
+        }
+        return {{clientModel_camelCase}};
+    }
+
+    private {{serviceRequest}} constructServiceRequest({{clientModel}} {{clientModel_camelCase}}) {
+        {{serviceRequest}} {{serviceRequest_camelCase}} = new {{serviceRequest}}();
+        {{serviceRequest_camelCase}}.set{{entityName}}DTO({{clientModel_camelCase}}.get{{entityName}}DTO());
+        {{serviceRequest_camelCase}}.set{{entityName}}SearchDTO({{clientModel_camelCase}}.get{{entityName}}SearchDTO());
+        {{serviceRequest_camelCase}}.setRecordstoFetch({{clientModel_camelCase}}.getRecordstoFetch());
+        {{serviceRequest_camelCase}}.setPageIndex({{clientModel_camelCase}}.getPageIndex());
+        return {{serviceRequest_camelCase}};
+    }
+}
