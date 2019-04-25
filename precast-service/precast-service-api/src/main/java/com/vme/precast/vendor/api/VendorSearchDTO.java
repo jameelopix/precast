@@ -6,28 +6,27 @@ import coliseum.service.BaseSearchDTO;
 
 public class VendorSearchDTO extends BaseSearchDTO {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
+    private List<Long> idList;
+    private List<String> nameList;
 
-	private List<String> nameList;
+    public static String ID = "id";
+    public static String NAME = "name";
 
-	private List<Long> addressIdList;
+    public List<Long> getIdList() {
+        return idList;
+    }
 
-	public static String NAME = "name";
-	public static String ADDRESS_ID = "address.id";
+    public void setIdList(List<Long> idList) {
+        this.idList = idList;
+    }
 
-	public List<String> getNameList() {
-		return nameList;
-	}
+    public List<String> getNameList() {
+        return nameList;
+    }
 
-	public void setNameList(List<String> nameList) {
-		this.nameList = nameList;
-	}
+    public void setNameList(List<String> nameList) {
+        this.nameList = nameList;
+    }
 
-	public List<Long> getAddressIdList() {
-		return addressIdList;
-	}
-
-	public void setAddressIdList(List<Long> addressIdList) {
-		this.addressIdList = addressIdList;
-	}
 }

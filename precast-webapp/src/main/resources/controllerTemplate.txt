@@ -52,12 +52,12 @@ public class {{entityName}}Controller {
         return this.constructClientModel({{service_camelCase}}.get{{entityName}}s(this.constructServiceRequest({{clientModel_camelCase}})));
     }
 
-    private {{clientModel}} constructClientModel({{entityName}}ServiceResponse serviceResponse) {
+    private {{clientModel}} constructClientModel({{entityName}}ServiceResponse {{serviceResponse_camelCase}}) {
         {{clientModel}} {{clientModel_camelCase}} = null;
-        if (serviceResponse != null) {
+        if ({{serviceResponse_camelCase}} != null) {
             {{clientModel_camelCase}} = new {{clientModel}}();
-            {{clientModel_camelCase}}.set{{entityName}}DTOList(serviceResponse.get{{entityName}}DTOList());
-            {{clientModel_camelCase}}.setTotalRecords(serviceResponse.getTotalRecords());
+            {{clientModel_camelCase}}.set{{entityName}}DTOList({{serviceResponse_camelCase}}.get{{entityName}}DTOList());
+            {{clientModel_camelCase}}.setTotalRecords({{serviceResponse_camelCase}}.getTotalRecords());
         }
         return {{clientModel_camelCase}};
     }

@@ -2,45 +2,43 @@ package com.vme.precast.vendor.controller;
 
 import java.util.List;
 
-import org.springframework.stereotype.Controller;
-
 import com.vme.precast.vendor.api.VendorDTO;
 import com.vme.precast.vendor.api.VendorSearchDTO;
 
 import coliseum.web.BaseClientModel;
 
-@Controller
 public class VendorClientModel extends BaseClientModel {
 
-	private static final long serialVersionUID = 1L;
+ private static final long serialVersionUID = 1L;
 
-	private VendorDTO vendorDTO;
+ private VendorDTO vendorDTO;
 
-	private VendorSearchDTO vendorSearchDTO;
+ private VendorSearchDTO vendorSearchDTO;
 
-	private List<VendorDTO> vendorDTOList;
+ private List<VendorDTO> vendorDTOList;
 
-	public VendorDTO getVendorDTO() {
-		return vendorDTO;
-	}
+ public VendorDTO getVendorDTO() {
+ return vendorDTO;
+ }
 
-	public void setVendorDTO(VendorDTO vendorDTO) {
-		this.vendorDTO = vendorDTO;
-	}
+ public void setVendorDTO(VendorDTO vendorDTO) {
+ this.vendorDTO = vendorDTO;
+ }
 
-	public VendorSearchDTO getVendorSearchDTO() {
-		return vendorSearchDTO;
-	}
+ public List<VendorDTO> getVendorDTOList() {
+ return vendorDTOList;
+ }
 
-	public void setVendorSearchDTO(VendorSearchDTO vendorSearchDTO) {
-		this.vendorSearchDTO = vendorSearchDTO;
-	}
+ public void setVendorDTOList(List<VendorDTO> vendorDTOList) {
+ this.vendorDTOList = vendorDTOList;
+ }
 
-	public List<VendorDTO> getVendorDTOList() {
-		return vendorDTOList;
-	}
+ public VendorSearchDTO getVendorSearchDTO() {
+ return vendorSearchDTO;
+ }
 
-	public void setVendorDTOList(List<VendorDTO> vendorDTOList) {
-		this.vendorDTOList = vendorDTOList;
-	}
+ public void setVendorSearchDTO(VendorSearchDTO vendorSearchDTO) {
+ this.vendorSearchDTO = vendorSearchDTO;
+ }
+
 }

@@ -6,15 +6,15 @@ import coliseum.service.BaseServiceResponse;
 
 public class VendorServiceResponse extends BaseServiceResponse {
 
-	private static final long serialVersionUID = 1L;
+ private static final long serialVersionUID = 1L;
 
-	private List<VendorDTO> vendorDTOList;
+ private List<VendorDTO> vendorDTOList;
 
-	public List<VendorDTO> getVendorDTOList() {
-		return vendorDTOList;
-	}
+ public List<VendorDTO> getVendorDTOList() {
+ return vendorDTOList;
+ }
 
-	public void setVendorDTOList(List<VendorDTO> vendorDTOList) {
-		this.vendorDTOList = vendorDTOList;
-	}
+ public void setVendorDTOList(List<VendorDTO> vendorDTOList) {
+ this.vendorDTOList = vendorDTOList;
+ }
 }

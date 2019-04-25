@@ -36,27 +36,27 @@ public class VendorController {
     @RequestMapping(value = "createVendor", method = RequestMethod.POST)
     @ResponseBody
     public VendorClientModel createVendor(@Valid @RequestBody VendorClientModel vendorClientModel) {
-        return this.constructWidgetModel(vendorService.createVendor(this.constructServiceRequest(vendorClientModel)));
+        return this.constructClientModel(vendorService.createVendor(this.constructServiceRequest(vendorClientModel)));
     }
 
     @RequestMapping(value = "updateVendor", method = RequestMethod.POST)
     @ResponseBody
     public VendorClientModel updateVendor(@Valid @RequestBody VendorClientModel vendorClientModel) {
-        return this.constructWidgetModel(vendorService.updateVendor(this.constructServiceRequest(vendorClientModel)));
+        return this.constructClientModel(vendorService.updateVendor(this.constructServiceRequest(vendorClientModel)));
     }
 
     @RequestMapping(value = "getVendor", method = RequestMethod.POST)
     @ResponseBody
     public VendorClientModel getVendor(@RequestBody VendorClientModel vendorClientModel) {
-        return this.constructWidgetModel(vendorService.getVendors(this.constructServiceRequest(vendorClientModel)));
+        return this.constructClientModel(vendorService.getVendors(this.constructServiceRequest(vendorClientModel)));
     }
 
-    private VendorClientModel constructWidgetModel(VendorServiceResponse serviceResponse) {
+    private VendorClientModel constructClientModel(VendorServiceResponse vendorServiceResponse) {
         VendorClientModel vendorClientModel = null;
-        if (serviceResponse != null) {
+        if (vendorServiceResponse != null) {
             vendorClientModel = new VendorClientModel();
-            vendorClientModel.setVendorDTOList(serviceResponse.getVendorDTOList());
-            vendorClientModel.setTotalRecords(serviceResponse.getTotalRecords());
+            vendorClientModel.setVendorDTOList(vendorServiceResponse.getVendorDTOList());
+            vendorClientModel.setTotalRecords(vendorServiceResponse.getTotalRecords());
         }
         return vendorClientModel;
     }
