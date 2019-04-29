@@ -1,35 +1,17 @@
-package com.vme.precast.domain;
+package com.vme.precast.purchaseorder.api;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import com.vme.precast.shared.PurchaseOrderStatus;
 
-import coliseum.jpa.domain.BaseEntity;
+import coliseum.service.BaseDTO;
 
-@Entity
-public class PurchaseOrder extends BaseEntity {
+public class PurchaseOrderDTO extends BaseDTO {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String purchaseOrderNo;
-
-    @Temporal(TemporalType.DATE)
     private Date purchaseDate;
-
-    @Enumerated(EnumType.STRING)
     private PurchaseOrderStatus purchaseOrderStatus;
 
     public Long getId() {

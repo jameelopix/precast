@@ -15,13 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vme.precast.domain.Vendor;
+import com.vme.precast.domain.AccountDetails;
 
 //import com.experian.domain.Project;
 
 public class AppMain {
 
-    Class entity = Vendor.class;
+    Class entity = AccountDetails.class;
     String entityName = entity.getSimpleName();
 
     Map<String, String> variableNameMap = new HashMap<>();
@@ -780,9 +780,8 @@ public class AppMain {
             + "import com.vme.precast.{{entityName_lowerCase}}.api.{{dto}};\r\n"
             + "import com.vme.precast.{{entityName_lowerCase}}.api.{{service}};\r\n"
             + "import com.vme.precast.{{entityName_lowerCase}}.api.{{serviceRequest}};\r\n"
-            + "import com.vme.precast.{{entityName_lowerCase}}.api.{{entityName}}ServiceResponse;\r\n"
-            + "\r\n" + "@Controller\r\n"
-            + "public class {{entityName}}Controller {\r\n" + "\r\n" + "    @Autowired\r\n"
+            + "import com.vme.precast.{{entityName_lowerCase}}.api.{{entityName}}ServiceResponse;\r\n" + "\r\n"
+            + "@Controller\r\n" + "public class {{entityName}}Controller {\r\n" + "\r\n" + "    @Autowired\r\n"
             + "    {{service}} {{service_camelCase}};\r\n" + "\r\n"
             + "    @RequestMapping(value = \"delete{{entityName}}\", method = RequestMethod.POST)\r\n"
             + "    @ResponseBody\r\n"

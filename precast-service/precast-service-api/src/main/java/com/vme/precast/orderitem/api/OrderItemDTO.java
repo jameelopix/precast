@@ -1,41 +1,19 @@
-package com.vme.precast.domain;
+package com.vme.precast.orderitem.api;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-
+import com.vme.precast.purchaseorder.api.PurchaseOrderDTO;
 import com.vme.precast.shared.UnitType;
 
-import coliseum.jpa.domain.BaseEntity;
+import coliseum.service.BaseDTO;
 
-@Entity
-public class OrderItem extends BaseEntity {
+public class OrderItemDTO extends BaseDTO {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
     private String itemName;
-
     private Double quantity;
-
     private Double rate;
-
-    @Enumerated(EnumType.STRING)
     private UnitType unitType;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PurchaseOrder purchaseOrder;
-
-    @Column(insertable = false, updatable = false, name = "purchaseOrder_id")
+    private PurchaseOrderDTO purchaseOrderDTO;
     private Long purchaseOrderId;
 
     public Long getId() {
@@ -78,19 +56,19 @@ public class OrderItem extends BaseEntity {
         this.unitType = unitType;
     }
 
-    public PurchaseOrder getPurchaseOrder() {
-        return purchaseOrder;
-    }
-
-    public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
-        this.purchaseOrder = purchaseOrder;
-    }
-
     public Long getPurchaseOrderId() {
         return purchaseOrderId;
     }
 
     public void setPurchaseOrderId(Long purchaseOrderId) {
         this.purchaseOrderId = purchaseOrderId;
+    }
+
+    public PurchaseOrderDTO getPurchaseOrderDTO() {
+        return purchaseOrderDTO;
+    }
+
+    public void setPurchaseOrderDTO(PurchaseOrderDTO purchaseOrderDTO) {
+        this.purchaseOrderDTO = purchaseOrderDTO;
     }
 }

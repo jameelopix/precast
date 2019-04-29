@@ -1,0 +1,14 @@
+package com.vme.precast.accountdetails.api;
+
+import coliseum.service.ColiseumInterface;
+
+public interface AccountDetailsComponent extends ColiseumInterface {
+
+ public AccountDetailsServiceResponse createAccountDetails(AccountDetailsServiceRequest accountDetailsServiceRequest);
+
+ public AccountDetailsServiceResponse getAccountDetailss(AccountDetailsServiceRequest accountDetailsServiceRequest);
+
+ public AccountDetailsServiceResponse updateAccountDetails(AccountDetailsServiceRequest accountDetailsServiceRequest);
+
+ public AccountDetailsServiceResponse deleteAccountDetails(AccountDetailsServiceRequest accountDetailsServiceRequest);
+}

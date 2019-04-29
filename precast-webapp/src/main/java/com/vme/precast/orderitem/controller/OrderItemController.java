@@ -1,0 +1,75 @@
+package com.vme.precast.orderitem.controller;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.vme.precast.orderitem.api.OrderItemDTO;
+import com.vme.precast.orderitem.api.OrderItemService;
+import com.vme.precast.orderitem.api.OrderItemServiceRequest;
+import com.vme.precast.orderitem.api.OrderItemServiceResponse;
+
+@Controller
+public class OrderItemController {
+
+    @Autowired
+    OrderItemService orderItemService;
+
+    @RequestMapping(value = "deleteOrderItem", method = RequestMethod.POST)
+    @ResponseBody
+    public OrderItemClientModel deleteOrderItem(@RequestBody OrderItemClientModel orderItemClientModel) {
+        OrderItemServiceRequest orderItemServiceRequest = new OrderItemServiceRequest();
+        for (Long id : orderItemClientModel.getIdsToDelete()) {
+            OrderItemDTO orderItemDTO = new OrderItemDTO();
+            orderItemDTO.setId(id);
+            orderItemServiceRequest.setOrderItemDTO(orderItemDTO);
+            orderItemService.deleteOrderItem(orderItemServiceRequest);
+        }
+        return null;
+    }
+
+    @RequestMapping(value = "createOrderItem", method = RequestMethod.POST)
+    @ResponseBody
+    public OrderItemClientModel createOrderItem(@Valid @RequestBody OrderItemClientModel orderItemClientModel) {
+        return this.constructClientModel(
+                orderItemService.createOrderItem(this.constructServiceRequest(orderItemClientModel)));
+    }
+
+    @RequestMapping(value = "updateOrderItem", method = RequestMethod.POST)
+    @ResponseBody
+    public OrderItemClientModel updateOrderItem(@Valid @RequestBody OrderItemClientModel orderItemClientModel) {
+        return this.constructClientModel(
+                orderItemService.updateOrderItem(this.constructServiceRequest(orderItemClientModel)));
+    }
+
+    @RequestMapping(value = "getOrderItem", method = RequestMethod.POST)
+    @ResponseBody
+    public OrderItemClientModel getOrderItem(@RequestBody OrderItemClientModel orderItemClientModel) {
+        return this.constructClientModel(
+                orderItemService.getOrderItems(this.constructServiceRequest(orderItemClientModel)));
+    }
+
+    private OrderItemClientModel constructClientModel(OrderItemServiceResponse orderItemServiceResponse) {
+        OrderItemClientModel orderItemClientModel = null;
+        if (orderItemServiceResponse != null) {
+            orderItemClientModel = new OrderItemClientModel();
+            orderItemClientModel.setOrderItemDTOList(orderItemServiceResponse.getOrderItemDTOList());
+            orderItemClientModel.setTotalRecords(orderItemServiceResponse.getTotalRecords());
+        }
+        return orderItemClientModel;
+    }
+
+    private OrderItemServiceRequest constructServiceRequest(OrderItemClientModel orderItemClientModel) {
+        OrderItemServiceRequest orderItemServiceRequest = new OrderItemServiceRequest();
+        orderItemServiceRequest.setOrderItemDTO(orderItemClientModel.getOrderItemDTO());
+        orderItemServiceRequest.setOrderItemSearchDTO(orderItemClientModel.getOrderItemSearchDTO());
+        orderItemServiceRequest.setRecordstoFetch(orderItemClientModel.getRecordstoFetch());
+        orderItemServiceRequest.setPageIndex(orderItemClientModel.getPageIndex());
+        return orderItemServiceRequest;
+    }
+}
