@@ -469,6 +469,16 @@ public class AppMain {
     }
 
     public static void main(String[] args) {
+//        String word = "refer";
+//
+//        StringBuilder sb = new StringBuilder();
+//        for (int i = word.length() - 1; i >= 0; i--) {
+//            sb.append(word.charAt(i));
+//        }
+//        String reverse = sb.toString();
+//
+//        System.out.println(word.toLowerCase().equals(reverse.toLowerCase()));
+
         new AppMain();
     }
 

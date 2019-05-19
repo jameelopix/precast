@@ -3,13 +3,21 @@ package com.vme.precast.purchaseorder.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.GenericConverter;
 
 import com.vme.precast.domain.PurchaseOrder;
+import com.vme.precast.domain.Vendor;
 import com.vme.precast.purchaseorder.api.PurchaseOrderDTO;
+import com.vme.precast.vendor.api.VendorDTO;
+
+import coliseum.service.ConversionUtility;
 
 public class PurchaseOrderGenericConvertor implements GenericConverter {
+
+    @Autowired
+    ConversionUtility conversionUtility;
 
     @Override
     public Set<ConvertiblePair> getConvertibleTypes() {
@@ -37,6 +45,10 @@ public class PurchaseOrderGenericConvertor implements GenericConverter {
         target.setPurchaseOrderNo(source.getPurchaseOrderNo());
         target.setPurchaseDate(source.getPurchaseDate());
         target.setPurchaseOrderStatus(source.getPurchaseOrderStatus());
+//        if (source.getVendorDTO() != null) {
+//            target.setVendor((Vendor) conversionUtility.convert(source.getVendorDTO(), VendorDTO.class, Vendor.class));
+//        }
+//        target.setVendorId(source.getVendorId());
         return target;
     }
 
@@ -46,6 +58,11 @@ public class PurchaseOrderGenericConvertor implements GenericConverter {
         target.setPurchaseOrderNo(source.getPurchaseOrderNo());
         target.setPurchaseDate(source.getPurchaseDate());
         target.setPurchaseOrderStatus(source.getPurchaseOrderStatus());
+        if (source.getVendor() != null) {
+            target.setVendorDTO(
+                    (VendorDTO) conversionUtility.convert(source.getVendor(), Vendor.class, VendorDTO.class));
+        }
+        target.setVendorId(source.getVendorId());
         return target;
     }
 }

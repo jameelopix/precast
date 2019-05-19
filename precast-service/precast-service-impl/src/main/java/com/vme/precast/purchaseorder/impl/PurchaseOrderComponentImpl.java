@@ -14,6 +14,7 @@ import com.vme.precast.purchaseorder.api.PurchaseOrderSearchDTO;
 import com.vme.precast.purchaseorder.api.PurchaseOrderServiceRequest;
 import com.vme.precast.purchaseorder.api.PurchaseOrderServiceResponse;
 import com.vme.precast.repository.PurchaseOrderRepo;
+import com.vme.precast.repository.VendorRepo;
 import com.vme.precast.shared.PurchaseOrderStatus;
 
 import coliseum.jpa.Filter;
@@ -26,6 +27,9 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
     PurchaseOrderRepo purchaseOrderRepo;
 
     @Autowired
+    VendorRepo vendorRepo;
+
+    @Autowired
     ConversionUtility conversionUtility;
 
     @Override
@@ -33,6 +37,8 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
         PurchaseOrderDTO purchaseOrderDTO = purchaseOrderServiceRequest.getPurchaseOrderDTO();
         PurchaseOrder purchaseorder = (PurchaseOrder) conversionUtility.convert(purchaseOrderDTO,
                 PurchaseOrderDTO.class, PurchaseOrder.class);
+
+        purchaseorder.setVendor(vendorRepo.findById(purchaseOrderDTO.getVendorId()).get());
         purchaseorder.setPurchaseOrderStatus(PurchaseOrderStatus.OPEN);
         purchaseOrderRepo.save(purchaseorder);
         return null;
@@ -50,11 +56,13 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
             List<String> purchaseOrderNoList = purchaseOrderSearchDTO.getPurchaseOrderNoList();
             List<Date> purchaseDateList = purchaseOrderSearchDTO.getPurchaseDateList();
             List<PurchaseOrderStatus> purchaseOrderStatusList = purchaseOrderSearchDTO.getPurchaseOrderStatusList();
+            List<Long> vendorIdList = purchaseOrderSearchDTO.getVendorIdList();
 
             FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.ID, idList);
             FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.PURCHASEORDERNO, purchaseOrderNoList);
             FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.PURCHASEDATE, purchaseDateList);
             FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.PURCHASEORDERSTATUS, purchaseOrderStatusList);
+            FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.VENDOR, vendorIdList);
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
@@ -81,6 +89,9 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
         PurchaseOrder target = purchaseOrderRepo.findById(source.getId()).get();
         target.setPurchaseOrderNo(source.getPurchaseOrderNo());
         target.setPurchaseDate(source.getPurchaseDate());
+        if (source.getVendorId() != null && !source.getVendorId().equals(target.getVendorId())) {
+            target.setVendor(vendorRepo.findById(source.getVendorId()).get());
+        }
         purchaseOrderRepo.save(target);
         return null;
     }

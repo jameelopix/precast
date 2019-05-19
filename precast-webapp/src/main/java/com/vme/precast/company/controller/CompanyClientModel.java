@@ -9,36 +9,36 @@ import coliseum.web.BaseClientModel;
 
 public class CompanyClientModel extends BaseClientModel {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
- private CompanyDTO companyDTO;
+    private CompanyDTO companyDTO;
 
- private CompanySearchDTO companySearchDTO;
+    private CompanySearchDTO companySearchDTO;
 
- private List<CompanyDTO> companyDTOList;
+    private List<CompanyDTO> companyDTOList;
 
- public CompanyDTO getCompanyDTO() {
- return companyDTO;
- }
+    public CompanyDTO getCompanyDTO() {
+        return companyDTO;
+    }
 
- public void setCompanyDTO(CompanyDTO companyDTO) {
- this.companyDTO = companyDTO;
- }
+    public void setCompanyDTO(CompanyDTO companyDTO) {
+        this.companyDTO = companyDTO;
+    }
 
- public List<CompanyDTO> getCompanyDTOList() {
- return companyDTOList;
- }
+    public List<CompanyDTO> getCompanyDTOList() {
+        return companyDTOList;
+    }
 
- public void setCompanyDTOList(List<CompanyDTO> companyDTOList) {
- this.companyDTOList = companyDTOList;
- }
+    public void setCompanyDTOList(List<CompanyDTO> companyDTOList) {
+        this.companyDTOList = companyDTOList;
+    }
 
- public CompanySearchDTO getCompanySearchDTO() {
- return companySearchDTO;
- }
+    public CompanySearchDTO getCompanySearchDTO() {
+        return companySearchDTO;
+    }
 
- public void setCompanySearchDTO(CompanySearchDTO companySearchDTO) {
- this.companySearchDTO = companySearchDTO;
- }
+    public void setCompanySearchDTO(CompanySearchDTO companySearchDTO) {
+        this.companySearchDTO = companySearchDTO;
+    }
 
 }

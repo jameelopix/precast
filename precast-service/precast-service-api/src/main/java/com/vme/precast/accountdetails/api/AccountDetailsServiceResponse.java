@@ -6,15 +6,15 @@ import coliseum.service.BaseServiceResponse;
 
 public class AccountDetailsServiceResponse extends BaseServiceResponse {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
- private List<AccountDetailsDTO> accountDetailsDTOList;
+    private List<AccountDetailsDTO> accountDetailsDTOList;
 
- public List<AccountDetailsDTO> getAccountDetailsDTOList() {
- return accountDetailsDTOList;
- }
+    public List<AccountDetailsDTO> getAccountDetailsDTOList() {
+        return accountDetailsDTOList;
+    }
 
- public void setAccountDetailsDTOList(List<AccountDetailsDTO> accountDetailsDTOList) {
- this.accountDetailsDTOList = accountDetailsDTOList;
- }
+    public void setAccountDetailsDTOList(List<AccountDetailsDTO> accountDetailsDTOList) {
+        this.accountDetailsDTOList = accountDetailsDTOList;
+    }
 }

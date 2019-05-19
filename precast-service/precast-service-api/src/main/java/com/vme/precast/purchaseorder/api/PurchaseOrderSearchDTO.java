@@ -14,9 +14,11 @@ public class PurchaseOrderSearchDTO extends BaseSearchDTO {
     private List<String> purchaseOrderNoList;
     private List<Date> purchaseDateList;
     private List<PurchaseOrderStatus> purchaseOrderStatusList;
+    private List<Long> vendorIdList;
 
     public static String ID = "id";
     public static String PURCHASEORDERNO = "purchaseOrderNo";
+    public static String VENDOR = "vendor.id";
     public static String PURCHASEDATE = "purchaseDate";
     public static String PURCHASEORDERSTATUS = "purchaseOrderStatus";
 
@@ -50,5 +52,13 @@ public class PurchaseOrderSearchDTO extends BaseSearchDTO {
 
     public void setPurchaseOrderStatusList(List<PurchaseOrderStatus> purchaseOrderStatusList) {
         this.purchaseOrderStatusList = purchaseOrderStatusList;
+    }
+
+    public List<Long> getVendorIdList() {
+        return vendorIdList;
+    }
+
+    public void setVendorIdList(List<Long> vendorIdList) {
+        this.vendorIdList = vendorIdList;
     }
 }
