@@ -12,7 +12,10 @@ import com.vme.precast.accountdetails.api.AccountDetailsSearchDTO;
 import com.vme.precast.accountdetails.api.AccountDetailsServiceRequest;
 import com.vme.precast.accountdetails.api.AccountDetailsServiceResponse;
 import com.vme.precast.domain.AccountDetails;
+import com.vme.precast.domain.Company;
 import com.vme.precast.repository.AccountDetailsRepo;
+import com.vme.precast.repository.CompanyRepo;
+import com.vme.precast.shared.AccountType;
 
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
@@ -22,6 +25,9 @@ import coliseum.service.FilterUtils;
 public class AccountDetailsComponentImpl implements AccountDetailsComponent {
     @Autowired
     AccountDetailsRepo accountDetailsRepo;
+
+    @Autowired
+    CompanyRepo companyRepo;
 
     @Autowired
     ConversionUtility conversionUtility;
@@ -44,13 +50,17 @@ public class AccountDetailsComponentImpl implements AccountDetailsComponent {
 
         AccountDetailsSearchDTO accountDetailsSearchDTO = accountDetailsServiceRequest.getAccountDetailsSearchDTO();
         if (accountDetailsSearchDTO != null) {
-//            List<Long> ids = accountDetailsSearchDTO.getIds();
-//            List<String> nameList = accountDetailsSearchDTO.getNameList();
-//            List<Long> addressIdList = accountDetailsSearchDTO.getAddressIdList();
+            List<Long> idList = accountDetailsSearchDTO.getIdList();
+            List<String> accountNameList = accountDetailsSearchDTO.getAccountNameList();
+            List<String> accountNumberList = accountDetailsSearchDTO.getAccountNumberList();
+            List<AccountType> accountTypeList = accountDetailsSearchDTO.getAccountTypeList();
+            List<Long> companyIdList = accountDetailsSearchDTO.getCompanyIdList();
 
-//            FilterUtils.createEqualFilter(filters, AccountDetailsSearchDTO.ID, ids);
-//            FilterUtils.createEqualFilter(filters, AccountDetailsSearchDTO.NAME, nameList);
-//            FilterUtils.createEqualFilter(filters, AccountDetailsSearchDTO.ADDRESS_ID, addressIdList);
+            FilterUtils.createEqualFilter(filters, AccountDetailsSearchDTO.ID, idList);
+            FilterUtils.createEqualFilter(filters, AccountDetailsSearchDTO.ACCOUNTNAME, accountNameList);
+            FilterUtils.createEqualFilter(filters, AccountDetailsSearchDTO.ACCOUNTNUMBER, accountNumberList);
+            FilterUtils.createEqualFilter(filters, AccountDetailsSearchDTO.ACCOUNTTYPE, accountTypeList);
+            FilterUtils.createEqualFilter(filters, AccountDetailsSearchDTO.COMPANYID, companyIdList);
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
@@ -76,8 +86,14 @@ public class AccountDetailsComponentImpl implements AccountDetailsComponent {
         AccountDetailsDTO source = accountDetailsServiceRequest.getAccountDetailsDTO();
 
         AccountDetails target = accountDetailsRepo.findById(source.getId()).get();
-//        target.setName(source.getName());
+        target.setAccountName(source.getAccountName());
+        target.setAccountNumber(source.getAccountNumber());
+        target.setAccountType(source.getAccountType());
 
+        if (source.getCompanyId() != null && !source.getCompanyId().equals(target.getCompanyId())) {
+            Company company = companyRepo.findById(source.getCompanyId()).get();
+            target.setCompany(company);
+        }
         accountDetailsRepo.save(target);
         return null;
     }

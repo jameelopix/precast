@@ -15,13 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vme.precast.domain.AccountDetails;
+import com.vme.precast.domain.PartyMaster;
 
 //import com.experian.domain.Project;
 
 public class AppMain {
 
-    Class entity = AccountDetails.class;
+    Class entity = PartyMaster.class;
     String entityName = entity.getSimpleName();
 
     Map<String, String> variableNameMap = new HashMap<>();

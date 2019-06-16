@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+ <input name="partyMasterServiceRequest" required="true" />
+
+ <action-state id="validate">
+ <evaluate
+ expression="partyMasterValidator.checkPartyMasterDuplicate(partyMasterServiceRequest)" />
+ <evaluate expression="endValidation">
+ <attribute name="name" value="endValidation"></attribute>
+ </evaluate>
+ <transition on="endValidation.success" to="updatePartyMaster" />
+ </action-state>
+
+ <action-state id="updatePartyMaster">
+ <evaluate
+ expression="partyMasterComponent.updatePartyMaster(partyMasterServiceRequest)"
+ result="flowScope.partyMasterServiceResponse" />
+ <transition to="exit" />
+ </action-state>
+
+ <end-state id="exit">
+ <output name="partyMasterServiceResponse" />
+ </end-state>
+</flow>
