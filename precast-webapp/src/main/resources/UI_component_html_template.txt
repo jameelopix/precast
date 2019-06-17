@@ -1,0 +1,78 @@
+<form [formGroup]="{{entityName_camelCase}}SearchForm">
+<div class="card">
+<div class="card-body">
+<div class="row">
+<div class="form-group col-sm-12">
+<label>Name</label>
+<input
+class="form-control"
+name="name"
+id="{{entityName_camelCase}}Names"
+type="text"
+formControlName="names"
+style="width: 100%"
+/>
+</div>
+</div>
+<div class="row">
+<div class="col-12">
+<button
+class="btn btn-primary btn-sm btm-space float-right"
+(click)="search{{entityName}}()"
+>
+Search
+</button>
+</div>
+</div>
+</div>
+</div>
+</form>
+<p-messages [(value)]="messages"></p-messages>
+
+<cui-grid [values]="{{entityName_camelCase}}DTOList" [options]="{{entityName_camelCase}}Options"></cui-grid>
+
+<p-dialog [(visible)]="{{entityName_camelCase}}DialogVisibilty" [width]="500">
+<p-header>
+Create
+</p-header>
+<form [formGroup]="{{entityName_camelCase}}Form">
+<div class="form-group">
+<label for="{{entityName_camelCase}}Name">Name</label>
+<input
+class="form-control"
+name="name"
+id="{{entityName_camelCase}}Name"
+type="text"
+formControlName="name"
+/>
+<div
+class="form-control-feedback"
+*ngIf="
+getControl('name').errors &&
+(getControl('name').dirty || getControl('name').touched)
+"
+>
+<p *ngIf="getControl('name').errors.required">Name is required</p>
+</div>
+</div>
+</form>
+<p-footer>
+<div class="btn-toolbar">
+<button
+class="btn btn-sm btn-success"
+type="button"
+[disabled]="{{entityName_camelCase}}Form.invalid"
+(click)="save{{entityName}}()"
+>
+<i class="pi pi-save">Save</i>
+</button>
+<button
+class="btn btn-sm btn-default"
+type="button"
+(click)="cancel{{entityName}}()"
+>
+<i class="pi pi-times">Cancel</i>
+</button>
+</div>
+</p-footer>
+</p-dialog>

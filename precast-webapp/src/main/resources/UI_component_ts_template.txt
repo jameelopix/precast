@@ -1,0 +1,179 @@
+import { Component, OnInit } from "@angular/core";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { {{entityName}}Service } from "../services/{{entityName_camelCase}}.service";
+import { MessageUtilService } from "../services/message-util.service";
+import { MESSAGES } from "../model/messages";
+
+@Component({
+selector: "app-{{entityName_camelCase}}",
+templateUrl: "./{{entityName_camelCase}}.component.html",
+styleUrls: ["./{{entityName_camelCase}}.component.css"]
+})
+export class {{entityName}}Component implements OnInit {
+{{entityName_camelCase}}DTOList: any[] = [];
+{{entityName_camelCase}}DialogVisibilty: boolean = false;
+{{entityName_camelCase}}Form: FormGroup;
+{{entityName_camelCase}}SearchForm: FormGroup;
+
+messages: any[] = [];
+
+result: any = null;
+
+constructor(
+private {{entityName_camelCase}}Service: {{entityName}}Service,
+private messageUtilService: MessageUtilService,
+private formBuilder: FormBuilder
+) {
+this.createFormGroup();
+}
+
+ngOnInit() {
+this.fetchReleventData();
+}
+
+fetchReleventData() { }
+
+createFormGroup() {
+this.{{entityName_camelCase}}Form = this.formBuilder.group({
+id: [null],
+name: ["", Validators.required]
+});
+
+this.{{entityName_camelCase}}SearchForm = this.formBuilder.group({
+names: [""]
+});
+}
+
+add{{entityName}} = () => {
+this.{{entityName_camelCase}}Form.reset();
+this.{{entityName_camelCase}}DialogVisibilty = true;
+};
+
+edit{{entityName}} = rowData => {
+this.populate{{entityName}}Form(rowData, false);
+this.{{entityName_camelCase}}DialogVisibilty = true;
+};
+
+copy{{entityName}} = rowData => {
+this.populate{{entityName}}Form(rowData);
+this.{{entityName_camelCase}}DialogVisibilty = true;
+};
+
+populate{{entityName}}Form(rowData: any, makeIdNull: boolean = true) {
+this.{{entityName_camelCase}}Form.reset();
+
+let id = null;
+if (!makeIdNull) {
+id = rowData["id"];
+}
+
+let formValue = {
+id: id,
+name: rowData["name"]
+};
+
+this.{{entityName_camelCase}}Form.setValue(formValue);
+}
+
+search{{entityName}} = () => {
+let searchFormData = this.{{entityName_camelCase}}SearchForm.getRawValue();
+
+let request = {
+{{entityName_camelCase}}SearchDTO: {
+nameList: [searchFormData["names"]]
+}
+}
+
+this.result = request;
+
+this.{{entityName_camelCase}}Service.get(request, this.get{{entityName}}Callback);
+}
+
+save{{entityName}} = () => {
+this.messageUtilService.clearMessage(this.messages);
+let formData = this.{{entityName_camelCase}}Form.getRawValue();
+
+let request = {
+{{entityName_camelCase}}DTO: {
+id: formData["id"],
+name: formData["name"]
+}
+};
+
+this.{{entityName_camelCase}}Service.save(
+request,
+this.save{{entityName}}SuccessCallback,
+this.save{{entityName}}ErrorCallback
+);
+};
+
+save{{entityName}}SuccessCallback = (response: any) => {
+this.messageUtilService.showSuccessMessages(
+this.messages,
+MESSAGES.SAVE_ACK_MSG
+);
+this.{{entityName_camelCase}}DialogVisibilty = false;
+this.get{{entityName}}();
+};
+
+save{{entityName}}ErrorCallback = (response: any) => {
+this.messageUtilService.showErrorMessages(this.messages, response[0]);
+};
+
+cancel{{entityName}} = () => {
+this.{{entityName_camelCase}}Form.reset();
+this.{{entityName_camelCase}}DialogVisibilty = false;
+};
+
+get{{entityName}} = () => {
+this.{{entityName_camelCase}}Service.get({}, this.get{{entityName}}Callback);
+};
+
+get{{entityName}}Callback = (response: any) => {
+this.{{entityName_camelCase}}DTOList = response.{{entityName_camelCase}}DTOList;
+};
+
+delete{{entityName}} = rowData => {
+this.messageUtilService.clearMessage(this.messages);
+
+this.{{entityName_camelCase}}Service.delete(
+rowData["id"],
+this.delete{{entityName}}SuccessCallback,
+this.delete{{entityName}}ErrorCallback
+);
+};
+
+delete{{entityName}}SuccessCallback = (response: any) => {
+this.messageUtilService.showSuccessMessages(
+this.messages,
+MESSAGES.DELETE_ACK_MSG
+);
+this.get{{entityName}}();
+};
+
+delete{{entityName}}ErrorCallback = (response: any) => {
+this.messageUtilService.showErrorMessages(this.messages, response[0]);
+};
+
+{{entityName_camelCase}}Options: any = {
+caption: "{{entityName}} Details",
+addCallback: this.add{{entityName}},
+editCallback: this.edit{{entityName}},
+copyCallback: this.copy{{entityName}},
+getCallback: this.get{{entityName}},
+deleteCallback: this.delete{{entityName}},
+childPresent: true,
+columns: [
+{
+name: "Name",
+index: "name",
+type: "textInput"
+// width: "45%"
+}
+]
+};
+
+getControl(field: any) {
+return this.{{entityName_camelCase}}Form.controls[field];
+}
+}
