@@ -14,6 +14,7 @@ public class AccountDetailsDTO extends BaseDTO {
     private AccountType accountType;
     private CompanyDTO companyDTO;
     private Long companyId;
+    private String bankName;
 
     public Long getId() {
         return id;
@@ -61,5 +62,13 @@ public class AccountDetailsDTO extends BaseDTO {
 
     public void setCompanyId(Long companyId) {
         this.companyId = companyId;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 }

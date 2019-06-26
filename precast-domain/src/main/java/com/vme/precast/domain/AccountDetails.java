@@ -2,6 +2,8 @@ package com.vme.precast.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,7 +26,10 @@ public class AccountDetails extends BaseEntity {
     private String accountName;
 
     private String accountNumber;
+    
+    private String bankName;
 
+    @Enumerated(EnumType.STRING)
     private AccountType accountType;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -79,5 +84,13 @@ public class AccountDetails extends BaseEntity {
 
     public void setAccountType(AccountType accountType) {
         this.accountType = accountType;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
     }
 }

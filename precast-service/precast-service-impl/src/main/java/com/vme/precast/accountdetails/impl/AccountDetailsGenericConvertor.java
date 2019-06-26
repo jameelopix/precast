@@ -46,6 +46,7 @@ public class AccountDetailsGenericConvertor implements GenericConverter {
         target.setAccountName(source.getAccountName());
         target.setAccountNumber(source.getAccountNumber());
         target.setAccountType(source.getAccountType());
+        target.setBankName(source.getBankName());
 
         if (source.getCompanyDTO() != null) {
             target.setCompany(
@@ -61,6 +62,7 @@ public class AccountDetailsGenericConvertor implements GenericConverter {
         target.setAccountName(source.getAccountName());
         target.setAccountNumber(source.getAccountNumber());
         target.setAccountType(source.getAccountType());
+        target.setBankName(source.getBankName());
 
         if (RepoUtils.isNotProxy(source.getCompany())) {
             target.setCompanyDTO(

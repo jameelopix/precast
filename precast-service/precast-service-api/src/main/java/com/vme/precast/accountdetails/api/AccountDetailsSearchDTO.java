@@ -16,6 +16,9 @@ public class AccountDetailsSearchDTO extends BaseSearchDTO {
     private List<AccountType> accountTypeList;
     private List<CompanyDTO> companyDTOList;
     private List<Long> companyIdList;
+    private List<String> bankNameList;
+
+    private boolean companyNeeded = false;
 
     public static String ID = "id";
     public static String ACCOUNTNAME = "accountName";
@@ -23,6 +26,7 @@ public class AccountDetailsSearchDTO extends BaseSearchDTO {
     public static String ACCOUNTTYPE = "accountType";
     public static String COMPANY = "company";
     public static String COMPANYID = "companyId";
+    public static String BANKNAME = "bankName";
 
     public List<Long> getIdList() {
         return idList;
@@ -70,5 +74,21 @@ public class AccountDetailsSearchDTO extends BaseSearchDTO {
 
     public void setCompanyIdList(List<Long> companyIdList) {
         this.companyIdList = companyIdList;
+    }
+
+    public List<String> getBankNameList() {
+        return bankNameList;
+    }
+
+    public void setBankNameList(List<String> bankNameList) {
+        this.bankNameList = bankNameList;
+    }
+
+    public boolean isCompanyNeeded() {
+        return companyNeeded;
+    }
+
+    public void setCompanyNeeded(boolean companyNeeded) {
+        this.companyNeeded = companyNeeded;
     }
 }
