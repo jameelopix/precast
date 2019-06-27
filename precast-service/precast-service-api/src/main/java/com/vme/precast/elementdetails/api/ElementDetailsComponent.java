@@ -1,0 +1,14 @@
+package com.vme.precast.elementdetails.api;
+
+import coliseum.service.ColiseumInterface;
+
+public interface ElementDetailsComponent extends ColiseumInterface {
+
+ public ElementDetailsServiceResponse createElementDetails(ElementDetailsServiceRequest elementDetailsServiceRequest);
+
+ public ElementDetailsServiceResponse getElementDetailss(ElementDetailsServiceRequest elementDetailsServiceRequest);
+
+ public ElementDetailsServiceResponse updateElementDetails(ElementDetailsServiceRequest elementDetailsServiceRequest);
+
+ public ElementDetailsServiceResponse deleteElementDetails(ElementDetailsServiceRequest elementDetailsServiceRequest);
+}

@@ -1,0 +1,14 @@
+package com.vme.precast.itembasicamountdetails.api;
+
+import coliseum.service.ColiseumInterface;
+
+public interface ItemBasicAmountDetailsComponent extends ColiseumInterface {
+
+ public ItemBasicAmountDetailsServiceResponse createItemBasicAmountDetails(ItemBasicAmountDetailsServiceRequest itemBasicAmountDetailsServiceRequest);
+
+ public ItemBasicAmountDetailsServiceResponse getItemBasicAmountDetailss(ItemBasicAmountDetailsServiceRequest itemBasicAmountDetailsServiceRequest);
+
+ public ItemBasicAmountDetailsServiceResponse updateItemBasicAmountDetails(ItemBasicAmountDetailsServiceRequest itemBasicAmountDetailsServiceRequest);
+
+ public ItemBasicAmountDetailsServiceResponse deleteItemBasicAmountDetails(ItemBasicAmountDetailsServiceRequest itemBasicAmountDetailsServiceRequest);
+}

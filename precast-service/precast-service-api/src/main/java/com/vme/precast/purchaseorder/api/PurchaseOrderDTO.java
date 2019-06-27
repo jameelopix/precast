@@ -12,10 +12,10 @@ public class PurchaseOrderDTO extends BaseDTO {
     private static final long serialVersionUID = 1L;
     private Long id;
     private String purchaseOrderNo;
+    private VendorDTO vendorDTO;
+    private Long vendorDTOId;
     private Date purchaseDate;
     private PurchaseOrderStatus purchaseOrderStatus;
-    private VendorDTO vendorDTO;
-    private Long vendorId;
 
     public Long getId() {
         return id;
@@ -33,6 +33,22 @@ public class PurchaseOrderDTO extends BaseDTO {
         this.purchaseOrderNo = purchaseOrderNo;
     }
 
+    public VendorDTO getVendorDTO() {
+        return vendorDTO;
+    }
+
+    public void setVendorDTO(VendorDTO vendorDTO) {
+        this.vendorDTO = vendorDTO;
+    }
+
+    public Long getVendorDTOId() {
+        return vendorDTOId;
+    }
+
+    public void setVendorDTOId(Long vendorDTOId) {
+        this.vendorDTOId = vendorDTOId;
+    }
+
     public Date getPurchaseDate() {
         return purchaseDate;
     }
@@ -47,21 +63,5 @@ public class PurchaseOrderDTO extends BaseDTO {
 
     public void setPurchaseOrderStatus(PurchaseOrderStatus purchaseOrderStatus) {
         this.purchaseOrderStatus = purchaseOrderStatus;
-    }
-
-    public VendorDTO getVendorDTO() {
-        return vendorDTO;
-    }
-
-    public void setVendorDTO(VendorDTO vendorDTO) {
-        this.vendorDTO = vendorDTO;
-    }
-
-    public Long getVendorId() {
-        return vendorId;
-    }
-
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
     }
 }

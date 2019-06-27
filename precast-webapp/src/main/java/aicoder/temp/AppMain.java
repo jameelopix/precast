@@ -15,13 +15,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vme.precast.domain.PartyMaster;
+import com.vme.precast.domain.ItemFreightAmountDetails;
 
 //import com.experian.domain.Project;
 
 public class AppMain {
 
-    Class entity = PartyMaster.class;
+    Class entity = ItemFreightAmountDetails.class;
     String entityName = entity.getSimpleName();
 
     Map<String, String> variableNameMap = new HashMap<>();
@@ -162,6 +162,8 @@ public class AppMain {
         List<String> deletexmlcode = this.templateBuilder(Arrays.asList(deletexml), variableNameMap);
         List<String> getxmlcode = this.templateBuilder(Arrays.asList(getxml), variableNameMap);
 
+        System.out.println("File Saving started");
+        System.out.println("--------------------------");
         saveFile(repoCode, folder_repository, entityName + repoFile_suffix + JAVA);
 
         saveFile(componentCode, folder_api, entityName + componentFile_suffix + JAVA);

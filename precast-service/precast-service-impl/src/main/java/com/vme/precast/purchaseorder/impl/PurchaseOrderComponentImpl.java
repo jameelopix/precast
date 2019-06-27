@@ -1,13 +1,13 @@
 package com.vme.precast.purchaseorder.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vme.precast.domain.PurchaseOrder;
+import com.vme.precast.domain.Vendor;
 import com.vme.precast.purchaseorder.api.PurchaseOrderComponent;
 import com.vme.precast.purchaseorder.api.PurchaseOrderDTO;
 import com.vme.precast.purchaseorder.api.PurchaseOrderSearchDTO;
@@ -25,7 +25,6 @@ import coliseum.service.FilterUtils;
 public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
     @Autowired
     PurchaseOrderRepo purchaseOrderRepo;
-
     @Autowired
     VendorRepo vendorRepo;
 
@@ -38,8 +37,10 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
         PurchaseOrder purchaseorder = (PurchaseOrder) conversionUtility.convert(purchaseOrderDTO,
                 PurchaseOrderDTO.class, PurchaseOrder.class);
 
-        purchaseorder.setVendor(vendorRepo.findById(purchaseOrderDTO.getVendorId()).get());
-        purchaseorder.setPurchaseOrderStatus(PurchaseOrderStatus.OPEN);
+        if (purchaseOrderDTO.getVendorDTOId() != null) {
+            Vendor vendor = vendorRepo.findById(purchaseOrderDTO.getVendorDTOId()).get();
+            purchaseorder.setVendor(vendor);
+        }
         purchaseOrderRepo.save(purchaseorder);
         return null;
     }
@@ -54,15 +55,14 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
         if (purchaseOrderSearchDTO != null) {
             List<Long> idList = purchaseOrderSearchDTO.getIdList();
             List<String> purchaseOrderNoList = purchaseOrderSearchDTO.getPurchaseOrderNoList();
-            List<Date> purchaseDateList = purchaseOrderSearchDTO.getPurchaseDateList();
+            List<Long> vendorDTOIdList = purchaseOrderSearchDTO.getVendorDTOIdList();
             List<PurchaseOrderStatus> purchaseOrderStatusList = purchaseOrderSearchDTO.getPurchaseOrderStatusList();
-            List<Long> vendorIdList = purchaseOrderSearchDTO.getVendorIdList();
+//            List<Long> addressIdList = purchaseOrderSearchDTO.getPurchaseDateList()
 
             FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.ID, idList);
+            FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.VENDORID, vendorDTOIdList);
             FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.PURCHASEORDERNO, purchaseOrderNoList);
-            FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.PURCHASEDATE, purchaseDateList);
             FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.PURCHASEORDERSTATUS, purchaseOrderStatusList);
-            FilterUtils.createEqualFilter(filters, PurchaseOrderSearchDTO.VENDOR, vendorIdList);
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
@@ -87,11 +87,14 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
         PurchaseOrderDTO source = purchaseOrderServiceRequest.getPurchaseOrderDTO();
 
         PurchaseOrder target = purchaseOrderRepo.findById(source.getId()).get();
+        target.setPurchaseOrderStatus(source.getPurchaseOrderStatus());
         target.setPurchaseOrderNo(source.getPurchaseOrderNo());
         target.setPurchaseDate(source.getPurchaseDate());
-        if (source.getVendorId() != null && !source.getVendorId().equals(target.getVendorId())) {
-            target.setVendor(vendorRepo.findById(source.getVendorId()).get());
+        if (source.getVendorDTOId() != null && !source.getVendorDTOId().equals(target.getVendorId())) {
+            Vendor vendor = vendorRepo.findById(source.getVendorDTOId()).get();
+            target.setVendor(vendor);
         }
+
         purchaseOrderRepo.save(target);
         return null;
     }
@@ -100,24 +103,6 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
     public PurchaseOrderServiceResponse deletePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest) {
         PurchaseOrderDTO purchaseOrderDTO = purchaseOrderServiceRequest.getPurchaseOrderDTO();
         purchaseOrderRepo.deleteById(purchaseOrderDTO.getId());
-        return null;
-    }
-
-    @Override
-    public PurchaseOrderServiceResponse issuePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest) {
-        PurchaseOrderDTO source = purchaseOrderServiceRequest.getPurchaseOrderDTO();
-        PurchaseOrder target = purchaseOrderRepo.findById(source.getId()).get();
-        target.setPurchaseOrderStatus(PurchaseOrderStatus.ISSUED);
-        purchaseOrderRepo.save(target);
-        return null;
-    }
-
-    @Override
-    public PurchaseOrderServiceResponse closePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest) {
-        PurchaseOrderDTO source = purchaseOrderServiceRequest.getPurchaseOrderDTO();
-        PurchaseOrder target = purchaseOrderRepo.findById(source.getId()).get();
-        target.setPurchaseOrderStatus(PurchaseOrderStatus.CLOSED);
-        purchaseOrderRepo.save(target);
         return null;
     }
 }

@@ -21,13 +21,13 @@ public class ElementDetails extends BaseEntity {
 
     private String mixDesignName;
 
-    private String weight;
+    private Double weight;
 
-    private String length;
+    private Double length;
 
-    private String width;
+    private Double width;
 
-    private String thickness;
+    private Double thickness;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Element element;
@@ -35,51 +35,35 @@ public class ElementDetails extends BaseEntity {
     @Column(insertable = false, updatable = false, name = "element_id")
     private Long elementId;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getMixDesignName() {
-        return mixDesignName;
-    }
-
-    public void setMixDesignName(String mixDesignName) {
-        this.mixDesignName = mixDesignName;
-    }
-
-    public String getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
-    public String getLength() {
+    public Double getLength() {
         return length;
     }
 
-    public void setLength(String length) {
+    public void setLength(Double length) {
         this.length = length;
     }
 
-    public String getWidth() {
+    public Double getWidth() {
         return width;
     }
 
-    public void setWidth(String width) {
+    public void setWidth(Double width) {
         this.width = width;
     }
 
-    public String getThickness() {
+    public Double getThickness() {
         return thickness;
     }
 
-    public void setThickness(String thickness) {
+    public void setThickness(Double thickness) {
         this.thickness = thickness;
     }
 
@@ -97,5 +81,21 @@ public class ElementDetails extends BaseEntity {
 
     public void setElementId(Long elementId) {
         this.elementId = elementId;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getMixDesignName() {
+        return mixDesignName;
+    }
+
+    public void setMixDesignName(String mixDesignName) {
+        this.mixDesignName = mixDesignName;
     }
 }

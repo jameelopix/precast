@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.vme.precast.shared.PurchaseOrderStatus;
+import com.vme.precast.vendor.api.VendorDTO;
 
 import coliseum.service.BaseSearchDTO;
 
@@ -12,13 +13,15 @@ public class PurchaseOrderSearchDTO extends BaseSearchDTO {
     private static final long serialVersionUID = 1L;
     private List<Long> idList;
     private List<String> purchaseOrderNoList;
+    private List<VendorDTO> vendorDTOList;
+    private List<Long> vendorDTOIdList;
     private List<Date> purchaseDateList;
     private List<PurchaseOrderStatus> purchaseOrderStatusList;
-    private List<Long> vendorIdList;
 
     public static String ID = "id";
     public static String PURCHASEORDERNO = "purchaseOrderNo";
-    public static String VENDOR = "vendor.id";
+    public static String VENDOR = "vendor";
+    public static String VENDORID = "vendor.id";
     public static String PURCHASEDATE = "purchaseDate";
     public static String PURCHASEORDERSTATUS = "purchaseOrderStatus";
 
@@ -38,6 +41,22 @@ public class PurchaseOrderSearchDTO extends BaseSearchDTO {
         this.purchaseOrderNoList = purchaseOrderNoList;
     }
 
+    public List<VendorDTO> getVendorDTOList() {
+        return vendorDTOList;
+    }
+
+    public void setVendorDTOList(List<VendorDTO> vendorDTOList) {
+        this.vendorDTOList = vendorDTOList;
+    }
+
+    public List<Long> getVendorDTOIdList() {
+        return vendorDTOIdList;
+    }
+
+    public void setVendorDTOIdList(List<Long> vendorDTOIdList) {
+        this.vendorDTOIdList = vendorDTOIdList;
+    }
+
     public List<Date> getPurchaseDateList() {
         return purchaseDateList;
     }
@@ -54,11 +73,4 @@ public class PurchaseOrderSearchDTO extends BaseSearchDTO {
         this.purchaseOrderStatusList = purchaseOrderStatusList;
     }
 
-    public List<Long> getVendorIdList() {
-        return vendorIdList;
-    }
-
-    public void setVendorIdList(List<Long> vendorIdList) {
-        this.vendorIdList = vendorIdList;
-    }
 }

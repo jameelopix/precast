@@ -20,6 +20,12 @@ public class PurchaseRegisterItem extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    private PurchaseRegister purchaseRegister;
+
+    @Column(insertable = false, updatable = false, name = "purchaseRegister_id")
+    private Long purchaseRegisterId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private PurchaseOrderItem purchaseOrderItem;
 
     @Column(insertable = false, updatable = false, name = "purchaseOrderItem_id")
@@ -36,6 +42,22 @@ public class PurchaseRegisterItem extends BaseEntity {
 
     private Double netQuantity;
     private String netUnit;
+
+    public PurchaseRegister getPurchaseRegister() {
+        return purchaseRegister;
+    }
+
+    public void setPurchaseRegister(PurchaseRegister purchaseRegister) {
+        this.purchaseRegister = purchaseRegister;
+    }
+
+    public Long getPurchaseRegisterId() {
+        return purchaseRegisterId;
+    }
+
+    public void setPurchaseRegisterId(Long purchaseRegisterId) {
+        this.purchaseRegisterId = purchaseRegisterId;
+    }
 
     public Long getId() {
         return id;

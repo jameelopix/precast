@@ -1,0 +1,14 @@
+package com.vme.precast.steeldetails.api;
+
+import coliseum.service.ColiseumInterface;
+
+public interface SteelDetailsComponent extends ColiseumInterface {
+
+ public SteelDetailsServiceResponse createSteelDetails(SteelDetailsServiceRequest steelDetailsServiceRequest);
+
+ public SteelDetailsServiceResponse getSteelDetailss(SteelDetailsServiceRequest steelDetailsServiceRequest);
+
+ public SteelDetailsServiceResponse updateSteelDetails(SteelDetailsServiceRequest steelDetailsServiceRequest);
+
+ public SteelDetailsServiceResponse deleteSteelDetails(SteelDetailsServiceRequest steelDetailsServiceRequest);
+}

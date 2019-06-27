@@ -1,32 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
-	<input name="purchaseOrderServiceRequest" required="true" />
+ <input name="purchaseOrderServiceRequest" required="true" />
 
-	<action-state id="validate">
-		<evaluate
-			expression="purchaseOrderValidator.checkPurchaseOrderDuplicate(purchaseOrderServiceRequest)" />
-		<evaluate
-			expression="purchaseOrderValidator.isPurchaseOrderClosed(purchaseOrderServiceRequest)" />
-		<evaluate
-			expression="purchaseOrderValidator.isPurchaseOrderIssued(purchaseOrderServiceRequest)" />
-		<evaluate expression="endValidation">
-			<attribute name="name" value="endValidation"></attribute>
-		</evaluate>
-		<transition on="endValidation.success"
-			to="updatePurchaseOrder" />
-	</action-state>
+ <action-state id="validate">
+ <evaluate
+ expression="purchaseOrderValidator.checkPurchaseOrderDuplicate(purchaseOrderServiceRequest)" />
+ <evaluate expression="endValidation">
+ <attribute name="name" value="endValidation"></attribute>
+ </evaluate>
+ <transition on="endValidation.success" to="updatePurchaseOrder" />
+ </action-state>
 
-	<action-state id="updatePurchaseOrder">
-		<evaluate
-			expression="purchaseOrderComponent.updatePurchaseOrder(purchaseOrderServiceRequest)"
-			result="flowScope.purchaseOrderServiceResponse" />
-		<transition to="exit" />
-	</action-state>
+ <action-state id="updatePurchaseOrder">
+ <evaluate
+ expression="purchaseOrderComponent.updatePurchaseOrder(purchaseOrderServiceRequest)"
+ result="flowScope.purchaseOrderServiceResponse" />
+ <transition to="exit" />
+ </action-state>
 
-	<end-state id="exit">
-		<output name="purchaseOrderServiceResponse" />
-	</end-state>
+ <end-state id="exit">
+ <output name="purchaseOrderServiceResponse" />
+ </end-state>
 </flow>

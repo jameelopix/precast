@@ -62,4 +62,20 @@ public class MixtureItem extends BaseEntity {
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
     }
+
+    public Mixture getMixture() {
+        return mixture;
+    }
+
+    public void setMixture(Mixture mixture) {
+        this.mixture = mixture;
+    }
+
+    public Long getMixtureId() {
+        return mixtureId;
+    }
+
+    public void setMixtureId(Long mixtureId) {
+        this.mixtureId = mixtureId;
+    }
 }

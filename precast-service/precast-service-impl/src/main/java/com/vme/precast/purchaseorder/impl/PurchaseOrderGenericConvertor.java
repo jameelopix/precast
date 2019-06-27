@@ -12,6 +12,7 @@ import com.vme.precast.domain.Vendor;
 import com.vme.precast.purchaseorder.api.PurchaseOrderDTO;
 import com.vme.precast.vendor.api.VendorDTO;
 
+import coliseum.jpa.RepoUtils;
 import coliseum.service.ConversionUtility;
 
 public class PurchaseOrderGenericConvertor implements GenericConverter {
@@ -45,10 +46,6 @@ public class PurchaseOrderGenericConvertor implements GenericConverter {
         target.setPurchaseOrderNo(source.getPurchaseOrderNo());
         target.setPurchaseDate(source.getPurchaseDate());
         target.setPurchaseOrderStatus(source.getPurchaseOrderStatus());
-//        if (source.getVendorDTO() != null) {
-//            target.setVendor((Vendor) conversionUtility.convert(source.getVendorDTO(), VendorDTO.class, Vendor.class));
-//        }
-//        target.setVendorId(source.getVendorId());
         return target;
     }
 
@@ -58,11 +55,12 @@ public class PurchaseOrderGenericConvertor implements GenericConverter {
         target.setPurchaseOrderNo(source.getPurchaseOrderNo());
         target.setPurchaseDate(source.getPurchaseDate());
         target.setPurchaseOrderStatus(source.getPurchaseOrderStatus());
-        if (source.getVendor() != null) {
+
+        if (RepoUtils.isNotProxy(source.getVendor())) {
             target.setVendorDTO(
                     (VendorDTO) conversionUtility.convert(source.getVendor(), Vendor.class, VendorDTO.class));
         }
-        target.setVendorId(source.getVendorId());
+        target.setVendorDTOId(source.getVendorId());
         return target;
     }
 }

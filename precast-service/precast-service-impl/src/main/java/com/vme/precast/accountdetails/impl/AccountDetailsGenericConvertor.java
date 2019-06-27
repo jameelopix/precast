@@ -48,11 +48,11 @@ public class AccountDetailsGenericConvertor implements GenericConverter {
         target.setAccountType(source.getAccountType());
         target.setBankName(source.getBankName());
 
-        if (source.getCompanyDTO() != null) {
-            target.setCompany(
-                    (Company) conversionUtility.convert(source.getCompanyDTO(), CompanyDTO.class, Company.class));
-        }
-        target.setCompanyId(source.getCompanyId());
+//        if (source.getCompanyDTO() != null) {
+//            target.setCompany(
+//                    (Company) conversionUtility.convert(source.getCompanyDTO(), CompanyDTO.class, Company.class));
+//        }
+//        target.setCompanyId(source.getCompanyId());
         return target;
     }
 

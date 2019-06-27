@@ -22,8 +22,7 @@ public class PurchaseOrderController {
 
     @RequestMapping(value = "deletePurchaseOrder", method = RequestMethod.POST)
     @ResponseBody
-    public PurchaseOrderClientModel deletePurchaseOrder(
-            @RequestBody PurchaseOrderClientModel purchaseOrderClientModel) {
+    public PurchaseOrderClientModel deletePurchaseOrder(@RequestBody PurchaseOrderClientModel purchaseOrderClientModel) {
         PurchaseOrderServiceRequest purchaseOrderServiceRequest = new PurchaseOrderServiceRequest();
         for (Long id : purchaseOrderClientModel.getIdsToDelete()) {
             PurchaseOrderDTO purchaseOrderDTO = new PurchaseOrderDTO();
@@ -36,41 +35,20 @@ public class PurchaseOrderController {
 
     @RequestMapping(value = "createPurchaseOrder", method = RequestMethod.POST)
     @ResponseBody
-    public PurchaseOrderClientModel createPurchaseOrder(
-            @Valid @RequestBody PurchaseOrderClientModel purchaseOrderClientModel) {
-        return this.constructClientModel(
-                purchaseOrderService.createPurchaseOrder(this.constructServiceRequest(purchaseOrderClientModel)));
+    public PurchaseOrderClientModel createPurchaseOrder(@Valid @RequestBody PurchaseOrderClientModel purchaseOrderClientModel) {
+        return this.constructClientModel(purchaseOrderService.createPurchaseOrder(this.constructServiceRequest(purchaseOrderClientModel)));
     }
 
     @RequestMapping(value = "updatePurchaseOrder", method = RequestMethod.POST)
     @ResponseBody
-    public PurchaseOrderClientModel updatePurchaseOrder(
-            @Valid @RequestBody PurchaseOrderClientModel purchaseOrderClientModel) {
-        return this.constructClientModel(
-                purchaseOrderService.updatePurchaseOrder(this.constructServiceRequest(purchaseOrderClientModel)));
-    }
-
-    @RequestMapping(value = "issuePurchaseOrder", method = RequestMethod.POST)
-    @ResponseBody
-    public PurchaseOrderClientModel issuePurchaseOrder(
-            @Valid @RequestBody PurchaseOrderClientModel purchaseOrderClientModel) {
-        return this.constructClientModel(
-                purchaseOrderService.issuePurchaseOrder(this.constructServiceRequest(purchaseOrderClientModel)));
-    }
-
-    @RequestMapping(value = "closePurchaseOrder", method = RequestMethod.POST)
-    @ResponseBody
-    public PurchaseOrderClientModel closePurchaseOrder(
-            @Valid @RequestBody PurchaseOrderClientModel purchaseOrderClientModel) {
-        return this.constructClientModel(
-                purchaseOrderService.closePurchaseOrder(this.constructServiceRequest(purchaseOrderClientModel)));
+    public PurchaseOrderClientModel updatePurchaseOrder(@Valid @RequestBody PurchaseOrderClientModel purchaseOrderClientModel) {
+        return this.constructClientModel(purchaseOrderService.updatePurchaseOrder(this.constructServiceRequest(purchaseOrderClientModel)));
     }
 
     @RequestMapping(value = "getPurchaseOrder", method = RequestMethod.POST)
     @ResponseBody
     public PurchaseOrderClientModel getPurchaseOrder(@RequestBody PurchaseOrderClientModel purchaseOrderClientModel) {
-        return this.constructClientModel(
-                purchaseOrderService.getPurchaseOrders(this.constructServiceRequest(purchaseOrderClientModel)));
+        return this.constructClientModel(purchaseOrderService.getPurchaseOrders(this.constructServiceRequest(purchaseOrderClientModel)));
     }
 
     private PurchaseOrderClientModel constructClientModel(PurchaseOrderServiceResponse purchaseOrderServiceResponse) {
