@@ -18,8 +18,10 @@ import com.vme.precast.repository.ElementRepo;
 import com.vme.precast.repository.ElementTypeRepo;
 import com.vme.precast.repository.ProjectRepo;
 
+import coliseum.jpa.Association;
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
+import coliseum.service.AssociationUtils;
 import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
@@ -41,12 +43,12 @@ public class ElementComponentImpl implements ElementComponent {
         ElementDTO elementDTO = elementServiceRequest.getElementDTO();
         Element element = (Element) conversionUtility.convert(elementDTO, ElementDTO.class, Element.class);
 
-        if (elementDTO.getProjectDTOId() != null) {
-            Project project = projectRepo.findById(elementDTO.getProjectDTOId()).get();
+        if (elementDTO.getProjectId() != null) {
+            Project project = projectRepo.findById(elementDTO.getProjectId()).get();
             element.setProject(project);
         }
-        if (elementDTO.getElementTypeDTOId() != null) {
-            ElementType elementType = elementTypeRepo.findById(elementDTO.getElementTypeDTOId()).get();
+        if (elementDTO.getElementTypeId() != null) {
+            ElementType elementType = elementTypeRepo.findById(elementDTO.getElementTypeId()).get();
             element.setElementType(elementType);
         }
         elementRepo.save(element);
@@ -58,23 +60,38 @@ public class ElementComponentImpl implements ElementComponent {
         List<Element> elementList = new ArrayList<>();
         List<Filter> filters = new ArrayList<>();
         SearchObject searchObject = new SearchObject();
+        List<Association> associations = new ArrayList<>();
 
         ElementSearchDTO elementSearchDTO = elementServiceRequest.getElementSearchDTO();
         if (elementSearchDTO != null) {
             List<Long> ids = elementSearchDTO.getIdList();
             List<String> nameList = elementSearchDTO.getNameList();
             List<String> floorList = elementSearchDTO.getFloorList();
-            List<Long> elementTypeDTOIdList = elementSearchDTO.getElementTypeDTOIdList();
-            List<Long> projectDTOIdList = elementSearchDTO.getProjectDTOIdList();
+            List<Long> elementTypeIdList = elementSearchDTO.getElementTypeIdList();
+            List<Long> projectIdList = elementSearchDTO.getProjectIdList();
 
             FilterUtils.createEqualFilter(filters, ElementSearchDTO.ID, ids);
             FilterUtils.createEqualFilter(filters, ElementSearchDTO.NAME, nameList);
             FilterUtils.createEqualFilter(filters, ElementSearchDTO.FLOOR, floorList);
-            FilterUtils.createEqualFilter(filters, ElementSearchDTO.ELEMENTTYPEID, elementTypeDTOIdList);
-            FilterUtils.createEqualFilter(filters, ElementSearchDTO.PROJECTID, projectDTOIdList);
+            FilterUtils.createEqualFilter(filters, ElementSearchDTO.ELEMENTTYPEID, elementTypeIdList);
+            FilterUtils.createEqualFilter(filters, ElementSearchDTO.PROJECTID, projectIdList);
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
+            }
+
+            AssociationUtils.createAssociation(associations, ElementSearchDTO.PROJECT,
+                    elementSearchDTO.getProjectNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
+            }
+
+            AssociationUtils.createAssociation(associations, ElementSearchDTO.ELEMENTTYPE,
+                    elementSearchDTO.getElementTypeNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
             }
         }
         searchObject.setPageIndex(elementServiceRequest.getPageIndex());
@@ -98,12 +115,12 @@ public class ElementComponentImpl implements ElementComponent {
         target.setName(source.getName());
         target.setFloor(source.getFloor());
 
-        if (source.getElementTypeDTOId() != null && !source.getElementTypeDTOId().equals(target.getElementTypeId())) {
-            ElementType elementType = elementTypeRepo.findById(source.getElementTypeDTOId()).get();
+        if (source.getElementTypeId() != null && !source.getElementTypeId().equals(target.getElementTypeId())) {
+            ElementType elementType = elementTypeRepo.findById(source.getElementTypeId()).get();
             target.setElementType(elementType);
         }
-        if (source.getProjectDTOId() != null && !source.getProjectDTOId().equals(target.getProjectId())) {
-            Project project = projectRepo.findById(source.getProjectDTOId()).get();
+        if (source.getProjectId() != null && !source.getProjectId().equals(target.getProjectId())) {
+            Project project = projectRepo.findById(source.getProjectId()).get();
             target.setProject(project);
         }
         elementRepo.save(target);

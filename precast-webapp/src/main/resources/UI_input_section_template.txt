@@ -1,0 +1,27 @@
+<p-dialog [(visible)]="elementDialogVisibilty" [width]="500">
+  <p-header>
+    {{entityName}}
+  </p-header>
+  <form [formGroup]="elementForm">
+{{inputParts}}    
+  </form>
+  <p-footer>
+    <div class="btn-toolbar">
+      <button
+        class="btn btn-sm btn-success"
+        type="button"
+        [disabled]="elementForm.invalid"
+        (click)="saveElement()"
+      >
+        <i class="pi pi-save">Save</i>
+      </button>
+      <button
+        class="btn btn-sm btn-default"
+        type="button"
+        (click)="cancelElement()"
+      >
+        <i class="pi pi-times">Cancel</i>
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>

@@ -1,5 +1,6 @@
 package aicoder.temp;
 
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,13 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vme.precast.domain.AccountDetails;
+import com.vme.precast.domain.Element;
 
 //import com.experian.domain.Project;
 
 public class UIGenerator {
 
-    Class entity = AccountDetails.class;
+    Class entity = Element.class;
     String entityName = entity.getSimpleName();
 
     String projectBaseFolder = "c:\\finaltemp\\";
@@ -118,6 +119,12 @@ public class UIGenerator {
 
     public static void main(String[] args) {
 // System.out.println("UIGenerator.main()");
-        new UIGenerator();
+//        new UIGenerator();
+
+        Class cls = Element.class;
+        for (Field field : cls.getDeclaredFields()) {
+            System.out.println(field.getName());
+        }
+
     }
 }

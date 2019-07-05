@@ -8,33 +8,32 @@ const GET_URL: string = "get{{entityName}}";
 const DELETE_URL: string = "delete{{entityName}}";
 
 @Injectable({
-providedIn: "root"
+  providedIn: "root"
 })
 export class {{entityName}}Service {
+  constructor(private clientService: ClientService) {}
 
-constructor(private clientService: ClientService) {}
+  save(request, successCallback, errorCallback?) {
+    let url = SAVE_URL;
+    if (request["{{entityName_camelCase}}DTO"]["id"]) {
+      url = UPDATE_URL;
+    }
 
-save(request, successCallback, errorCallback?) {
-let url = SAVE_URL;
-if (request["{{entityName_camelCase}}DTO"]["id"]) {
-url = UPDATE_URL;
-}
+    this.clientService.post(url, request, successCallback, errorCallback);
+  }
 
-this.clientService.post(url, request, successCallback, errorCallback);
-}
+  delete(id: number, successCallback, errorCallback?) {
+    if (window.confirm(MESSAGES.DELETE_CONFIRM_MSG)) {
+      this.clientService.post(
+        DELETE_URL,
+        { idsToDelete: [id] },
+        successCallback,
+        errorCallback
+      );
+    }
+  }
 
-delete(id: number, successCallback, errorCallback?) {
-if (window.confirm(MESSAGES.DELETE_CONFIRM_MSG)) {
-this.clientService.post(
-DELETE_URL,
-{ idsToDelete: [id] },
-successCallback,
-errorCallback
-);
-}
-}
-
-get(request, successCallback, errorCallback?) {
-this.clientService.post(GET_URL, request, successCallback, errorCallback);
-}
+  get(request, successCallback, errorCallback?) {
+    this.clientService.post(GET_URL, request, successCallback, errorCallback);
+  }
 }

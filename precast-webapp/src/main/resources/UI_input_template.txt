@@ -1,0 +1,22 @@
+    <div class="form-group">
+      <label for="{{fieldName_camelCase}}">{{fieldName}}</label>
+      <input
+        class="form-control"
+        name="{{fieldName_camelCase}}"
+        id="{{fieldName_camelCase}}"
+        type="text"
+        formControlName="{{fieldName_camelCase}}"
+        style="width: 100%"
+      />
+      <div
+        class="form-control-feedback"
+        *ngIf="
+          getControl('{{fieldName_camelCase}}').errors &&
+          (getControl('{{fieldName_camelCase}}').dirty || getControl('{{fieldName_camelCase}}').touched)
+        "
+      >
+        <p *ngIf="getControl('{{fieldName_camelCase}}').errors.required">
+          {{fieldName}} is required
+        </p>
+      </div>
+    </div>

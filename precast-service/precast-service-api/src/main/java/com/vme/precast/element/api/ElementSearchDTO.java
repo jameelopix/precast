@@ -14,9 +14,12 @@ public class ElementSearchDTO extends BaseSearchDTO {
     private List<String> nameList;
     private List<String> floorList;
     private List<ProjectDTO> projectDTOList;
-    private List<Long> projectDTOIdList;
+    private List<Long> projectIdList;
     private List<ElementTypeDTO> elementTypeDTOList;
-    private List<Long> elementTypeDTOIdList;
+    private List<Long> elementTypeIdList;
+    
+    private Boolean projectNeeded;
+    private Boolean elementTypeNeeded;
 
     public static String ID = "id";
     public static String NAME = "name";
@@ -57,15 +60,7 @@ public class ElementSearchDTO extends BaseSearchDTO {
     public void setProjectDTOList(List<ProjectDTO> projectDTOList) {
         this.projectDTOList = projectDTOList;
     }
-
-    public List<Long> getProjectDTOIdList() {
-        return projectDTOIdList;
-    }
-
-    public void setProjectDTOIdList(List<Long> projectDTOIdList) {
-        this.projectDTOIdList = projectDTOIdList;
-    }
-
+    
     public List<ElementTypeDTO> getElementTypeDTOList() {
         return elementTypeDTOList;
     }
@@ -73,13 +68,37 @@ public class ElementSearchDTO extends BaseSearchDTO {
     public void setElementTypeDTOList(List<ElementTypeDTO> elementTypeDTOList) {
         this.elementTypeDTOList = elementTypeDTOList;
     }
-
-    public List<Long> getElementTypeDTOIdList() {
-        return elementTypeDTOIdList;
+    
+    public Boolean getElementTypeNeeded() {
+        return elementTypeNeeded;
     }
 
-    public void setElementTypeDTOIdList(List<Long> elementTypeDTOIdList) {
-        this.elementTypeDTOIdList = elementTypeDTOIdList;
+    public void setElementTypeNeeded(Boolean elementTypeNeeded) {
+        this.elementTypeNeeded = elementTypeNeeded;
+    }
+
+    public Boolean getProjectNeeded() {
+        return projectNeeded;
+    }
+
+    public void setProjectNeeded(Boolean projectNeeded) {
+        this.projectNeeded = projectNeeded;
+    }
+
+    public List<Long> getElementTypeIdList() {
+        return elementTypeIdList;
+    }
+
+    public void setElementTypeIdList(List<Long> elementTypeIdList) {
+        this.elementTypeIdList = elementTypeIdList;
+    }
+
+    public List<Long> getProjectIdList() {
+        return projectIdList;
+    }
+
+    public void setProjectIdList(List<Long> projectIdList) {
+        this.projectIdList = projectIdList;
     }
 
 }

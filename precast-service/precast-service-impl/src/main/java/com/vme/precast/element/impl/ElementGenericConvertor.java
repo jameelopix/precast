@@ -60,13 +60,13 @@ public class ElementGenericConvertor implements GenericConverter {
             target.setProjectDTO(
                     (ProjectDTO) conversionUtility.convert(source.getProject(), Project.class, ProjectDTO.class));
         }
-        target.setProjectDTOId(source.getProjectId());
+        target.setProjectId(source.getProjectId());
 
         if (RepoUtils.isNotProxy(source.getElementType())) {
             target.setElementTypeDTO((ElementTypeDTO) conversionUtility.convert(source.getElementType(),
                     ElementType.class, ElementTypeDTO.class));
         }
-        target.setElementTypeDTOId(source.getElementTypeId());
+        target.setElementTypeId(source.getElementTypeId());
         return target;
     }
 }

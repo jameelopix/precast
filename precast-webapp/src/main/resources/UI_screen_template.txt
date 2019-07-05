@@ -1,0 +1,10 @@
+{{searchBlock}}
+
+<p-messages [(value)]="messages"></p-messages>
+
+<cui-grid
+  [values]="{{entityName_camelCase}}DTOList"
+  [options]="{{entityName_camelCase}}Options"
+></cui-grid>
+
+{{inputBlock}}

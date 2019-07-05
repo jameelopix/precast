@@ -1,0 +1,16 @@
+<div class="form-group col-sm-4">
+  <label>{{fieldName}}</label>
+  <p-dropdown
+    id="{{fieldName_camelCase}}IdList"
+    [options]="{{fieldName_camelCase}}DTOList"
+    formControlName="{{fieldName_camelCase}}IdList"
+    dataKey="id"
+    inputId="id"
+    placeholder="Select {{fieldName}}"
+    optionLabel="name"
+    appendTo="body"
+    [style]="{ width: '100%', height: '40px' }"
+    showClear="true"
+  >
+  </p-dropdown>
+</div>

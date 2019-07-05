@@ -12,9 +12,9 @@ public class ElementDTO extends BaseDTO {
     private String name;
     private String floor;
     private ProjectDTO projectDTO;
-    private Long projectDTOId;
+    private Long projectId;
     private ElementTypeDTO elementTypeDTO;
-    private Long elementTypeDTOId;
+    private Long elementTypeId;
 
     public Long getId() {
         return id;
@@ -48,12 +48,12 @@ public class ElementDTO extends BaseDTO {
         this.projectDTO = projectDTO;
     }
 
-    public Long getProjectDTOId() {
-        return projectDTOId;
+    public Long getProjectId() {
+        return projectId;
     }
 
-    public void setProjectDTOId(Long projectDTOId) {
-        this.projectDTOId = projectDTOId;
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
     }
 
     public ElementTypeDTO getElementTypeDTO() {
@@ -64,12 +64,12 @@ public class ElementDTO extends BaseDTO {
         this.elementTypeDTO = elementTypeDTO;
     }
 
-    public Long getElementTypeDTOId() {
-        return elementTypeDTOId;
+    public Long getElementTypeId() {
+        return elementTypeId;
     }
 
-    public void setElementTypeDTOId(Long elementTypeDTOId) {
-        this.elementTypeDTOId = elementTypeDTOId;
+    public void setElementTypeId(Long elementTypeId) {
+        this.elementTypeId = elementTypeId;
     }
 
 }

@@ -16,8 +16,10 @@ import com.vme.precast.elementtype.api.ElementTypeServiceResponse;
 import com.vme.precast.repository.ElementTypeRepo;
 import com.vme.precast.repository.ProjectRepo;
 
+import coliseum.jpa.Association;
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
+import coliseum.service.AssociationUtils;
 import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
@@ -49,6 +51,7 @@ public class ElementTypeComponentImpl implements ElementTypeComponent {
     public ElementTypeServiceResponse getElementTypes(ElementTypeServiceRequest elementTypeServiceRequest) {
         List<ElementType> elementTypeList = new ArrayList<>();
         List<Filter> filters = new ArrayList<>();
+        List<Association> associations = new ArrayList<>();
         SearchObject searchObject = new SearchObject();
 
         ElementTypeSearchDTO elementTypeSearchDTO = elementTypeServiceRequest.getElementTypeSearchDTO();
@@ -60,6 +63,13 @@ public class ElementTypeComponentImpl implements ElementTypeComponent {
             FilterUtils.createEqualFilter(filters, ElementTypeSearchDTO.NAME, nameList);
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
+            }
+
+            AssociationUtils.createAssociation(associations, ElementTypeSearchDTO.PROJECT,
+                    elementTypeSearchDTO.getProjectNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
             }
         }
         searchObject.setPageIndex(elementTypeServiceRequest.getPageIndex());

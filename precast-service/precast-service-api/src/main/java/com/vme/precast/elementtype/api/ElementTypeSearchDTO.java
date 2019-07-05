@@ -14,6 +14,8 @@ public class ElementTypeSearchDTO extends BaseSearchDTO {
     private List<ProjectDTO> projectDTOList;
     private List<Long> projectIdList;
 
+    private Boolean projectNeeded;
+
     public static String ID = "id";
     public static String NAME = "name";
     public static String PROJECT = "project";
@@ -49,6 +51,14 @@ public class ElementTypeSearchDTO extends BaseSearchDTO {
 
     public void setProjectIdList(List<Long> projectIdList) {
         this.projectIdList = projectIdList;
+    }
+
+    public Boolean getProjectNeeded() {
+        return projectNeeded;
+    }
+
+    public void setProjectNeeded(Boolean projectNeeded) {
+        this.projectNeeded = projectNeeded;
     }
 
 }

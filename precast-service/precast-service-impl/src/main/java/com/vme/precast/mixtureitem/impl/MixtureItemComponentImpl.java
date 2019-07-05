@@ -35,6 +35,11 @@ public class MixtureItemComponentImpl implements MixtureItemComponent {
         MixtureItemDTO mixtureItemDTO = mixtureItemServiceRequest.getMixtureItemDTO();
         MixtureItem mixtureitem = (MixtureItem) conversionUtility.convert(mixtureItemDTO, MixtureItemDTO.class,
                 MixtureItem.class);
+
+        if (mixtureItemDTO.getMixtureDTOId() != null) {
+            Mixture mixture = mixtureRepo.findById(mixtureItemDTO.getMixtureDTOId()).get();
+            mixtureitem.setMixture(mixture);
+        }
         mixtureItemRepo.save(mixtureitem);
         return null;
     }

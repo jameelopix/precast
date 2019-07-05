@@ -1,179 +1,271 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { {{entityName}}Service } from "../services/{{entityName_camelCase}}.service";
+import { {{entityName}}Service } from "../services/account-detail.service";
 import { MessageUtilService } from "../services/message-util.service";
 import { MESSAGES } from "../model/messages";
+import { CompanyService } from "../services/company.service";
+import { UIService } from "../services/ui.service";
 
 @Component({
-selector: "app-{{entityName_camelCase}}",
-templateUrl: "./{{entityName_camelCase}}.component.html",
-styleUrls: ["./{{entityName_camelCase}}.component.css"]
+  selector: "app-account-details",
+  templateUrl: "./account-details.component.html",
+  styleUrls: ["./account-details.component.css"]
 })
 export class {{entityName}}Component implements OnInit {
-{{entityName_camelCase}}DTOList: any[] = [];
-{{entityName_camelCase}}DialogVisibilty: boolean = false;
-{{entityName_camelCase}}Form: FormGroup;
-{{entityName_camelCase}}SearchForm: FormGroup;
+  {{entityName_camelCase}}DTOList: any[] = [];
+  {{entityName_camelCase}}DialogVisibilty: boolean = false;
+  {{entityName_camelCase}}Form: FormGroup;
+  {{entityName_camelCase}}SearchForm: FormGroup;
 
-messages: any[] = [];
+  companyDTOList: any[] = [];
+  accTypeList: any[] = [
+    {
+      id: "CASH",
+      name: "CASH"
+    },
+    {
+      id: "BANK",
+      name: "BANK"
+    }
+  ];
+  bankList: any[] = [
+    {
+      id: "AXIS",
+      name: "AXIS"
+    },
+    {
+      id: "ICICI",
+      name: "ICICI"
+    },
+    {
+      id: "SBI",
+      name: "SBI"
+    }
+  ];
 
-result: any = null;
+  messages: any[] = [];
 
-constructor(
-private {{entityName_camelCase}}Service: {{entityName}}Service,
-private messageUtilService: MessageUtilService,
-private formBuilder: FormBuilder
-) {
-this.createFormGroup();
-}
+  result: any = null;
 
-ngOnInit() {
-this.fetchReleventData();
-}
+  constructor(
+    private {{entityName_camelCase}}Service: {{entityName}}Service,
+    private companyService: CompanyService,
+    private messageUtilService: MessageUtilService,
+    private uiservice: UIService,
+    private formBuilder: FormBuilder
+  ) {
+    this.createFormGroup();
+  }
 
-fetchReleventData() { }
+  ngOnInit() {
+    this.fetchReleventData();
+  }
 
-createFormGroup() {
-this.{{entityName_camelCase}}Form = this.formBuilder.group({
-id: [null],
-name: ["", Validators.required]
-});
+  fetchReleventData() {
+    this.getCompanyDTOList();
+  }
 
-this.{{entityName_camelCase}}SearchForm = this.formBuilder.group({
-names: [""]
-});
-}
+  getCompanyDTOList() {
+    this.companyService.get({}, (response: any) => {
+      this.companyDTOList = response["companyDTOList"];
+    });
+  }
 
-add{{entityName}} = () => {
-this.{{entityName_camelCase}}Form.reset();
-this.{{entityName_camelCase}}DialogVisibilty = true;
-};
+  createFormGroup() {
+    this.{{entityName_camelCase}}Form = this.formBuilder.group({
+      id: [null],
+      companyId: ["", Validators.required],
+      accountType: ["", Validators.required],
+      bankName: [""],
+      accountName: ["", Validators.required],
+      accountNumber: [""]
+    });
 
-edit{{entityName}} = rowData => {
-this.populate{{entityName}}Form(rowData, false);
-this.{{entityName_camelCase}}DialogVisibilty = true;
-};
+    this.{{entityName_camelCase}}SearchForm = this.formBuilder.group({
+      accountNameList: [""],
+      accountNumberList: [""],
+      accountTypeList: [""],
+      bankNameList: [""],
+      companyIdList: [""]
+    });
+  }
 
-copy{{entityName}} = rowData => {
-this.populate{{entityName}}Form(rowData);
-this.{{entityName_camelCase}}DialogVisibilty = true;
-};
+  add{{entityName}} = () => {
+    this.{{entityName_camelCase}}Form.reset();
+    this.{{entityName_camelCase}}DialogVisibilty = true;
+  };
 
-populate{{entityName}}Form(rowData: any, makeIdNull: boolean = true) {
-this.{{entityName_camelCase}}Form.reset();
+  edit{{entityName}} = rowData => {
+    this.populate{{entityName}}Form(rowData, false);
+    this.{{entityName_camelCase}}DialogVisibilty = true;
+  };
 
-let id = null;
-if (!makeIdNull) {
-id = rowData["id"];
-}
+  copy{{entityName}} = rowData => {
+    this.populate{{entityName}}Form(rowData);
+    this.{{entityName_camelCase}}DialogVisibilty = true;
+  };
 
-let formValue = {
-id: id,
-name: rowData["name"]
-};
+  populate{{entityName}}Form(rowData: any, makeIdNull: boolean = true) {
+    this.{{entityName_camelCase}}Form.reset();
 
-this.{{entityName_camelCase}}Form.setValue(formValue);
-}
+    let id = null;
+    if (!makeIdNull) {
+      id = rowData["id"];
+    }
 
-search{{entityName}} = () => {
-let searchFormData = this.{{entityName_camelCase}}SearchForm.getRawValue();
+    let formValue = {
+      id: id,
+      companyId: { id: rowData["companyId"] },
+      accountType: { id: rowData["accountType"] },
+      bankName: { id: rowData["bankName"] },
+      accountName: rowData["accountName"],
+      accountNumber: rowData["accountNumber"]
+    };
 
-let request = {
-{{entityName_camelCase}}SearchDTO: {
-nameList: [searchFormData["names"]]
-}
-}
+    this.{{entityName_camelCase}}Form.setValue(formValue);
+  }
 
-this.result = request;
+  // search{{entityName}} = () => {
 
-this.{{entityName_camelCase}}Service.get(request, this.get{{entityName}}Callback);
-}
+  // };
 
-save{{entityName}} = () => {
-this.messageUtilService.clearMessage(this.messages);
-let formData = this.{{entityName_camelCase}}Form.getRawValue();
+  save{{entityName}} = () => {
+    this.messageUtilService.clearMessage(this.messages);
+    let formData = this.{{entityName_camelCase}}Form.getRawValue();
 
-let request = {
-{{entityName_camelCase}}DTO: {
-id: formData["id"],
-name: formData["name"]
-}
-};
+    let request = {
+      {{entityName_camelCase}}DTO: {
+        id: formData["id"],
+        companyId: formData["companyId"]["id"],
+        accountType: formData["accountType"]["id"],
+        bankName: formData["bankName"]["id"],
+        accountName: formData["accountName"],
+        accountNumber: formData["accountNumber"]
+      }
+    };
 
-this.{{entityName_camelCase}}Service.save(
-request,
-this.save{{entityName}}SuccessCallback,
-this.save{{entityName}}ErrorCallback
-);
-};
+    this.{{entityName_camelCase}}Service.save(
+      request,
+      this.save{{entityName}}SuccessCallback,
+      this.save{{entityName}}ErrorCallback
+    );
+  };
 
-save{{entityName}}SuccessCallback = (response: any) => {
-this.messageUtilService.showSuccessMessages(
-this.messages,
-MESSAGES.SAVE_ACK_MSG
-);
-this.{{entityName_camelCase}}DialogVisibilty = false;
-this.get{{entityName}}();
-};
+  save{{entityName}}SuccessCallback = (response: any) => {
+    this.messageUtilService.showSuccessMessages(
+      this.messages,
+      MESSAGES.SAVE_ACK_MSG
+    );
+    this.{{entityName_camelCase}}DialogVisibilty = false;
+    this.get{{entityName}}();
+  };
 
-save{{entityName}}ErrorCallback = (response: any) => {
-this.messageUtilService.showErrorMessages(this.messages, response[0]);
-};
+  save{{entityName}}ErrorCallback = (response: any) => {
+    this.messageUtilService.showErrorMessages(this.messages, response[0]);
+  };
 
-cancel{{entityName}} = () => {
-this.{{entityName_camelCase}}Form.reset();
-this.{{entityName_camelCase}}DialogVisibilty = false;
-};
+  cancel{{entityName}} = () => {
+    this.{{entityName_camelCase}}Form.reset();
+    this.{{entityName_camelCase}}DialogVisibilty = false;
+  };
 
-get{{entityName}} = () => {
-this.{{entityName_camelCase}}Service.get({}, this.get{{entityName}}Callback);
-};
+  get{{entityName}} = () => {
+    let searchFormData = this.{{entityName_camelCase}}SearchForm.getRawValue();
 
-get{{entityName}}Callback = (response: any) => {
-this.{{entityName_camelCase}}DTOList = response.{{entityName_camelCase}}DTOList;
-};
+    let request = {
+      {{entityName_camelCase}}SearchDTO: {
+        accountNameList: this.uiservice.getSearchData(
+          searchFormData,
+          "companyIdList"
+        ),
+        accountNumberList: this.uiservice.getSearchData(
+          searchFormData,
+          "accountNumberList"
+        ),
+        accountTypeList: this.uiservice.getSearchData(
+          searchFormData,
+          "accountTypeList"
+        ),
+        bankNameList: this.uiservice.getSearchData(
+          searchFormData,
+          "bankNameList"
+        ),
+        companyIdList: this.uiservice.getSearchData(
+          searchFormData,
+          "companyIdList"
+        ),
+        companyNeeded: true
+      }
+    };
 
-delete{{entityName}} = rowData => {
-this.messageUtilService.clearMessage(this.messages);
+    this.{{entityName_camelCase}}DTOList = [];
+    this.{{entityName_camelCase}}Service.get(request, this.get{{entityName}}Callback);
+  };
 
-this.{{entityName_camelCase}}Service.delete(
-rowData["id"],
-this.delete{{entityName}}SuccessCallback,
-this.delete{{entityName}}ErrorCallback
-);
-};
+  get{{entityName}}Callback = (response: any) => {
+    this.{{entityName_camelCase}}DTOList = response.{{entityName_camelCase}}DTOList;
+  };
 
-delete{{entityName}}SuccessCallback = (response: any) => {
-this.messageUtilService.showSuccessMessages(
-this.messages,
-MESSAGES.DELETE_ACK_MSG
-);
-this.get{{entityName}}();
-};
+  delete{{entityName}} = rowData => {
+    this.messageUtilService.clearMessage(this.messages);
 
-delete{{entityName}}ErrorCallback = (response: any) => {
-this.messageUtilService.showErrorMessages(this.messages, response[0]);
-};
+    this.{{entityName_camelCase}}Service.delete(
+      rowData["id"],
+      this.delete{{entityName}}SuccessCallback,
+      this.delete{{entityName}}ErrorCallback
+    );
+  };
 
-{{entityName_camelCase}}Options: any = {
-caption: "{{entityName}} Details",
-addCallback: this.add{{entityName}},
-editCallback: this.edit{{entityName}},
-copyCallback: this.copy{{entityName}},
-getCallback: this.get{{entityName}},
-deleteCallback: this.delete{{entityName}},
-childPresent: true,
-columns: [
-{
-name: "Name",
-index: "name",
-type: "textInput"
-// width: "45%"
-}
-]
-};
+  delete{{entityName}}SuccessCallback = (response: any) => {
+    this.messageUtilService.showSuccessMessages(
+      this.messages,
+      MESSAGES.DELETE_ACK_MSG
+    );
+    this.get{{entityName}}();
+  };
 
-getControl(field: any) {
-return this.{{entityName_camelCase}}Form.controls[field];
-}
+  delete{{entityName}}ErrorCallback = (response: any) => {
+    this.messageUtilService.showErrorMessages(this.messages, response[0]);
+  };
+
+  {{entityName_camelCase}}Options: any = {
+    caption: "{{entityName}} Details",
+    addCallback: this.add{{entityName}},
+    editCallback: this.edit{{entityName}},
+    copyCallback: this.copy{{entityName}},
+    getCallback: this.get{{entityName}},
+    deleteCallback: this.delete{{entityName}},
+    childPresent: true,
+    columns: [
+      {
+        name: "Account Name",
+        index: "accountName",
+        type: "textInput"
+      },
+      {
+        name: "Account No.",
+        index: "accountNumber",
+        type: "textInput"
+      },
+      {
+        name: "Type",
+        index: "accountType",
+        type: "textInput"
+      },
+      {
+        name: "Bank",
+        index: "bankName",
+        type: "textInput"
+      },
+      {
+        name: "Company",
+        index: "companyDTO.name",
+        type: "textInput"
+      }
+    ]
+  };
+
+  getControl(field: any) {
+    return this.{{entityName_camelCase}}Form.controls[field];
+  }
 }
