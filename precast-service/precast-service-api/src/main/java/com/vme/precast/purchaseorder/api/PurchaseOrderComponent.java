@@ -11,4 +11,8 @@ public interface PurchaseOrderComponent extends ColiseumInterface {
  public PurchaseOrderServiceResponse updatePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
 
  public PurchaseOrderServiceResponse deletePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
+
+ public PurchaseOrderServiceResponse issuePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
+
+ public PurchaseOrderServiceResponse closePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
 }

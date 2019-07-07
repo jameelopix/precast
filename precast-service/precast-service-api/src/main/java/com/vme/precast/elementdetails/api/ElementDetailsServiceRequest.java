@@ -4,25 +4,25 @@ import coliseum.service.BaseServiceRequest;
 
 public class ElementDetailsServiceRequest extends BaseServiceRequest {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
- private ElementDetailsDTO elementDetailsDTO;
+    private ElementDetailsDTO elementDetailsDTO;
 
- private ElementDetailsSearchDTO elementDetailsSearchDTO;
+    private ElementDetailsSearchDTO elementDetailsSearchDTO;
 
- public ElementDetailsDTO getElementDetailsDTO() {
- return elementDetailsDTO;
- }
+    public ElementDetailsDTO getElementDetailsDTO() {
+        return elementDetailsDTO;
+    }
 
- public void setElementDetailsDTO(ElementDetailsDTO elementDetailsDTO) {
- this.elementDetailsDTO = elementDetailsDTO;
- }
+    public void setElementDetailsDTO(ElementDetailsDTO elementDetailsDTO) {
+        this.elementDetailsDTO = elementDetailsDTO;
+    }
 
- public ElementDetailsSearchDTO getElementDetailsSearchDTO() {
- return elementDetailsSearchDTO;
- }
+    public ElementDetailsSearchDTO getElementDetailsSearchDTO() {
+        return elementDetailsSearchDTO;
+    }
 
- public void setElementDetailsSearchDTO(ElementDetailsSearchDTO elementDetailsSearchDTO) {
- this.elementDetailsSearchDTO = elementDetailsSearchDTO;
- }
+    public void setElementDetailsSearchDTO(ElementDetailsSearchDTO elementDetailsSearchDTO) {
+        this.elementDetailsSearchDTO = elementDetailsSearchDTO;
+    }
 }

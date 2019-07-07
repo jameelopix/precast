@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vme.precast.domain.PurchaseRegister;
 import com.vme.precast.domain.Vendor;
+import com.vme.precast.purchaseorder.api.PurchaseOrderSearchDTO;
 import com.vme.precast.purchaseregister.api.PurchaseRegisterComponent;
 import com.vme.precast.purchaseregister.api.PurchaseRegisterDTO;
 import com.vme.precast.purchaseregister.api.PurchaseRegisterSearchDTO;
@@ -16,8 +17,10 @@ import com.vme.precast.purchaseregister.api.PurchaseRegisterServiceResponse;
 import com.vme.precast.repository.PurchaseRegisterRepo;
 import com.vme.precast.repository.VendorRepo;
 
+import coliseum.jpa.Association;
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
+import coliseum.service.AssociationUtils;
 import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
@@ -51,6 +54,7 @@ public class PurchaseRegisterComponentImpl implements PurchaseRegisterComponent 
         List<PurchaseRegister> purchaseRegisterList = new ArrayList<>();
         List<Filter> filters = new ArrayList<>();
         SearchObject searchObject = new SearchObject();
+        List<Association> associations = new ArrayList<>();
 
         PurchaseRegisterSearchDTO purchaseRegisterSearchDTO = purchaseRegisterServiceRequest
                 .getPurchaseRegisterSearchDTO();
@@ -65,6 +69,13 @@ public class PurchaseRegisterComponentImpl implements PurchaseRegisterComponent 
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
+            }
+
+            AssociationUtils.createAssociation(associations, PurchaseRegisterSearchDTO.VENDOR,
+                    purchaseRegisterSearchDTO.getVendorNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
             }
         }
         searchObject.setPageIndex(purchaseRegisterServiceRequest.getPageIndex());

@@ -17,6 +17,8 @@ public class ElementDetailsSearchDTO extends BaseSearchDTO {
     private List<Double> thicknessList;
     private List<ElementDTO> elementDTOList;
     private List<Long> elementIdList;
+    
+    private Boolean elementNeeded;
 
     public static String ID = "id";
     public static String MIXDESIGNNAME = "mixDesignName";
@@ -89,6 +91,14 @@ public class ElementDetailsSearchDTO extends BaseSearchDTO {
 
     public void setLengthList(List<Double> lengthList) {
         this.lengthList = lengthList;
+    }
+
+    public Boolean getElementNeeded() {
+        return elementNeeded;
+    }
+
+    public void setElementNeeded(Boolean elementNeeded) {
+        this.elementNeeded = elementNeeded;
     }
 
 }

@@ -1,28 +1,40 @@
 package com.vme.precast.purchaseorderitem.api;
 
+import com.vme.precast.purchaseorder.api.PurchaseOrderServiceRequest;
+
 import coliseum.service.BaseServiceRequest;
 
 public class PurchaseOrderItemServiceRequest extends BaseServiceRequest {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
- private PurchaseOrderItemDTO purchaseOrderItemDTO;
+    private PurchaseOrderItemDTO purchaseOrderItemDTO;
 
- private PurchaseOrderItemSearchDTO purchaseOrderItemSearchDTO;
+    private PurchaseOrderItemSearchDTO purchaseOrderItemSearchDTO;
 
- public PurchaseOrderItemDTO getPurchaseOrderItemDTO() {
- return purchaseOrderItemDTO;
- }
+    private PurchaseOrderServiceRequest purchaseOrderServiceRequest;
 
- public void setPurchaseOrderItemDTO(PurchaseOrderItemDTO purchaseOrderItemDTO) {
- this.purchaseOrderItemDTO = purchaseOrderItemDTO;
- }
+    public PurchaseOrderItemDTO getPurchaseOrderItemDTO() {
+        return purchaseOrderItemDTO;
+    }
 
- public PurchaseOrderItemSearchDTO getPurchaseOrderItemSearchDTO() {
- return purchaseOrderItemSearchDTO;
- }
+    public void setPurchaseOrderItemDTO(PurchaseOrderItemDTO purchaseOrderItemDTO) {
+        this.purchaseOrderItemDTO = purchaseOrderItemDTO;
+    }
 
- public void setPurchaseOrderItemSearchDTO(PurchaseOrderItemSearchDTO purchaseOrderItemSearchDTO) {
- this.purchaseOrderItemSearchDTO = purchaseOrderItemSearchDTO;
- }
+    public PurchaseOrderItemSearchDTO getPurchaseOrderItemSearchDTO() {
+        return purchaseOrderItemSearchDTO;
+    }
+
+    public void setPurchaseOrderItemSearchDTO(PurchaseOrderItemSearchDTO purchaseOrderItemSearchDTO) {
+        this.purchaseOrderItemSearchDTO = purchaseOrderItemSearchDTO;
+    }
+
+    public PurchaseOrderServiceRequest getPurchaseOrderServiceRequest() {
+        return purchaseOrderServiceRequest;
+    }
+
+    public void setPurchaseOrderServiceRequest(PurchaseOrderServiceRequest purchaseOrderServiceRequest) {
+        this.purchaseOrderServiceRequest = purchaseOrderServiceRequest;
+    }
 }

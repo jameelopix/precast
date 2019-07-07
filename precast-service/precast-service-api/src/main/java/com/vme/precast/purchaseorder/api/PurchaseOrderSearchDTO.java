@@ -18,6 +18,8 @@ public class PurchaseOrderSearchDTO extends BaseSearchDTO {
     private List<Date> purchaseDateList;
     private List<PurchaseOrderStatus> purchaseOrderStatusList;
 
+    private Boolean vendorNeeded;
+    
     public static String ID = "id";
     public static String PURCHASEORDERNO = "purchaseOrderNo";
     public static String VENDOR = "vendor";
@@ -71,6 +73,14 @@ public class PurchaseOrderSearchDTO extends BaseSearchDTO {
 
     public void setPurchaseOrderStatusList(List<PurchaseOrderStatus> purchaseOrderStatusList) {
         this.purchaseOrderStatusList = purchaseOrderStatusList;
+    }
+
+    public Boolean getVendorNeeded() {
+        return vendorNeeded;
+    }
+
+    public void setVendorNeeded(Boolean vendorNeeded) {
+        this.vendorNeeded = vendorNeeded;
     }
 
 }

@@ -7,21 +7,12 @@ import coliseum.service.BaseDTO;
 public class SteelDetailsDTO extends BaseDTO {
 
     private static final long serialVersionUID = 1L;
-    private Long id;
     private String rawMaterialName;
     private String unit;
     private Double theoriticalQuantity;
     private Double actualQuantity;
     private ElementDTO elementDTO;
-    private Long elementDTOId;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Long elementId;
 
     public String getRawMaterialName() {
         return rawMaterialName;
@@ -63,11 +54,11 @@ public class SteelDetailsDTO extends BaseDTO {
         this.elementDTO = elementDTO;
     }
 
-    public Long getElementDTOId() {
-        return elementDTOId;
+    public Long getElementId() {
+        return elementId;
     }
 
-    public void setElementDTOId(Long elementDTOId) {
-        this.elementDTOId = elementDTOId;
+    public void setElementId(Long elementId) {
+        this.elementId = elementId;
     }
 }

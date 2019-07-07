@@ -16,8 +16,10 @@ import com.vme.precast.steeldetails.api.SteelDetailsSearchDTO;
 import com.vme.precast.steeldetails.api.SteelDetailsServiceRequest;
 import com.vme.precast.steeldetails.api.SteelDetailsServiceResponse;
 
+import coliseum.jpa.Association;
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
+import coliseum.service.AssociationUtils;
 import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
@@ -35,8 +37,8 @@ public class SteelDetailsComponentImpl implements SteelDetailsComponent {
         SteelDetailsDTO steelDetailsDTO = steelDetailsServiceRequest.getSteelDetailsDTO();
         SteelDetails steeldetails = (SteelDetails) conversionUtility.convert(steelDetailsDTO, SteelDetailsDTO.class,
                 SteelDetails.class);
-        if (steelDetailsDTO.getElementDTOId() != null) {
-            Element element = elementRepo.findById(steelDetailsDTO.getElementDTOId()).get();
+        if (steelDetailsDTO.getElementId() != null) {
+            Element element = elementRepo.findById(steelDetailsDTO.getElementId()).get();
             steeldetails.setElement(element);
         }
         steelDetailsRepo.save(steeldetails);
@@ -48,12 +50,13 @@ public class SteelDetailsComponentImpl implements SteelDetailsComponent {
         List<SteelDetails> steelDetailsList = new ArrayList<>();
         List<Filter> filters = new ArrayList<>();
         SearchObject searchObject = new SearchObject();
+        List<Association> associations = new ArrayList<>();
 
         SteelDetailsSearchDTO steelDetailsSearchDTO = steelDetailsServiceRequest.getSteelDetailsSearchDTO();
         if (steelDetailsSearchDTO != null) {
             List<Long> idList = steelDetailsSearchDTO.getIdList();
             List<String> rawMaterialNameList = steelDetailsSearchDTO.getRawMaterialNameList();
-            List<Long> elementDTOIdList = steelDetailsSearchDTO.getElementDTOIdList();
+            List<Long> elementIdList = steelDetailsSearchDTO.getElementIdList();
             List<String> unitList = steelDetailsSearchDTO.getUnitList();
             List<Double> actualQuantityList = steelDetailsSearchDTO.getActualQuantityList();
             List<Double> theoriticalQuantityList = steelDetailsSearchDTO.getTheoriticalQuantityList();
@@ -63,10 +66,17 @@ public class SteelDetailsComponentImpl implements SteelDetailsComponent {
             FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.UNIT, unitList);
             FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.ACTUALQUANTITY, actualQuantityList);
             FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.THEORITICALQUANTITY, theoriticalQuantityList);
-            FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.ELEMENTID, elementDTOIdList);
+            FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.ELEMENTID, elementIdList);
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
+            }
+
+            AssociationUtils.createAssociation(associations, SteelDetailsSearchDTO.ELEMENT,
+                    steelDetailsSearchDTO.getElementNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
             }
         }
         searchObject.setPageIndex(steelDetailsServiceRequest.getPageIndex());
@@ -93,8 +103,8 @@ public class SteelDetailsComponentImpl implements SteelDetailsComponent {
         target.setTheoriticalQuantity(source.getTheoriticalQuantity());
         target.setActualQuantity(source.getActualQuantity());
 
-        if (source.getElementDTOId() != null && !source.getElementDTOId().equals(target.getElementId())) {
-            Element element = elementRepo.findById(source.getElementDTOId()).get();
+        if (source.getElementId() != null && !source.getElementId().equals(target.getElementId())) {
+            Element element = elementRepo.findById(source.getElementId()).get();
             target.setElement(element);
         }
         steelDetailsRepo.save(target);

@@ -14,7 +14,7 @@ public class ElementDetailsDTO extends BaseDTO {
     private Double width;
     private Double thickness;
     private ElementDTO elementDTO;
-    private Long elementDTOId;
+    private Long elementId;
 
     public Long getId() {
         return id;
@@ -72,12 +72,12 @@ public class ElementDetailsDTO extends BaseDTO {
         this.elementDTO = elementDTO;
     }
 
-    public Long getElementDTOId() {
-        return elementDTOId;
+    public Long getElementId() {
+        return elementId;
     }
 
-    public void setElementDTOId(Long elementDTOId) {
-        this.elementDTOId = elementDTOId;
+    public void setElementId(Long elementId) {
+        this.elementId = elementId;
     }
 
 }

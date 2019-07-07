@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vme.precast.domain.PurchaseOrder;
 import com.vme.precast.domain.PurchaseOrderItem;
+import com.vme.precast.purchaseorder.api.PurchaseOrderDTO;
+import com.vme.precast.purchaseorder.api.PurchaseOrderServiceRequest;
 import com.vme.precast.purchaseorderitem.api.PurchaseOrderItemComponent;
 import com.vme.precast.purchaseorderitem.api.PurchaseOrderItemDTO;
 import com.vme.precast.purchaseorderitem.api.PurchaseOrderItemSearchDTO;
@@ -36,6 +38,12 @@ public class PurchaseOrderItemComponentImpl implements PurchaseOrderItemComponen
         PurchaseOrderItemDTO purchaseOrderItemDTO = purchaseOrderItemServiceRequest.getPurchaseOrderItemDTO();
         PurchaseOrderItem purchaseorderitem = (PurchaseOrderItem) conversionUtility.convert(purchaseOrderItemDTO,
                 PurchaseOrderItemDTO.class, PurchaseOrderItem.class);
+
+        if (purchaseOrderItemDTO.getPurchaseOrderDTOId() != null) {
+            PurchaseOrder purchaseOrder = purchaseOrderRepo.findById(purchaseOrderItemDTO.getPurchaseOrderDTOId())
+                    .get();
+            purchaseorderitem.setPurchaseOrder(purchaseOrder);
+        }
         purchaseOrderItemRepo.save(purchaseorderitem);
         return null;
     }
@@ -107,6 +115,25 @@ public class PurchaseOrderItemComponentImpl implements PurchaseOrderItemComponen
             PurchaseOrderItemServiceRequest purchaseOrderItemServiceRequest) {
         PurchaseOrderItemDTO purchaseOrderItemDTO = purchaseOrderItemServiceRequest.getPurchaseOrderItemDTO();
         purchaseOrderItemRepo.deleteById(purchaseOrderItemDTO.getId());
+        return null;
+    }
+
+    @Override
+    public PurchaseOrderItemServiceResponse preprocess(
+            PurchaseOrderItemServiceRequest purchaseOrderItemServiceRequest) {
+        PurchaseOrderItemDTO purchaseOrderItemDTO = purchaseOrderItemServiceRequest.getPurchaseOrderItemDTO();
+
+        Long purchaseOrderId = purchaseOrderItemDTO.getPurchaseOrderDTOId();
+        if (purchaseOrderId == null) {
+            purchaseOrderId = purchaseOrderItemRepo.findById(purchaseOrderItemDTO.getId()).get().getPurchaseOrderId();
+        }
+
+        PurchaseOrderServiceRequest purchaseOrderServiceRequest = new PurchaseOrderServiceRequest();
+        PurchaseOrderDTO purchaseOrderDTO = new PurchaseOrderDTO();
+        purchaseOrderDTO.setId(purchaseOrderId);
+        purchaseOrderServiceRequest.setPurchaseOrderDTO(purchaseOrderDTO);
+
+        purchaseOrderItemServiceRequest.setPurchaseOrderServiceRequest(purchaseOrderServiceRequest);
         return null;
     }
 }

@@ -17,8 +17,10 @@ import com.vme.precast.repository.PurchaseOrderRepo;
 import com.vme.precast.repository.VendorRepo;
 import com.vme.precast.shared.PurchaseOrderStatus;
 
+import coliseum.jpa.Association;
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
+import coliseum.service.AssociationUtils;
 import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
@@ -37,6 +39,7 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
         PurchaseOrder purchaseorder = (PurchaseOrder) conversionUtility.convert(purchaseOrderDTO,
                 PurchaseOrderDTO.class, PurchaseOrder.class);
 
+        purchaseorder.setPurchaseOrderStatus(PurchaseOrderStatus.OPEN);
         if (purchaseOrderDTO.getVendorDTOId() != null) {
             Vendor vendor = vendorRepo.findById(purchaseOrderDTO.getVendorDTOId()).get();
             purchaseorder.setVendor(vendor);
@@ -50,6 +53,7 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
         List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
         List<Filter> filters = new ArrayList<>();
         SearchObject searchObject = new SearchObject();
+        List<Association> associations = new ArrayList<>();
 
         PurchaseOrderSearchDTO purchaseOrderSearchDTO = purchaseOrderServiceRequest.getPurchaseOrderSearchDTO();
         if (purchaseOrderSearchDTO != null) {
@@ -66,6 +70,13 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
+            }
+
+            AssociationUtils.createAssociation(associations, PurchaseOrderSearchDTO.VENDOR,
+                    purchaseOrderSearchDTO.getVendorNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
             }
         }
         searchObject.setPageIndex(purchaseOrderServiceRequest.getPageIndex());
@@ -103,6 +114,24 @@ public class PurchaseOrderComponentImpl implements PurchaseOrderComponent {
     public PurchaseOrderServiceResponse deletePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest) {
         PurchaseOrderDTO purchaseOrderDTO = purchaseOrderServiceRequest.getPurchaseOrderDTO();
         purchaseOrderRepo.deleteById(purchaseOrderDTO.getId());
+        return null;
+    }
+
+    @Override
+    public PurchaseOrderServiceResponse issuePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest) {
+        PurchaseOrderDTO source = purchaseOrderServiceRequest.getPurchaseOrderDTO();
+        PurchaseOrder target = purchaseOrderRepo.findById(source.getId()).get();
+        target.setPurchaseOrderStatus(PurchaseOrderStatus.ISSUED);
+        purchaseOrderRepo.save(target);
+        return null;
+    }
+
+    @Override
+    public PurchaseOrderServiceResponse closePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest) {
+        PurchaseOrderDTO source = purchaseOrderServiceRequest.getPurchaseOrderDTO();
+        PurchaseOrder target = purchaseOrderRepo.findById(source.getId()).get();
+        target.setPurchaseOrderStatus(PurchaseOrderStatus.CLOSED);
+        purchaseOrderRepo.save(target);
         return null;
     }
 }

@@ -5,15 +5,21 @@ import coliseum.service.FlowDescriptor;
 
 public interface PurchaseOrderService extends BaseService {
 
- @FlowDescriptor(flow = "createpurchaseorder", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
- public PurchaseOrderServiceResponse createPurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
+    @FlowDescriptor(flow = "createpurchaseorder", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
+    public PurchaseOrderServiceResponse createPurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
 
- @FlowDescriptor(flow = "getpurchaseorders", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
- public PurchaseOrderServiceResponse getPurchaseOrders(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
+    @FlowDescriptor(flow = "getpurchaseorders", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
+    public PurchaseOrderServiceResponse getPurchaseOrders(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
 
- @FlowDescriptor(flow = "updatepurchaseorder", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
- public PurchaseOrderServiceResponse updatePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
+    @FlowDescriptor(flow = "updatepurchaseorder", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
+    public PurchaseOrderServiceResponse updatePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
 
- @FlowDescriptor(flow = "deletepurchaseorder", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
- public PurchaseOrderServiceResponse deletePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
+    @FlowDescriptor(flow = "deletepurchaseorder", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
+    public PurchaseOrderServiceResponse deletePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
+
+    @FlowDescriptor(flow = "issuepurchaseorder", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
+    public PurchaseOrderServiceResponse issuePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
+
+    @FlowDescriptor(flow = "closepurchaseorder", request = "purchaseOrderServiceRequest", response = "purchaseOrderServiceResponse")
+    public PurchaseOrderServiceResponse closePurchaseOrder(PurchaseOrderServiceRequest purchaseOrderServiceRequest);
 }

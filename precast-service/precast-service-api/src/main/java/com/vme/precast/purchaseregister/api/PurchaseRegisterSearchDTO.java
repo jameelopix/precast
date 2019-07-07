@@ -11,8 +11,11 @@ public class PurchaseRegisterSearchDTO extends BaseSearchDTO {
     private List<Long> vendorIdList;
     private List<String> weighBridgeNoList;
 
+    private Boolean vendorNeeded;
+
     public static String ID = "id";
     public static String VENDORID = "vendor.id";
+    public static String VENDOR = "vendor";
     public static String WEIGHBRIDGENO = "weighBridgeNo";
 
     public List<Long> getIdList() {
@@ -37,5 +40,13 @@ public class PurchaseRegisterSearchDTO extends BaseSearchDTO {
 
     public void setVendorIdList(List<Long> vendorIdList) {
         this.vendorIdList = vendorIdList;
+    }
+
+    public Boolean getVendorNeeded() {
+        return vendorNeeded;
+    }
+
+    public void setVendorNeeded(Boolean vendorNeeded) {
+        this.vendorNeeded = vendorNeeded;
     }
 }

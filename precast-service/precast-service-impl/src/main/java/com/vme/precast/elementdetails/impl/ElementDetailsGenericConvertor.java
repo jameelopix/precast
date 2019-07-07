@@ -62,9 +62,9 @@ public class ElementDetailsGenericConvertor implements GenericConverter {
 
         if (RepoUtils.isNotProxy(source.getElement())) {
             target.setElementDTO(
-                    (ElementDTO) conversionUtility.convert(source.getElementId(), Element.class, ElementDTO.class));
+                    (ElementDTO) conversionUtility.convert(source.getElement(), Element.class, ElementDTO.class));
         }
-        target.setElementDTOId(source.getElementId());
+        target.setElementId(source.getElementId());
         return target;
     }
 }

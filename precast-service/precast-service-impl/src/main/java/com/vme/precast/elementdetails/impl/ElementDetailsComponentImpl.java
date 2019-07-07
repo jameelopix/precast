@@ -16,8 +16,10 @@ import com.vme.precast.elementdetails.api.ElementDetailsServiceResponse;
 import com.vme.precast.repository.ElementDetailsRepo;
 import com.vme.precast.repository.ElementRepo;
 
+import coliseum.jpa.Association;
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
+import coliseum.service.AssociationUtils;
 import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
@@ -38,8 +40,8 @@ public class ElementDetailsComponentImpl implements ElementDetailsComponent {
         ElementDetails elementdetails = (ElementDetails) conversionUtility.convert(elementDetailsDTO,
                 ElementDetailsDTO.class, ElementDetails.class);
 
-        if (elementDetailsDTO.getElementDTOId() != null) {
-            Element element = elementRepo.findById(elementDetailsDTO.getElementDTOId()).get();
+        if (elementDetailsDTO.getElementId() != null) {
+            Element element = elementRepo.findById(elementDetailsDTO.getElementId()).get();
             elementdetails.setElement(element);
         }
         elementDetailsRepo.save(elementdetails);
@@ -51,6 +53,7 @@ public class ElementDetailsComponentImpl implements ElementDetailsComponent {
         List<ElementDetails> elementDetailsList = new ArrayList<>();
         List<Filter> filters = new ArrayList<>();
         SearchObject searchObject = new SearchObject();
+        List<Association> associations = new ArrayList<>();
 
         ElementDetailsSearchDTO elementDetailsSearchDTO = elementDetailsServiceRequest.getElementDetailsSearchDTO();
         if (elementDetailsSearchDTO != null) {
@@ -60,6 +63,7 @@ public class ElementDetailsComponentImpl implements ElementDetailsComponent {
             List<Double> widthList = elementDetailsSearchDTO.getWidthList();
             List<Double> thicknessList = elementDetailsSearchDTO.getThicknessList();
             List<String> mixDesignNameList = elementDetailsSearchDTO.getMixDesignNameList();
+            List<Long> elementIdList = elementDetailsSearchDTO.getElementIdList();
 
             FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.ID, ids);
             FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.MIXDESIGNNAME, mixDesignNameList);
@@ -67,9 +71,17 @@ public class ElementDetailsComponentImpl implements ElementDetailsComponent {
             FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.LENGTH, lengthList);
             FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.WIDTH, widthList);
             FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.THICKNESS, thicknessList);
+            FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.ELEMENTID, elementIdList);
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
+            }
+
+            AssociationUtils.createAssociation(associations, ElementDetailsSearchDTO.ELEMENT,
+                    elementDetailsSearchDTO.getElementNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
             }
         }
         searchObject.setPageIndex(elementDetailsServiceRequest.getPageIndex());
@@ -98,8 +110,8 @@ public class ElementDetailsComponentImpl implements ElementDetailsComponent {
         target.setWidth(source.getWidth());
         target.setThickness(source.getThickness());
 
-        if (source.getElementDTOId() != null && !source.getElementDTOId().equals(target.getElementId())) {
-            Element element = elementRepo.findById(source.getElementDTOId()).get();
+        if (source.getElementId() != null && !source.getElementId().equals(target.getElementId())) {
+            Element element = elementRepo.findById(source.getElementId()).get();
             target.setElement(element);
         }
 
