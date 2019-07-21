@@ -16,4 +16,7 @@ public interface PurchaseRegisterService extends BaseService {
 
  @FlowDescriptor(flow = "deletepurchaseregister", request = "purchaseRegisterServiceRequest", response = "purchaseRegisterServiceResponse")
  public PurchaseRegisterServiceResponse deletePurchaseRegister(PurchaseRegisterServiceRequest purchaseRegisterServiceRequest);
+ 
+ @FlowDescriptor(flow = "approvePurchaseRegister", request = "purchaseRegisterServiceRequest", response = "purchaseRegisterServiceResponse")
+ public PurchaseRegisterServiceResponse approvePurchaseRegister(PurchaseRegisterServiceRequest purchaseRegisterServiceRequest);
 }

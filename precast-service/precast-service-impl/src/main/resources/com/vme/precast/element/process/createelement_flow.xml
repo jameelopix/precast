@@ -1,27 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <flow xmlns="http://www.springframework.org/schema/webflow"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
- <input name="elementServiceRequest" required="true" />
+	<input name="elementServiceRequest" required="true" />
 
- <action-state id="validate">
- <evaluate
- expression="elementValidator.checkElementDuplicate(elementServiceRequest)" />
- <evaluate expression="endValidation">
- <attribute name="name" value="endValidation"></attribute>
- </evaluate>
- <transition on="endValidation.success" to="createElement" />
- </action-state>
+	<action-state id="validate">
+		<evaluate
+			expression="elementValidator.checkElementDuplicate(elementServiceRequest)" />
+		<evaluate expression="endValidation">
+			<attribute name="name" value="endValidation"></attribute>
+		</evaluate>
+		<transition on="endValidation.success" to="createElement" />
+	</action-state>
 
- <action-state id="createElement">
- <evaluate
- expression="elementComponent.createElement(elementServiceRequest)"
- result="flowScope.elementServiceResponse" />
- <transition to="exit" />
- </action-state>
+	<action-state id="createElement">
+		<evaluate
+			expression="elementComponent.createElement(elementServiceRequest)"
+			result="flowScope.elementServiceResponse" />
+		<transition to="createProductionPlanRequest" />
+	</action-state>
 
- <end-state id="exit">
- <output name="elementServiceResponse" />
- </end-state>
+	<action-state id="createProductionPlanRequest">
+		<evaluate
+			expression="elementComponent.createProductionPlanRequest(elementServiceRequest,flowScope.elementServiceResponse)"
+			result="flowScope.productionPlanServiceRequest" />
+		<transition to="createProductionPlan" />
+	</action-state>
+
+	<action-state id="createProductionPlan">
+		<evaluate
+			expression="productionPlanService.createProductionPlan(flowScope.productionPlanServiceRequest)" />
+		<transition to="exit" />
+	</action-state>
+
+	<end-state id="exit">
+		<output name="elementServiceResponse" />
+	</end-state>
 </flow>

@@ -6,15 +6,25 @@ import coliseum.service.BaseServiceResponse;
 
 public class ElementServiceResponse extends BaseServiceResponse {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
- private List<ElementDTO> elementDTOList;
+    private List<ElementDTO> elementDTOList;
 
- public List<ElementDTO> getElementDTOList() {
- return elementDTOList;
- }
+    private ElementDTO elementDTO;
 
- public void setElementDTOList(List<ElementDTO> elementDTOList) {
- this.elementDTOList = elementDTOList;
- }
+    public List<ElementDTO> getElementDTOList() {
+        return elementDTOList;
+    }
+
+    public void setElementDTOList(List<ElementDTO> elementDTOList) {
+        this.elementDTOList = elementDTOList;
+    }
+
+    public ElementDTO getElementDTO() {
+        return elementDTO;
+    }
+
+    public void setElementDTO(ElementDTO elementDTO) {
+        this.elementDTO = elementDTO;
+    }
 }

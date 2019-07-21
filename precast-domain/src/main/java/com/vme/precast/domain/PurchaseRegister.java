@@ -27,6 +27,8 @@ public class PurchaseRegister extends BaseEntity {
 
     private String weighBridgeNo;
 
+    private Boolean approved;
+
     public Long getId() {
         return id;
     }
@@ -57,5 +59,13 @@ public class PurchaseRegister extends BaseEntity {
 
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
+    }
+
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
     }
 }

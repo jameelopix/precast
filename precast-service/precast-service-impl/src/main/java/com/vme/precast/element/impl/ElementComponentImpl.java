@@ -14,6 +14,7 @@ import com.vme.precast.element.api.ElementDTO;
 import com.vme.precast.element.api.ElementSearchDTO;
 import com.vme.precast.element.api.ElementServiceRequest;
 import com.vme.precast.element.api.ElementServiceResponse;
+import com.vme.precast.productionplan.api.ProductionPlanServiceRequest;
 import com.vme.precast.repository.ElementRepo;
 import com.vme.precast.repository.ElementTypeRepo;
 import com.vme.precast.repository.ProjectRepo;
@@ -51,8 +52,13 @@ public class ElementComponentImpl implements ElementComponent {
             ElementType elementType = elementTypeRepo.findById(elementDTO.getElementTypeId()).get();
             element.setElementType(elementType);
         }
-        elementRepo.save(element);
-        return null;
+        element = elementRepo.save(element);
+
+        elementDTO = (ElementDTO) conversionUtility.convert(element, Element.class, ElementDTO.class);
+
+        ElementServiceResponse elementServiceResponse = new ElementServiceResponse();
+        elementServiceResponse.setElementDTO(elementDTO);
+        return elementServiceResponse;
     }
 
     @Override
@@ -132,5 +138,13 @@ public class ElementComponentImpl implements ElementComponent {
         ElementDTO elementDTO = elementServiceRequest.getElementDTO();
         elementRepo.deleteById(elementDTO.getId());
         return null;
+    }
+
+    @Override
+    public ProductionPlanServiceRequest createProductionPlanRequest(ElementServiceRequest elementServiceRequest,
+            ElementServiceResponse elementServiceResponse) {
+        ProductionPlanServiceRequest productionPlanServiceRequest = new ProductionPlanServiceRequest();
+        productionPlanServiceRequest.setElementDTO(elementServiceResponse.getElementDTO());
+        return productionPlanServiceRequest;
     }
 }

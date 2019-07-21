@@ -44,6 +44,7 @@ public class PurchaseRegisterGenericConvertor implements GenericConverter {
         PurchaseRegister target = new PurchaseRegister();
         target.setId(source.getId());
         target.setWeighBridgeNo(source.getWeighBridgeNo());
+        target.setApproved(source.getApproved());
         return target;
     }
 
@@ -51,6 +52,7 @@ public class PurchaseRegisterGenericConvertor implements GenericConverter {
         PurchaseRegisterDTO target = new PurchaseRegisterDTO();
         target.setId(source.getId());
         target.setWeighBridgeNo(source.getWeighBridgeNo());
+        target.setApproved(source.getApproved());
 
         if (RepoUtils.isNotProxy(source.getVendor())) {
             target.setVendorDTO(

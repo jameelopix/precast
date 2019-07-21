@@ -9,9 +9,11 @@ public class VendorSearchDTO extends BaseSearchDTO {
     private static final long serialVersionUID = 1L;
     private List<Long> idList;
     private List<String> nameList;
+    private List<String> codeList;
 
     public static String ID = "id";
     public static String NAME = "name";
+    public static String CODE = "code";
 
     public List<Long> getIdList() {
         return idList;
@@ -27,6 +29,14 @@ public class VendorSearchDTO extends BaseSearchDTO {
 
     public void setNameList(List<String> nameList) {
         this.nameList = nameList;
+    }
+
+    public List<String> getCodeList() {
+        return codeList;
+    }
+
+    public void setCodeList(List<String> codeList) {
+        this.codeList = codeList;
     }
 
 }

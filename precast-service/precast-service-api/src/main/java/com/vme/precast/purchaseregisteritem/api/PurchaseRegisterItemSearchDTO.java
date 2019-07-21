@@ -24,6 +24,8 @@ public class PurchaseRegisterItemSearchDTO extends BaseSearchDTO {
     private List<Double> netQuantityList;
     private List<String> netUnitList;
 
+    private Boolean purchaseOrderItemNeeded;
+
     public static String ID = "id";
     public static String PURCHASEREGISTER = "purchaseRegister";
     public static String PURCHASEREGISTERID = "purchaseRegister.id";
@@ -140,5 +142,13 @@ public class PurchaseRegisterItemSearchDTO extends BaseSearchDTO {
 
     public void setNetUnitList(List<String> netUnitList) {
         this.netUnitList = netUnitList;
+    }
+
+    public Boolean getPurchaseOrderItemNeeded() {
+        return purchaseOrderItemNeeded;
+    }
+
+    public void setPurchaseOrderItemNeeded(Boolean purchaseOrderItemNeeded) {
+        this.purchaseOrderItemNeeded = purchaseOrderItemNeeded;
     }
 }

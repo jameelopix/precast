@@ -34,16 +34,16 @@ public class VendorGenericConvertor implements GenericConverter {
     private Object convertToVendor(VendorDTO source) {
         Vendor target = new Vendor();
         target.setId(source.getId());
+        target.setCode(source.getCode());
         target.setName(source.getName());
-
         return target;
     }
 
     private Object convertToVendorDTO(Vendor source) {
         VendorDTO target = new VendorDTO();
         target.setId(source.getId());
+        target.setCode(source.getCode());
         target.setName(source.getName());
-
         return target;
     }
 }

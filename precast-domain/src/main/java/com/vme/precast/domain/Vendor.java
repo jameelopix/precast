@@ -16,6 +16,8 @@ public class Vendor extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String code;
+
     private String name;
 
     public Long getId() {
@@ -32,5 +34,13 @@ public class Vendor extends BaseEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

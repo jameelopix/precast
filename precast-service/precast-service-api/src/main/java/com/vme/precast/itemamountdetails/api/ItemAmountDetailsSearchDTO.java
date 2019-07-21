@@ -16,6 +16,8 @@ public class ItemAmountDetailsSearchDTO extends BaseSearchDTO {
     private List<Double> totalList;
     private List<Boolean> invoiceCheckedList;
 
+    private boolean vendorNeeded;
+
     public static String ID = "id";
     public static String VENDOR = "vendor";
     public static String VENDORID = "vendor.id";
@@ -69,5 +71,13 @@ public class ItemAmountDetailsSearchDTO extends BaseSearchDTO {
 
     public void setInvoiceCheckedList(List<Boolean> invoiceCheckedList) {
         this.invoiceCheckedList = invoiceCheckedList;
+    }
+
+    public boolean isVendorNeeded() {
+        return vendorNeeded;
+    }
+
+    public void setVendorNeeded(boolean vendorNeeded) {
+        this.vendorNeeded = vendorNeeded;
     }
 }

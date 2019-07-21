@@ -5,5 +5,7 @@ import coliseum.service.ErrorDTO;
 
 public interface PurchaseRegisterValidator extends ColiseumInterface {
 
- public ErrorDTO checkPurchaseRegisterDuplicate(PurchaseRegisterServiceRequest purchaseRegisterServiceRequest);
+    public ErrorDTO checkPurchaseRegisterDuplicate(PurchaseRegisterServiceRequest purchaseRegisterServiceRequest);
+
+    public ErrorDTO isPurchaseRegisterApproved(PurchaseRegisterServiceRequest purchaseRegisterServiceRequest);
 }

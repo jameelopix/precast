@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vme.precast.domain.PurchaseRegister;
 import com.vme.precast.domain.Vendor;
-import com.vme.precast.purchaseorder.api.PurchaseOrderSearchDTO;
 import com.vme.precast.purchaseregister.api.PurchaseRegisterComponent;
 import com.vme.precast.purchaseregister.api.PurchaseRegisterDTO;
 import com.vme.precast.purchaseregister.api.PurchaseRegisterSearchDTO;
@@ -40,10 +39,13 @@ public class PurchaseRegisterComponentImpl implements PurchaseRegisterComponent 
         PurchaseRegisterDTO purchaseRegisterDTO = purchaseRegisterServiceRequest.getPurchaseRegisterDTO();
         PurchaseRegister purchaseregister = (PurchaseRegister) conversionUtility.convert(purchaseRegisterDTO,
                 PurchaseRegisterDTO.class, PurchaseRegister.class);
+
         if (purchaseRegisterDTO.getVendorDTOId() != null) {
             Vendor vendor = vendorRepo.findById(purchaseRegisterDTO.getVendorDTOId()).get();
             purchaseregister.setVendor(vendor);
         }
+
+        purchaseregister.setApproved(false);
         purchaseRegisterRepo.save(purchaseregister);
         return null;
     }
@@ -72,7 +74,7 @@ public class PurchaseRegisterComponentImpl implements PurchaseRegisterComponent 
             }
 
             AssociationUtils.createAssociation(associations, PurchaseRegisterSearchDTO.VENDOR,
-                    purchaseRegisterSearchDTO.getVendorNeeded());
+                    purchaseRegisterSearchDTO.isVendorNeeded());
 
             if (CollectionUtils.isNotEmpty(associations)) {
                 searchObject.setAssociations(associations);
@@ -112,6 +114,15 @@ public class PurchaseRegisterComponentImpl implements PurchaseRegisterComponent 
             PurchaseRegisterServiceRequest purchaseRegisterServiceRequest) {
         PurchaseRegisterDTO purchaseRegisterDTO = purchaseRegisterServiceRequest.getPurchaseRegisterDTO();
         purchaseRegisterRepo.deleteById(purchaseRegisterDTO.getId());
+        return null;
+    }
+
+    @Override
+    public PurchaseRegisterServiceResponse approvePurchaseRegister(
+            PurchaseRegisterServiceRequest purchaseRegisterServiceRequest) {
+        System.out.println("PurchaseRegisterComponentImpl.finalizePurchaseRegister()");
+        
+        
         return null;
     }
 }

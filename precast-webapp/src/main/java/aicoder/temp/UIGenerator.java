@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vme.precast.domain.ItemFreightAmountDetails;
+import com.vme.precast.domain.ItemAmountDetails;
 
 //import com.experian.domain.Project;
 
 public class UIGenerator {
 
-    Class entity = ItemFreightAmountDetails.class;
+    Class entity = ItemAmountDetails.class;
     String entityName = entity.getSimpleName();
 
     String projectBaseFolder = "c:\\finaltemp\\";

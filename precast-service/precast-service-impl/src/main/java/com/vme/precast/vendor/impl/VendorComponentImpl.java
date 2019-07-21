@@ -44,9 +44,11 @@ public class VendorComponentImpl implements VendorComponent {
         if (vendorSearchDTO != null) {
             List<Long> idList = vendorSearchDTO.getIdList();
             List<String> nameList = vendorSearchDTO.getNameList();
+            List<String> codeList = vendorSearchDTO.getCodeList();
 
             FilterUtils.createEqualFilter(filters, VendorSearchDTO.ID, idList);
             FilterUtils.createEqualFilter(filters, VendorSearchDTO.NAME, nameList);
+            FilterUtils.createEqualFilter(filters, VendorSearchDTO.CODE, codeList);
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
@@ -71,6 +73,7 @@ public class VendorComponentImpl implements VendorComponent {
 
         Vendor target = vendorRepo.findById(source.getId()).get();
         target.setName(source.getName());
+        target.setCode(source.getCode());
 
         vendorRepo.save(target);
         return null;

@@ -13,11 +13,14 @@ import com.vme.precast.itemamountdetails.api.ItemAmountDetailsDTO;
 import com.vme.precast.itemamountdetails.api.ItemAmountDetailsSearchDTO;
 import com.vme.precast.itemamountdetails.api.ItemAmountDetailsServiceRequest;
 import com.vme.precast.itemamountdetails.api.ItemAmountDetailsServiceResponse;
+import com.vme.precast.purchaseregister.api.PurchaseRegisterSearchDTO;
 import com.vme.precast.repository.ItemAmountDetailsRepo;
 import com.vme.precast.repository.VendorRepo;
 
+import coliseum.jpa.Association;
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
+import coliseum.service.AssociationUtils;
 import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
@@ -51,6 +54,7 @@ public class ItemAmountDetailsComponentImpl implements ItemAmountDetailsComponen
         List<ItemAmountDetails> itemAmountDetailsList = new ArrayList<>();
         List<Filter> filters = new ArrayList<>();
         SearchObject searchObject = new SearchObject();
+        List<Association> associations = new ArrayList<>();
 
         ItemAmountDetailsSearchDTO itemAmountDetailsSearchDTO = itemAmountDetailsServiceRequest
                 .getItemAmountDetailsSearchDTO();
@@ -69,6 +73,13 @@ public class ItemAmountDetailsComponentImpl implements ItemAmountDetailsComponen
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
+            }
+
+            AssociationUtils.createAssociation(associations, ItemAmountDetailsSearchDTO.VENDOR,
+                    itemAmountDetailsSearchDTO.isVendorNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
             }
         }
         searchObject.setPageIndex(itemAmountDetailsServiceRequest.getPageIndex());

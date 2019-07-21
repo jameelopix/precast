@@ -18,8 +18,10 @@ import com.vme.precast.repository.PurchaseOrderItemRepo;
 import com.vme.precast.repository.PurchaseRegisterItemRepo;
 import com.vme.precast.repository.PurchaseRegisterRepo;
 
+import coliseum.jpa.Association;
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
+import coliseum.service.AssociationUtils;
 import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
@@ -41,6 +43,17 @@ public class PurchaseRegisterItemComponentImpl implements PurchaseRegisterItemCo
                 .getPurchaseRegisterItemDTO();
         PurchaseRegisterItem purchaseregisteritem = (PurchaseRegisterItem) conversionUtility
                 .convert(purchaseRegisterItemDTO, PurchaseRegisterItemDTO.class, PurchaseRegisterItem.class);
+
+        if (purchaseRegisterItemDTO.getPurchaseOrderItemDTOId() != null) {
+            PurchaseOrderItem purchaseOrderItem = purchaseOrderItemRepo
+                    .findById(purchaseRegisterItemDTO.getPurchaseOrderItemDTOId()).get();
+            purchaseregisteritem.setPurchaseOrderItem(purchaseOrderItem);
+        }
+        if (purchaseRegisterItemDTO.getPurchaseRegisterDTOId() != null) {
+            PurchaseRegister purchaseRegister = purchaseRegisterRepo
+                    .findById(purchaseRegisterItemDTO.getPurchaseRegisterDTOId()).get();
+            purchaseregisteritem.setPurchaseRegister(purchaseRegister);
+        }
         purchaseRegisterItemRepo.save(purchaseregisteritem);
         return null;
     }
@@ -51,6 +64,7 @@ public class PurchaseRegisterItemComponentImpl implements PurchaseRegisterItemCo
         List<PurchaseRegisterItem> purchaseRegisterItemList = new ArrayList<>();
         List<Filter> filters = new ArrayList<>();
         SearchObject searchObject = new SearchObject();
+        List<Association> associations = new ArrayList<>();
 
         PurchaseRegisterItemSearchDTO purchaseRegisterItemSearchDTO = purchaseRegisterItemServiceRequest
                 .getPurchaseRegisterItemSearchDTO();
@@ -85,6 +99,13 @@ public class PurchaseRegisterItemComponentImpl implements PurchaseRegisterItemCo
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
+            }
+
+            AssociationUtils.createAssociation(associations, PurchaseRegisterItemSearchDTO.PURCHASEORDERITEM,
+                    purchaseRegisterItemSearchDTO.getPurchaseOrderItemNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
             }
         }
         searchObject.setPageIndex(purchaseRegisterItemServiceRequest.getPageIndex());

@@ -11,4 +11,6 @@ public interface PurchaseRegisterComponent extends ColiseumInterface {
  public PurchaseRegisterServiceResponse updatePurchaseRegister(PurchaseRegisterServiceRequest purchaseRegisterServiceRequest);
 
  public PurchaseRegisterServiceResponse deletePurchaseRegister(PurchaseRegisterServiceRequest purchaseRegisterServiceRequest);
+ 
+ public PurchaseRegisterServiceResponse approvePurchaseRegister(PurchaseRegisterServiceRequest purchaseRegisterServiceRequest);
 }

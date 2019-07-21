@@ -11,6 +11,7 @@ public class PurchaseRegisterDTO extends BaseDTO {
     private VendorDTO vendorDTO;
     private Long vendorDTOId;
     private String weighBridgeNo;
+    private Boolean approved;
 
     public Long getId() {
         return id;
@@ -44,4 +45,11 @@ public class PurchaseRegisterDTO extends BaseDTO {
         this.vendorDTOId = vendorDTOId;
     }
 
+    public Boolean getApproved() {
+        return approved;
+    }
+
+    public void setApproved(Boolean approved) {
+        this.approved = approved;
+    }
 }
