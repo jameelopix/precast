@@ -1,0 +1,1369 @@
+{
+	"info": {
+		"_postman_id": "844771c3-56f8-4435-93c3-3bc217d24605",
+		"name": "precast",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "vendor",
+			"item": [
+				{
+					"name": "deleteVendor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idsToDelete\": [\n        14\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/deleteVendor",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"deleteVendor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateVendor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendorDTO\": {\n        \"id\": 14,\n        \"name\": \"Jameel Company\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/updateVendor",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"updateVendor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createVendor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vendorDTO\": {\n        \"name\": \"AMS\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/createVendor",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"createVendor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getVendor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"pageIndex\":0,\"recordstoFetch\":3}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getVendor",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getVendor"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "report",
+			"item": [
+				{
+					"name": "getVendor",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reportType\": \"PRODUCTION_PLAN\",\n    \"reportSearchDTO\": {}\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getReports",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getReports"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "item",
+			"item": [
+				{
+					"name": "deleteItem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idsToDelete\": [\n        15\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/deleteItem",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"deleteItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateItem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemDTO\": {\n        \"id\": 15,\n        \"name\": \"admixture\",\n        \"category\": \"concrete\",\n        \"unitType\": \"COUNT\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/updateItem",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"updateItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createItem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemDTO\": {\n        \"name\": \"paper\",\n        \"category\": \"office\",\n        \"unitType\": \"TONNE\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/createItem",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"createItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getItem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getItem",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getItem Filter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"itemSearchDTO\": {\n        \"unitTypeList\": [\n            \"LITRE\"\n        ]\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getItem",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getItem"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "config",
+			"item": [
+				{
+					"name": "getConfigMap",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"name\"\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getConfigMap",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getConfigMap"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getConfig",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"NAME\"\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getConfig",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getConfig"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getConfigList",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"RAW_MATERIAL_TYPE\"\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getConfigList",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getConfigList"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PurchaseOrder",
+			"item": [
+				{
+					"name": "deletePurchaseOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idsToDelete\": [\n        17\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/deletePurchaseOrder",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"deletePurchaseOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePurchaseOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchaseOrderDTO\": {\n        \"id\": 33,\n        \"purchaseOrderNo\": \"PO_299\",\n        \"purchaseDate\": \"2018-04-25T13:31:25.169Z\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/updatePurchaseOrder",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"updatePurchaseOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createPurchaseOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchaseOrderDTO\": {\n        \"purchaseOrderNo\": \"PO_299\",\n        \"purchaseDate\": \"2018-03-25T13:31:25.169Z\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/createPurchaseOrder",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"createPurchaseOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPurchaseOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getPurchaseOrder",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getPurchaseOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "issuePurchaseOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchaseOrderDTO\": {\n        \"id\": 17\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/issuePurchaseOrder",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"issuePurchaseOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "closePurchaseOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchaseOrderDTO\": {\n        \"id\": 16\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/closePurchaseOrder",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"closePurchaseOrder"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPurchaseOrder Filter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"purchaseOrderSearchDTO\": {\n \"purchaseDateList\": [\n \"2018-03-25T13:31:25.169Z\"\n ]\n }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getPurchaseOrder",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getPurchaseOrder"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "OrderItem",
+			"item": [
+				{
+					"name": "deleteOrderItem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idsToDelete\": [\n        20\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/deleteOrderItem",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"deleteOrderItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOrderItem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderItemDTO\": {\n    \t\"id\":20,\n        \"itemName\": \"admixture\",\n        \"quantity\": 3.5,\n        \"rate\": 300,\n        \"unitType\": \"COUNT\",\n        \"purchaseOrderId\": 16\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/updateOrderItem",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"updateOrderItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createOrderItem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderItemDTO\": {\n        \"itemName\": \"concrete\",\n        \"quantity\": 2.5,\n        \"rate\": 200,\n        \"unitType\": \"TONNE\",\n        \"purchaseOrderId\": 16\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/createOrderItem",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"createOrderItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getOrderItem",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"orderItemSearchDTO\": {\n        \"purchaseOrderNeeded\": true\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getOrderItem",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getOrderItem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPurchaseOrder Filter",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"purchaseOrderSearchDTO\": {\n        \"purchaseDateList\": [\n            \"2018-03-25T13:31:25.169Z\"\n        ]\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getPurchaseOrder",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getPurchaseOrder"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CostCentre",
+			"item": [
+				{
+					"name": "createCostCentre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"costCentreDTO\": {\n        \"name\": \"ELA\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/createCostCentre",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"createCostCentre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCostCentre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getCostCentre",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getCostCentre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCostCentre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"costCentreDTO\": {\n        \"id\": 38,\n        \"name\": \"ELA\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/updateCostCentre",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"updateCostCentre"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCostCentre",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idsToDelete\": [\n        39\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/deleteCostCentre",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"deleteCostCentre"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AccountHead",
+			"item": [
+				{
+					"name": "createAccountHead",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountHeadDTO\": {\n        \"name\": \"Retention\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/createAccountHead",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"createAccountHead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAccountHead",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getAccountHead",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getAccountHead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAccountHead",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"accountHeadDTO\": {\n        \"id\": 44,\n        \"name\": \"Repairs and Maintenance\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/updateAccountHead",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"updateAccountHead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAccountHead",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idsToDelete\": [\n        47\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/deleteAccountHead",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"deleteAccountHead"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PartyMaster",
+			"item": [
+				{
+					"name": "createPartyMaster",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"partyMasterDTO\": {\n        \"name\": \"Amit Steels\",\n        \"type\": \"Vendor\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/createPartyMaster",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"createPartyMaster"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getPartyMaster",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getPartyMaster",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getPartyMaster"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePartyMaster",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"partyMasterDTO\": {\n        \"id\": 50,\n        \"name\": \"Jameel Steels\",\n        \"type\": \"Factory\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/updatePartyMaster",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"updatePartyMaster"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deletePartyMaster",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idsToDelete\": [\n        50\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/deletePartyMaster",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"deletePartyMaster"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "createCompany",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyDTO\": {\n        \"name\": \"VME\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/createCompany",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"createCompany"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCompany",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getCompany",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getCompany"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCompany",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"companyDTO\": {\n        \"id\": 51,\n        \"name\": \"VME Precast\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/updateCompany",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"updateCompany"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCompany",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idsToDelete\": [\n        3\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/deleteCompany",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"deleteCompany"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Element",
+			"item": [
+				{
+					"name": "createElement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"elementDTO\": {\n        \"name\": \"Wall-03\",\n        \"floor\": \"second\",\n        \"projectId\": 98,\n        \"elementTypeId\": 103\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/createElement",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"createElement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getElement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"elementSearchDTO\":{\n\t\t\"ids\":[],\n\t\t\"projectNeeded\":false,\n\t\t\"elementTypeNeeded\":false\n\t}\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/getElement",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"getElement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateElement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"elementDTO\": {\n    \t\"id\":142,\n        \"name\": \"Wall-113\",\n        \"floor\": \"third\",\n        \"projectId\": 98,\n        \"elementTypeId\": 103\n    }\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/updateElement",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"updateElement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteElement",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"idsToDelete\": [\n        142\n    ]\n}"
+						},
+						"url": {
+							"raw": "http://{{server ip}}:{{port}}/{{projectName}}/deleteElement",
+							"protocol": "http",
+							"host": [
+								"{{server ip}}"
+							],
+							"port": "{{port}}",
+							"path": [
+								"{{projectName}}",
+								"deleteElement"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

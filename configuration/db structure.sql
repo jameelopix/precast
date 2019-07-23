@@ -38,16 +38,6 @@ CREATE TABLE `accountdetails` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `accountdetails`
---
-
-LOCK TABLES `accountdetails` WRITE;
-/*!40000 ALTER TABLE `accountdetails` DISABLE KEYS */;
-INSERT INTO `accountdetails` VALUES (72,NULL,NULL,0,'mape','123456789','CASH','AXIS',51),(73,NULL,NULL,0,'mape','4567890-','CASH','ICICI',51),(74,NULL,NULL,1,'mm','11111111111','CASH','AXIS',51),(77,NULL,NULL,0,'dfdff','3333','CASH','ICICI',51);
-/*!40000 ALTER TABLE `accountdetails` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `accounthead`
 --
 
@@ -63,16 +53,6 @@ CREATE TABLE `accounthead` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `accounthead`
---
-
-LOCK TABLES `accounthead` WRITE;
-/*!40000 ALTER TABLE `accounthead` DISABLE KEYS */;
-INSERT INTO `accounthead` VALUES (44,NULL,NULL,1,'Repairs and Maintenance'),(45,NULL,NULL,0,'Salary'),(46,NULL,NULL,0,'Retention');
-/*!40000 ALTER TABLE `accounthead` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `bankaccount`
@@ -96,16 +76,6 @@ CREATE TABLE `bankaccount` (
   KEY `FKmim47f9gr77d1h4ltf08oe5co` (`company_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `bankaccount`
---
-
-LOCK TABLES `bankaccount` WRITE;
-/*!40000 ALTER TABLE `bankaccount` DISABLE KEYS */;
-INSERT INTO `bankaccount` VALUES (9,NULL,NULL,NULL,NULL,19,'1111111','','',7),(10,NULL,NULL,NULL,NULL,2,'5678908790','','\0',6);
-/*!40000 ALTER TABLE `bankaccount` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `cashtransfer`
@@ -134,15 +104,6 @@ CREATE TABLE `cashtransfer` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `cashtransfer`
---
-
-LOCK TABLES `cashtransfer` WRITE;
-/*!40000 ALTER TABLE `cashtransfer` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cashtransfer` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `castingactivity`
 --
 
@@ -162,15 +123,6 @@ CREATE TABLE `castingactivity` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `castingactivity`
---
-
-LOCK TABLES `castingactivity` WRITE;
-/*!40000 ALTER TABLE `castingactivity` DISABLE KEYS */;
-/*!40000 ALTER TABLE `castingactivity` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `company`
@@ -194,14 +146,22 @@ CREATE TABLE `company` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `company`
+-- Table structure for table `config`
 --
 
-LOCK TABLES `company` WRITE;
-/*!40000 ALTER TABLE `company` DISABLE KEYS */;
-INSERT INTO `company` VALUES (66,NULL,NULL,NULL,NULL,0,NULL,'New Company',NULL),(51,NULL,NULL,NULL,NULL,1,NULL,'VME Precast',NULL);
-/*!40000 ALTER TABLE `company` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `config`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `config` (
+  `id` bigint(20) NOT NULL,
+  `lastModifiedBy` varchar(255) DEFAULT NULL,
+  `lastModifiedDate` datetime DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `costcentre`
@@ -219,16 +179,6 @@ CREATE TABLE `costcentre` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `costcentre`
---
-
-LOCK TABLES `costcentre` WRITE;
-/*!40000 ALTER TABLE `costcentre` DISABLE KEYS */;
-INSERT INTO `costcentre` VALUES (36,NULL,NULL,0,'Seemaati'),(37,NULL,NULL,0,'AnnaLakshmi'),(38,NULL,NULL,2,'ELA');
-/*!40000 ALTER TABLE `costcentre` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `dcitem`
@@ -255,15 +205,6 @@ CREATE TABLE `dcitem` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `dcitem`
---
-
-LOCK TABLES `dcitem` WRITE;
-/*!40000 ALTER TABLE `dcitem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `dcitem` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `dcregister`
 --
 
@@ -284,15 +225,6 @@ CREATE TABLE `dcregister` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `dcregister`
---
-
-LOCK TABLES `dcregister` WRITE;
-/*!40000 ALTER TABLE `dcregister` DISABLE KEYS */;
-/*!40000 ALTER TABLE `dcregister` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `element`
 --
 
@@ -301,39 +233,18 @@ DROP TABLE IF EXISTS `element`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `element` (
   `id` bigint(20) NOT NULL,
-  `createdBy` varchar(255) DEFAULT NULL,
-  `createdDate` datetime DEFAULT NULL,
   `lastModifiedBy` varchar(255) DEFAULT NULL,
   `lastModifiedDate` datetime DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
-  `billingConcreteQuantity` double DEFAULT NULL,
-  `breadth` double DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
-  `length` double DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `theoryArea` double DEFAULT NULL,
-  `theoryQuantity` double DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  `weight` double DEFAULT NULL,
-  `mixture_id` bigint(20) DEFAULT NULL,
-  `project_id` bigint(20) DEFAULT NULL,
   `elementType_id` bigint(20) DEFAULT NULL,
   `floor` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `project_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKj2tehoo596d9p7m815jus3nj2` (`mixture_id`),
   KEY `FKsj3whjcpaksqykcd0w9y4w0ko` (`elementType_id`),
   KEY `FKcq7ns0wy0qy9ktkyshk1ep0i1` (`project_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `element`
---
-
-LOCK TABLES `element` WRITE;
-/*!40000 ALTER TABLE `element` DISABLE KEYS */;
-/*!40000 ALTER TABLE `element` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `elementdetails`
@@ -359,15 +270,6 @@ CREATE TABLE `elementdetails` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `elementdetails`
---
-
-LOCK TABLES `elementdetails` WRITE;
-/*!40000 ALTER TABLE `elementdetails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `elementdetails` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `elementtype`
 --
 
@@ -389,15 +291,6 @@ CREATE TABLE `elementtype` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `elementtype`
---
-
-LOCK TABLES `elementtype` WRITE;
-/*!40000 ALTER TABLE `elementtype` DISABLE KEYS */;
-/*!40000 ALTER TABLE `elementtype` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `hibernate_sequence`
 --
 
@@ -408,16 +301,6 @@ CREATE TABLE `hibernate_sequence` (
   `next_val` bigint(20) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hibernate_sequence`
---
-
-LOCK TABLES `hibernate_sequence` WRITE;
-/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (78),(78),(78),(78),(78),(78),(78),(78),(78),(78),(78);
-/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `item`
@@ -439,13 +322,72 @@ CREATE TABLE `item` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `item`
+-- Table structure for table `itemamountdetails`
 --
 
-LOCK TABLES `item` WRITE;
-/*!40000 ALTER TABLE `item` DISABLE KEYS */;
-/*!40000 ALTER TABLE `item` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `itemamountdetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `itemamountdetails` (
+  `id` bigint(20) NOT NULL,
+  `lastModifiedBy` varchar(255) DEFAULT NULL,
+  `lastModifiedDate` datetime DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `dcNo` varchar(255) DEFAULT NULL,
+  `invoiceChecked` bit(1) DEFAULT NULL,
+  `total` double DEFAULT NULL,
+  `vendor_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKlqjjofra313ybkd4bx78gqxog` (`vendor_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `itembasicamountdetails`
+--
+
+DROP TABLE IF EXISTS `itembasicamountdetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `itembasicamountdetails` (
+  `id` bigint(20) NOT NULL,
+  `lastModifiedBy` varchar(255) DEFAULT NULL,
+  `lastModifiedDate` datetime DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  `itemAmountDetails_id` bigint(20) DEFAULT NULL,
+  `purchaseRegisterItem_id` bigint(20) DEFAULT NULL,
+  `rate` double DEFAULT NULL,
+  `taxAmount` double DEFAULT NULL,
+  `taxPercent` double DEFAULT NULL,
+  `total` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKlokjj4p0eik0u5gipgi3qd9us` (`itemAmountDetails_id`),
+  KEY `FKjofisdjrvi9e5iy045560j026` (`purchaseRegisterItem_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `itemfreightamountdetails`
+--
+
+DROP TABLE IF EXISTS `itemfreightamountdetails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `itemfreightamountdetails` (
+  `id` bigint(20) NOT NULL,
+  `lastModifiedBy` varchar(255) DEFAULT NULL,
+  `lastModifiedDate` datetime DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `amount` double DEFAULT NULL,
+  `itemAmountDetails_id` bigint(20) DEFAULT NULL,
+  `taxAmount` double DEFAULT NULL,
+  `taxPercent` double DEFAULT NULL,
+  `total` double DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKg9hgk7k3a2uhiquy2h7pimykk` (`itemAmountDetails_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `labouractivity`
@@ -470,15 +412,6 @@ CREATE TABLE `labouractivity` (
   KEY `FKs4kkh0hign0r1pm5te7n2uxju` (`subContractor_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `labouractivity`
---
-
-LOCK TABLES `labouractivity` WRITE;
-/*!40000 ALTER TABLE `labouractivity` DISABLE KEYS */;
-/*!40000 ALTER TABLE `labouractivity` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `labourrate`
@@ -506,13 +439,41 @@ CREATE TABLE `labourrate` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `labourrate`
+-- Table structure for table `listconfig`
 --
 
-LOCK TABLES `labourrate` WRITE;
-/*!40000 ALTER TABLE `labourrate` DISABLE KEYS */;
-/*!40000 ALTER TABLE `labourrate` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `listconfig`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `listconfig` (
+  `id` bigint(20) NOT NULL,
+  `lastModifiedBy` varchar(255) DEFAULT NULL,
+  `lastModifiedDate` datetime DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `mapconfig`
+--
+
+DROP TABLE IF EXISTS `mapconfig`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mapconfig` (
+  `id` bigint(20) NOT NULL,
+  `lastModifiedBy` varchar(255) DEFAULT NULL,
+  `lastModifiedDate` datetime DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `keyData` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `mixture`
@@ -533,15 +494,6 @@ CREATE TABLE `mixture` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `mixture`
---
-
-LOCK TABLES `mixture` WRITE;
-/*!40000 ALTER TABLE `mixture` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mixture` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `mixtureitem`
@@ -569,15 +521,6 @@ CREATE TABLE `mixtureitem` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `mixtureitem`
---
-
-LOCK TABLES `mixtureitem` WRITE;
-/*!40000 ALTER TABLE `mixtureitem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `mixtureitem` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `orderitem`
 --
 
@@ -601,16 +544,6 @@ CREATE TABLE `orderitem` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `orderitem`
---
-
-LOCK TABLES `orderitem` WRITE;
-/*!40000 ALTER TABLE `orderitem` DISABLE KEYS */;
-INSERT INTO `orderitem` VALUES (28,NULL,NULL,2,'Cement',NULL,123456,333,'KG',27),(26,NULL,NULL,1,'zzzz',NULL,1111,22,'TONNE',16),(31,NULL,NULL,1,'Cement',NULL,50,1000,'KG',30),(32,NULL,NULL,0,'Admixture',NULL,20,100,'KG',30),(34,NULL,NULL,0,'Cement',NULL,4.511,802,'TONNE',33);
-/*!40000 ALTER TABLE `orderitem` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `partymaster`
 --
 
@@ -629,14 +562,47 @@ CREATE TABLE `partymaster` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `partymaster`
+-- Table structure for table `productionplan`
 --
 
-LOCK TABLES `partymaster` WRITE;
-/*!40000 ALTER TABLE `partymaster` DISABLE KEYS */;
-INSERT INTO `partymaster` VALUES (48,NULL,NULL,1,'ACC Limited','Project'),(49,NULL,NULL,0,'Aloukik Agencies','Vendor'),(63,NULL,NULL,0,'mape','Vendor');
-/*!40000 ALTER TABLE `partymaster` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `productionplan`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `productionplan` (
+  `id` bigint(20) NOT NULL,
+  `lastModifiedBy` varchar(255) DEFAULT NULL,
+  `lastModifiedDate` datetime DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `deliveredDate` date DEFAULT NULL,
+  `plannedDate` date DEFAULT NULL,
+  `productionPlanStatus` int(11) DEFAULT NULL,
+  `element_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKi0axa0n8h2k3as86jekhavrkb` (`element_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `productionplanitem`
+--
+
+DROP TABLE IF EXISTS `productionplanitem`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `productionplanitem` (
+  `id` bigint(20) NOT NULL,
+  `lastModifiedBy` varchar(255) DEFAULT NULL,
+  `lastModifiedDate` datetime DEFAULT NULL,
+  `version` int(11) DEFAULT NULL,
+  `castedDate` date DEFAULT NULL,
+  `disapproved` bit(1) NOT NULL,
+  `disapprovedReason` varchar(255) DEFAULT NULL,
+  `sequenceOrder` int(11) NOT NULL,
+  `productionPlan_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKc88isjc5ko6283fg0on25notm` (`productionPlan_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Table structure for table `project`
@@ -663,15 +629,6 @@ CREATE TABLE `project` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `project`
---
-
-LOCK TABLES `project` WRITE;
-/*!40000 ALTER TABLE `project` DISABLE KEYS */;
-/*!40000 ALTER TABLE `project` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `project_master`
@@ -704,16 +661,6 @@ CREATE TABLE `project_master` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `project_master`
---
-
-LOCK TABLES `project_master` WRITE;
-/*!40000 ALTER TABLE `project_master` DISABLE KEYS */;
-INSERT INTO `project_master` VALUES (11,NULL,NULL,NULL,NULL,3,'1010',NULL,NULL,NULL,NULL,NULL,'Project_1010',198,100,1.98,NULL,1);
-/*!40000 ALTER TABLE `project_master` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `purchaseorder`
 --
 
@@ -735,16 +682,6 @@ CREATE TABLE `purchaseorder` (
   KEY `FKluqo43agu8ggt9ldlumsoj1so` (`vendor_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `purchaseorder`
---
-
-LOCK TABLES `purchaseorder` WRITE;
-/*!40000 ALTER TABLE `purchaseorder` DISABLE KEYS */;
-INSERT INTO `purchaseorder` VALUES (33,NULL,NULL,1,NULL,NULL,'2019-04-30','asdsda','ISSUED',NULL),(27,NULL,NULL,3,NULL,NULL,'2019-04-10','PO_100','OPEN',NULL),(29,NULL,NULL,1,NULL,NULL,'2019-04-20','PO_299','OPEN',NULL),(30,NULL,NULL,1,NULL,NULL,'2019-04-16','PO_JAMEEL','ISSUED',NULL);
-/*!40000 ALTER TABLE `purchaseorder` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `purchaseorderitem`
@@ -769,15 +706,6 @@ CREATE TABLE `purchaseorderitem` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `purchaseorderitem`
---
-
-LOCK TABLES `purchaseorderitem` WRITE;
-/*!40000 ALTER TABLE `purchaseorderitem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `purchaseorderitem` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `purchaseregister`
 --
 
@@ -791,18 +719,12 @@ CREATE TABLE `purchaseregister` (
   `version` int(11) DEFAULT NULL,
   `vendorName` varchar(255) DEFAULT NULL,
   `weighBridgeNo` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  `vendor_id` bigint(20) DEFAULT NULL,
+  `approved` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKrv39qw8gj0vpyejxbjhmem2q9` (`vendor_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `purchaseregister`
---
-
-LOCK TABLES `purchaseregister` WRITE;
-/*!40000 ALTER TABLE `purchaseregister` DISABLE KEYS */;
-/*!40000 ALTER TABLE `purchaseregister` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `purchaseregisteritem`
@@ -825,19 +747,12 @@ CREATE TABLE `purchaseregisteritem` (
   `purchaseOrderItem_id` bigint(20) DEFAULT NULL,
   `weighBridgeQuantity` double DEFAULT NULL,
   `weighBridgeUnit` varchar(255) DEFAULT NULL,
+  `purchaseRegister_id` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKcul1nhlw9gqku0ss5t47x0hxx` (`purchaseOrderItem_id`)
+  KEY `FKcul1nhlw9gqku0ss5t47x0hxx` (`purchaseOrderItem_id`),
+  KEY `FK3qs4tcwgsr2w3cf3qg1q98kql` (`purchaseRegister_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `purchaseregisteritem`
---
-
-LOCK TABLES `purchaseregisteritem` WRITE;
-/*!40000 ALTER TABLE `purchaseregisteritem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `purchaseregisteritem` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `rawmaterial`
@@ -859,16 +774,6 @@ CREATE TABLE `rawmaterial` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `rawmaterial`
---
-
-LOCK TABLES `rawmaterial` WRITE;
-/*!40000 ALTER TABLE `rawmaterial` DISABLE KEYS */;
-INSERT INTO `rawmaterial` VALUES (1,NULL,NULL,NULL,NULL,0,'Cement','Concrete','Kg'),(2,NULL,NULL,NULL,NULL,1,'Admixture','Concrete','Tonne');
-/*!40000 ALTER TABLE `rawmaterial` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `steeldetails`
@@ -893,15 +798,6 @@ CREATE TABLE `steeldetails` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `steeldetails`
---
-
-LOCK TABLES `steeldetails` WRITE;
-/*!40000 ALTER TABLE `steeldetails` DISABLE KEYS */;
-/*!40000 ALTER TABLE `steeldetails` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `steelitem`
 --
 
@@ -923,15 +819,6 @@ CREATE TABLE `steelitem` (
   KEY `FKo2jil1kv440a30mk6wnejlr8l` (`element_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `steelitem`
---
-
-LOCK TABLES `steelitem` WRITE;
-/*!40000 ALTER TABLE `steelitem` DISABLE KEYS */;
-/*!40000 ALTER TABLE `steelitem` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `student_master`
@@ -962,15 +849,6 @@ CREATE TABLE `student_master` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `student_master`
---
-
-LOCK TABLES `student_master` WRITE;
-/*!40000 ALTER TABLE `student_master` DISABLE KEYS */;
-/*!40000 ALTER TABLE `student_master` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `subcontractor`
 --
 
@@ -993,15 +871,6 @@ CREATE TABLE `subcontractor` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `subcontractor`
---
-
-LOCK TABLES `subcontractor` WRITE;
-/*!40000 ALTER TABLE `subcontractor` DISABLE KEYS */;
-/*!40000 ALTER TABLE `subcontractor` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `vendor`
 --
 
@@ -1014,19 +883,10 @@ CREATE TABLE `vendor` (
   `lastModifiedDate` datetime DEFAULT NULL,
   `version` int(11) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `vendor`
---
-
-LOCK TABLES `vendor` WRITE;
-/*!40000 ALTER TABLE `vendor` DISABLE KEYS */;
-INSERT INTO `vendor` VALUES (53,NULL,NULL,2,'Anna'),(57,NULL,NULL,0,'MAPE'),(58,NULL,NULL,0,'CATO');
-/*!40000 ALTER TABLE `vendor` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `workdetail`
@@ -1053,15 +913,6 @@ CREATE TABLE `workdetail` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `workdetail`
---
-
-LOCK TABLES `workdetail` WRITE;
-/*!40000 ALTER TABLE `workdetail` DISABLE KEYS */;
-/*!40000 ALTER TABLE `workdetail` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Dumping events for database 'precastdb'
 --
 
@@ -1078,4 +929,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-06-26 12:15:32
+-- Dump completed on 2019-07-23 23:52:11

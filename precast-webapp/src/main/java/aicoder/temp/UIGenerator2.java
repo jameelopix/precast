@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vme.precast.domain.Element;
+import com.vme.precast.report.api.ProductionPlanReportDTO;
 
 //import com.experian.domain.Project;
 
 public class UIGenerator2 {
 
-    Class entity = Element.class;
+    Class entity = ProductionPlanReportDTO.class;
     String entityName = entity.getSimpleName().replace("DTO", "");
 
     public UIGenerator2() {

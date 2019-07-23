@@ -25,7 +25,7 @@ public class ElementSearchDTO extends BaseSearchDTO {
     public static String NAME = "name";
     public static String FLOOR = "floor";
     public static String PROJECT = "project";
-    public static String PROJECTID = "project.Id";
+    public static String PROJECTID = "project.id";
     public static String ELEMENTTYPE = "elementType";
     public static String ELEMENTTYPEID = "elementType.id";
 

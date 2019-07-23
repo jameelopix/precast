@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vme.precast.domain.Element;
 import com.vme.precast.domain.ProductionPlan;
+import com.vme.precast.element.api.ElementDTO;
 import com.vme.precast.productionplan.api.ProductionPlanComponent;
 import com.vme.precast.productionplan.api.ProductionPlanDTO;
 import com.vme.precast.productionplan.api.ProductionPlanSearchDTO;
@@ -37,9 +38,8 @@ public class ProductionPlanComponentImpl implements ProductionPlanComponent {
     @Override
     public ProductionPlanServiceResponse createProductionPlan(
             ProductionPlanServiceRequest productionPlanServiceRequest) {
-        ProductionPlanDTO productionPlanDTO = productionPlanServiceRequest.getProductionPlanDTO();
-
-        Element element = elementRepo.findById(productionPlanDTO.getElementId()).get();
+        ElementDTO elementDTO = productionPlanServiceRequest.getElementDTO();
+        Element element = elementRepo.findById(elementDTO.getId()).get();
 
         ProductionPlan productionplan = new ProductionPlan();
         productionplan.setElement(element);
