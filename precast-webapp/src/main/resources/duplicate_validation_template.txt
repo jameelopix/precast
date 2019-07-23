@@ -1,0 +1,48 @@
+package com.vme.precast.{{entityName_camelCase}}.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.vme.precast.domain.{{entityName}};
+import com.vme.precast.repository.{{entityName}}Repo;
+import com.vme.precast.{{entityName_camelCase}}.api.{{entityName}}DTO;
+import com.vme.precast.{{entityName_camelCase}}.api.{{entityName}}SearchDTO;
+import com.vme.precast.{{entityName_camelCase}}.api.{{entityName}}ServiceRequest;
+import com.vme.precast.{{entityName_camelCase}}.api.{{entityName}}Validator;
+
+import coliseum.jpa.Filter;
+import coliseum.jpa.SearchObject;
+import coliseum.service.ErrorDTO;
+import coliseum.service.FilterUtils;
+
+public class {{entityName}}ValidatorImpl implements {{entityName}}Validator {
+    @Autowired
+    {{entityName}}Repo {{entityName_camelCase}}Repo;
+
+    @Override
+    public ErrorDTO check{{entityName}}Duplicate({{entityName}}ServiceRequest {{entityName_camelCase}}ServiceRequest) {
+        ErrorDTO errorDTO = null;
+        {{entityName}}DTO {{entityName_camelCase}}DTO = {{entityName_camelCase}}ServiceRequest.get{{entityName}}DTO();
+
+        SearchObject searchObject = new SearchObject();
+        List<Filter> filters = new ArrayList<>();
+        FilterUtils.createEqualFilter(filters, {{entityName}}SearchDTO.CODE, {{entityName_camelCase}}DTO.getCode());
+        if (CollectionUtils.isNotEmpty(filters)) {
+            searchObject.setFilters(filters);
+        }
+        List<{{entityName}}> {{entityName_camelCase}}List = {{entityName_camelCase}}Repo.search(searchObject);
+
+        if (CollectionUtils.isNotEmpty({{entityName_camelCase}}List)) {
+            for ({{entityName}} {{entityName_camelCase}} : {{entityName_camelCase}}List) {
+                if (!{{entityName_camelCase}}.getId().equals({{entityName_camelCase}}DTO.getId())) {
+                    errorDTO = new ErrorDTO("ERR_VR_100", "{{entityName}} already exists!!!");
+                    break;
+                }
+            }
+        }
+        return errorDTO;
+    }
+}
