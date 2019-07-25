@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vme.precast.domain.Element;
+import com.vme.precast.domain.DCItem;
 
 //import com.experian.domain.Project;
 
 public class ValidationGenerator {
 
-    Class entity = Element.class;
+    Class entity = DCItem.class;
     String entityName = entity.getSimpleName();
 
     boolean duplicateCheck = true;

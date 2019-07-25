@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+ <input name="financialDetailServiceRequest" required="true" />
+
+ <action-state id="validate">
+ <evaluate
+ expression="financialDetailValidator.checkFinancialDetailDuplicate(financialDetailServiceRequest)" />
+ <evaluate expression="endValidation">
+ <attribute name="name" value="endValidation"></attribute>
+ </evaluate>
+ <transition on="endValidation.success" to="createFinancialDetail" />
+ </action-state>
+
+ <action-state id="createFinancialDetail">
+ <evaluate
+ expression="financialDetailComponent.createFinancialDetail(financialDetailServiceRequest)"
+ result="flowScope.financialDetailServiceResponse" />
+ <transition to="exit" />
+ </action-state>
+
+ <end-state id="exit">
+ <output name="financialDetailServiceResponse" />
+ </end-state>
+</flow>

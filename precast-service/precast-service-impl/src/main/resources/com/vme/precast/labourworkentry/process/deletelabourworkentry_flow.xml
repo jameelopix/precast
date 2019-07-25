@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/webflow http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+ <input name="labourWorkEntryServiceRequest" required="true" />
+
+ <action-state id="deleteLabourWorkEntry">
+ <evaluate
+ expression="labourWorkEntryComponent.deleteLabourWorkEntry(labourWorkEntryServiceRequest)"
+ result="flowScope.labourWorkEntryServiceResponse" />
+ <transition to="exit" />
+ </action-state>
+
+ <end-state id="exit">
+ <output name="labourWorkEntryServiceResponse" />
+ </end-state>
+</flow>

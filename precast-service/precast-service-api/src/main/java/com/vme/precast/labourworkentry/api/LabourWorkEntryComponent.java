@@ -1,0 +1,14 @@
+package com.vme.precast.labourworkentry.api;
+
+import coliseum.service.ColiseumInterface;
+
+public interface LabourWorkEntryComponent extends ColiseumInterface {
+
+ public LabourWorkEntryServiceResponse createLabourWorkEntry(LabourWorkEntryServiceRequest labourWorkEntryServiceRequest);
+
+ public LabourWorkEntryServiceResponse getLabourWorkEntrys(LabourWorkEntryServiceRequest labourWorkEntryServiceRequest);
+
+ public LabourWorkEntryServiceResponse updateLabourWorkEntry(LabourWorkEntryServiceRequest labourWorkEntryServiceRequest);
+
+ public LabourWorkEntryServiceResponse deleteLabourWorkEntry(LabourWorkEntryServiceRequest labourWorkEntryServiceRequest);
+}

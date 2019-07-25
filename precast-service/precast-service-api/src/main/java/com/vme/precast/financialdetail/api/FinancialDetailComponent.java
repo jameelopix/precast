@@ -1,0 +1,14 @@
+package com.vme.precast.financialdetail.api;
+
+import coliseum.service.ColiseumInterface;
+
+public interface FinancialDetailComponent extends ColiseumInterface {
+
+ public FinancialDetailServiceResponse createFinancialDetail(FinancialDetailServiceRequest financialDetailServiceRequest);
+
+ public FinancialDetailServiceResponse getFinancialDetails(FinancialDetailServiceRequest financialDetailServiceRequest);
+
+ public FinancialDetailServiceResponse updateFinancialDetail(FinancialDetailServiceRequest financialDetailServiceRequest);
+
+ public FinancialDetailServiceResponse deleteFinancialDetail(FinancialDetailServiceRequest financialDetailServiceRequest);
+}

@@ -1,0 +1,14 @@
+package com.vme.precast.productionplanitem.api;
+
+import coliseum.service.ColiseumInterface;
+
+public interface ProductionPlanItemComponent extends ColiseumInterface {
+
+ public ProductionPlanItemServiceResponse createProductionPlanItem(ProductionPlanItemServiceRequest productionPlanItemServiceRequest);
+
+ public ProductionPlanItemServiceResponse getProductionPlanItems(ProductionPlanItemServiceRequest productionPlanItemServiceRequest);
+
+ public ProductionPlanItemServiceResponse updateProductionPlanItem(ProductionPlanItemServiceRequest productionPlanItemServiceRequest);
+
+ public ProductionPlanItemServiceResponse deleteProductionPlanItem(ProductionPlanItemServiceRequest productionPlanItemServiceRequest);
+}
