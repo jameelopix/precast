@@ -8,13 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.vme.precast.report.api.ProductionPlanReportDTO;
+import com.vme.precast.domain.LabourWorkEntry;
 
 //import com.experian.domain.Project;
 
 public class UIGenerator {
 
-    Class entity = ProductionPlanReportDTO.class;
+    Class entity = LabourWorkEntry.class;
     String entityName = entity.getSimpleName().replace("DTO", "");
 
     String projectBaseFolder = "c:\\finaltemp\\";

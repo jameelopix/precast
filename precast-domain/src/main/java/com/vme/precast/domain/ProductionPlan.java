@@ -2,6 +2,7 @@ package com.vme.precast.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,6 +27,9 @@ public class ProductionPlan extends BaseEntity {
 
     @OneToOne(fetch = FetchType.LAZY)
     private Element element;
+
+    @Column(insertable = false, updatable = false, name = "element_id")
+    private Long elementId;
 
     private ProductionPlanStatus productionPlanStatus;
 
@@ -73,5 +77,13 @@ public class ProductionPlan extends BaseEntity {
 
     public void setDeliveredDate(Date deliveredDate) {
         this.deliveredDate = deliveredDate;
+    }
+
+    public Long getElementId() {
+        return elementId;
+    }
+
+    public void setElementId(Long elementId) {
+        this.elementId = elementId;
     }
 }

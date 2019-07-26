@@ -46,13 +46,13 @@ public class ProductionPlanItemComponentImpl implements ProductionPlanItemCompon
         ProductionPlanItemSearchDTO productionPlanItemSearchDTO = productionPlanItemServiceRequest
                 .getProductionPlanItemSearchDTO();
         if (productionPlanItemSearchDTO != null) {
-            List<Long> ids = productionPlanItemSearchDTO.getIds();
-            List<String> nameList = productionPlanItemSearchDTO.getNameList();
-            List<Long> addressIdList = productionPlanItemSearchDTO.getAddressIdList();
-
-            FilterUtils.createEqualFilter(filters, ProductionPlanItemSearchDTO.ID, ids);
-            FilterUtils.createEqualFilter(filters, ProductionPlanItemSearchDTO.NAME, nameList);
-            FilterUtils.createEqualFilter(filters, ProductionPlanItemSearchDTO.ADDRESS_ID, addressIdList);
+//            List<Long> ids = productionPlanItemSearchDTO.getIds();
+//            List<String> nameList = productionPlanItemSearchDTO.getNameList();
+//            List<Long> addressIdList = productionPlanItemSearchDTO.getAddressIdList();
+//
+//            FilterUtils.createEqualFilter(filters, ProductionPlanItemSearchDTO.ID, ids);
+//            FilterUtils.createEqualFilter(filters, ProductionPlanItemSearchDTO.NAME, nameList);
+//            FilterUtils.createEqualFilter(filters, ProductionPlanItemSearchDTO.ADDRESS_ID, addressIdList);
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
@@ -78,7 +78,7 @@ public class ProductionPlanItemComponentImpl implements ProductionPlanItemCompon
         ProductionPlanItemDTO source = productionPlanItemServiceRequest.getProductionPlanItemDTO();
 
         ProductionPlanItem target = productionPlanItemRepo.findById(source.getId()).get();
-        target.setName(source.getName());
+//        target.setName(source.getName());
 
         productionPlanItemRepo.save(target);
         return null;

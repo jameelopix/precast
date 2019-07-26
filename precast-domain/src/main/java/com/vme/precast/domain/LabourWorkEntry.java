@@ -30,7 +30,7 @@ public class LabourWorkEntry extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     private SubContractor subContractor;
 
-    @Column(insertable = false, updatable = false, name = "sub_contractor_id")
+    @Column(insertable = false, updatable = false, name = "subContractor_id")
     private Long subContractorId;
 
     @ManyToOne(fetch = FetchType.LAZY)

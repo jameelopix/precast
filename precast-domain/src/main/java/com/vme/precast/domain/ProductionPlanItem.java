@@ -2,6 +2,7 @@ package com.vme.precast.domain;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,6 +25,9 @@ public class ProductionPlanItem extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ProductionPlan productionPlan;
+    
+    @Column(insertable = false, updatable = false, name = "productionPlan_id")
+    private Long productionPlanId;
 
     private int sequenceOrder;
 

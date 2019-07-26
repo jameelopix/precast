@@ -34,24 +34,24 @@ public class ProductionPlanItemGenericConvertor implements GenericConverter {
     private Object convertToProductionPlanItem(ProductionPlanItemDTO source) {
         ProductionPlanItem target = new ProductionPlanItem();
         target.setId(source.getId());
-        target.setProductionPlan(source.getProductionPlan());
         target.setSequenceOrder(source.getSequenceOrder());
         target.setCastedDate(source.getCastedDate());
         target.setDisapprovedReason(source.getDisapprovedReason());
-        target.setDisapproved(source.getDisapproved());
+        target.setDisapproved(source.isDisapproved());
 
+//        target.setProductionPlan(source.getProductionPlan());
         return target;
     }
 
     private Object convertToProductionPlanItemDTO(ProductionPlanItem source) {
         ProductionPlanItemDTO target = new ProductionPlanItemDTO();
         target.setId(source.getId());
-        target.setProductionPlan(source.getProductionPlan());
         target.setSequenceOrder(source.getSequenceOrder());
         target.setCastedDate(source.getCastedDate());
         target.setDisapprovedReason(source.getDisapprovedReason());
-        target.setDisapproved(source.getDisapproved());
+        target.setDisapproved(source.isDisapproved());
 
+//        target.setProductionPlan(source.getProductionPlan());
         return target;
     }
 }

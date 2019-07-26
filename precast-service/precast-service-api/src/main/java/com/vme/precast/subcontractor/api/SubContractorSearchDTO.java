@@ -8,6 +8,7 @@ public class SubContractorSearchDTO extends BaseSearchDTO {
 
     private static final long serialVersionUID = 1L;
     private List<Long> idList;
+    private List<String> codeList;
     private List<String> nameList;
     private List<Boolean> activeList;
     private List<Long> financialDetailIdList;
@@ -15,6 +16,7 @@ public class SubContractorSearchDTO extends BaseSearchDTO {
 
     public static String ID = "id";
     public static String NAME = "name";
+    public static String CODE = "code";
     public static String ACTIVE = "active";
     public static String FINANCIALDETAIL = "financialDetail";
     public static String FINANCIALDETAILID = "financialDetailId";
@@ -59,5 +61,13 @@ public class SubContractorSearchDTO extends BaseSearchDTO {
 
     public void setAddressIdList(List<Long> addressIdList) {
         this.addressIdList = addressIdList;
+    }
+
+    public List<String> getCodeList() {
+        return codeList;
+    }
+
+    public void setCodeList(List<String> codeList) {
+        this.codeList = codeList;
     }
 }

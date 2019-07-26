@@ -9,6 +9,7 @@ public class SubContractorDTO extends BaseDTO {
 
     private static final long serialVersionUID = 1L;
     private Long id;
+    private String code;
     private String name;
     private Boolean active;
     private FinancialDetailDTO financialDetailDTO;
@@ -70,5 +71,13 @@ public class SubContractorDTO extends BaseDTO {
 
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }

@@ -51,6 +51,7 @@ public class ProductionPlanGenericConvertor implements GenericConverter {
             target.setElement(
                     (Element) conversionUtility.convert(source.getElementDTO(), ElementDTO.class, Element.class));
         }
+        target.setElementId(source.getElementId());
         return target;
     }
 

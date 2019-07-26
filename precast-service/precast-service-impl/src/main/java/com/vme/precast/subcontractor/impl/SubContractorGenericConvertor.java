@@ -46,6 +46,7 @@ public class SubContractorGenericConvertor implements GenericConverter {
         SubContractor target = new SubContractor();
         target.setId(source.getId());
         target.setName(source.getName());
+        target.setCode(source.getCode());
         target.setActive(source.getActive());
         return target;
     }
@@ -54,6 +55,7 @@ public class SubContractorGenericConvertor implements GenericConverter {
         SubContractorDTO target = new SubContractorDTO();
         target.setId(source.getId());
         target.setName(source.getName());
+        target.setCode(source.getCode());
         target.setActive(source.getActive());
 
         if (RepoUtils.isNotProxy(source.getAddress())) {

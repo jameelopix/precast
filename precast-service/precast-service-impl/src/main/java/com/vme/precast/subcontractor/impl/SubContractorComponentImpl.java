@@ -63,12 +63,14 @@ public class SubContractorComponentImpl implements SubContractorComponent {
         if (subContractorSearchDTO != null) {
             List<Long> idList = subContractorSearchDTO.getIdList();
             List<String> nameList = subContractorSearchDTO.getNameList();
+            List<String> codeList = subContractorSearchDTO.getCodeList();
             List<Boolean> activeList = subContractorSearchDTO.getActiveList();
             List<Long> addressIdList = subContractorSearchDTO.getAddressIdList();
             List<Long> financialDetailIdList = subContractorSearchDTO.getFinancialDetailIdList();
 
             FilterUtils.createEqualFilter(filters, SubContractorSearchDTO.ID, idList);
             FilterUtils.createEqualFilter(filters, SubContractorSearchDTO.NAME, nameList);
+            FilterUtils.createEqualFilter(filters, SubContractorSearchDTO.CODE, codeList);
             FilterUtils.createEqualFilter(filters, SubContractorSearchDTO.ACTIVE, activeList);
             FilterUtils.createEqualFilter(filters, SubContractorSearchDTO.ADDRESSID, addressIdList);
             FilterUtils.createEqualFilter(filters, SubContractorSearchDTO.FINANCIALDETAILID, financialDetailIdList);
@@ -97,6 +99,7 @@ public class SubContractorComponentImpl implements SubContractorComponent {
 
         SubContractor target = subContractorRepo.findById(source.getId()).get();
         target.setName(source.getName());
+        target.setName(source.getCode());
         target.setActive(source.getActive());
 
         if (source.getAddressId() != null && !source.getAddressId().equals(target.getAddressId())) {

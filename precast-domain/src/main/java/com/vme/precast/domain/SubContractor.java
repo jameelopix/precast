@@ -20,6 +20,8 @@ public class SubContractor extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String code;
+
     private String name;
 
     private Boolean active;
@@ -27,7 +29,7 @@ public class SubContractor extends BaseEntity {
     @OneToOne(fetch = FetchType.LAZY)
     private FinancialDetail financialDetail;
 
-    @Column(insertable = false, updatable = false, name = "financial_detail_id")
+    @Column(insertable = false, updatable = false, name = "financialDetail_id")
     private Long financialDetailId;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -90,5 +92,13 @@ public class SubContractor extends BaseEntity {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 }
