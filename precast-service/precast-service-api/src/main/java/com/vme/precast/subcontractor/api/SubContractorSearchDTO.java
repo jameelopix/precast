@@ -14,6 +14,9 @@ public class SubContractorSearchDTO extends BaseSearchDTO {
     private List<Long> financialDetailIdList;
     private List<Long> addressIdList;
 
+    private boolean addressNeeded;
+    private boolean financialDetailNeeded;
+
     public static String ID = "id";
     public static String NAME = "name";
     public static String CODE = "code";
@@ -69,5 +72,21 @@ public class SubContractorSearchDTO extends BaseSearchDTO {
 
     public void setCodeList(List<String> codeList) {
         this.codeList = codeList;
+    }
+
+    public boolean isFinancialDetailNeeded() {
+        return financialDetailNeeded;
+    }
+
+    public void setFinancialDetailNeeded(boolean financialDetailNeeded) {
+        this.financialDetailNeeded = financialDetailNeeded;
+    }
+
+    public boolean isAddressNeeded() {
+        return addressNeeded;
+    }
+
+    public void setAddressNeeded(boolean addressNeeded) {
+        this.addressNeeded = addressNeeded;
     }
 }

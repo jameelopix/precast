@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.vme.precast.domain.Address;
 import com.vme.precast.domain.FinancialDetail;
 import com.vme.precast.domain.SubContractor;
+import com.vme.precast.element.api.ElementSearchDTO;
 import com.vme.precast.repository.AddressRepo;
 import com.vme.precast.repository.FinancialDetailRepo;
 import com.vme.precast.repository.SubContractorRepo;
@@ -18,8 +19,10 @@ import com.vme.precast.subcontractor.api.SubContractorSearchDTO;
 import com.vme.precast.subcontractor.api.SubContractorServiceRequest;
 import com.vme.precast.subcontractor.api.SubContractorServiceResponse;
 
+import coliseum.jpa.Association;
 import coliseum.jpa.Filter;
 import coliseum.jpa.SearchObject;
+import coliseum.service.AssociationUtils;
 import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
@@ -40,6 +43,7 @@ public class SubContractorComponentImpl implements SubContractorComponent {
         SubContractor subcontractor = (SubContractor) conversionUtility.convert(subContractorDTO,
                 SubContractorDTO.class, SubContractor.class);
 
+        subcontractor.setActive(true);
         if (subContractorDTO.getAddressId() != null) {
             Address address = addressRepo.findById(subContractorDTO.getAddressId()).get();
             subcontractor.setAddress(address);
@@ -58,6 +62,7 @@ public class SubContractorComponentImpl implements SubContractorComponent {
         List<SubContractor> subContractorList = new ArrayList<>();
         List<Filter> filters = new ArrayList<>();
         SearchObject searchObject = new SearchObject();
+        List<Association> associations = new ArrayList<>();
 
         SubContractorSearchDTO subContractorSearchDTO = subContractorServiceRequest.getSubContractorSearchDTO();
         if (subContractorSearchDTO != null) {
@@ -77,6 +82,20 @@ public class SubContractorComponentImpl implements SubContractorComponent {
 
             if (CollectionUtils.isNotEmpty(filters)) {
                 searchObject.setFilters(filters);
+            }
+
+            AssociationUtils.createAssociation(associations, SubContractorSearchDTO.ADDRESS,
+                    subContractorSearchDTO.isAddressNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
+            }
+
+            AssociationUtils.createAssociation(associations, SubContractorSearchDTO.FINANCIALDETAIL,
+                    subContractorSearchDTO.isFinancialDetailNeeded());
+
+            if (CollectionUtils.isNotEmpty(associations)) {
+                searchObject.setAssociations(associations);
             }
         }
         searchObject.setPageIndex(subContractorServiceRequest.getPageIndex());
@@ -99,7 +118,7 @@ public class SubContractorComponentImpl implements SubContractorComponent {
 
         SubContractor target = subContractorRepo.findById(source.getId()).get();
         target.setName(source.getName());
-        target.setName(source.getCode());
+        target.setCode(source.getCode());
         target.setActive(source.getActive());
 
         if (source.getAddressId() != null && !source.getAddressId().equals(target.getAddressId())) {

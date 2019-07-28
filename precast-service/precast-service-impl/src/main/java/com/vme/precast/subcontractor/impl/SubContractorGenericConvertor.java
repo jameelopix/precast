@@ -58,13 +58,13 @@ public class SubContractorGenericConvertor implements GenericConverter {
         target.setCode(source.getCode());
         target.setActive(source.getActive());
 
-        if (RepoUtils.isNotProxy(source.getAddress())) {
+        if (source.getAddress() != null && RepoUtils.isNotProxy(source.getAddress())) {
             target.setAddressDTO(
                     (AddressDTO) conversionUtility.convert(source.getAddress(), Address.class, AddressDTO.class));
         }
         target.setAddressId(source.getAddressId());
 
-        if (RepoUtils.isNotProxy(source.getFinancialDetail())) {
+        if (source.getFinancialDetail() != null && RepoUtils.isNotProxy(source.getFinancialDetail())) {
             target.setFinancialDetailDTO((FinancialDetailDTO) conversionUtility.convert(source.getFinancialDetail(),
                     FinancialDetail.class, FinancialDetailDTO.class));
         }
