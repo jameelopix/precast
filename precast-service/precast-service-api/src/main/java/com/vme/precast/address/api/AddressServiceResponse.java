@@ -10,11 +10,21 @@ public class AddressServiceResponse extends BaseServiceResponse {
 
     private List<AddressDTO> addressDTOList;
 
+    private AddressDTO addressDTO;
+
     public List<AddressDTO> getAddressDTOList() {
         return addressDTOList;
     }
 
     public void setAddressDTOList(List<AddressDTO> addressDTOList) {
         this.addressDTOList = addressDTOList;
+    }
+
+    public AddressDTO getAddressDTO() {
+        return addressDTO;
+    }
+
+    public void setAddressDTO(AddressDTO addressDTO) {
+        this.addressDTO = addressDTO;
     }
 }

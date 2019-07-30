@@ -30,8 +30,13 @@ public class AddressComponentImpl implements AddressComponent {
     public AddressServiceResponse createAddress(AddressServiceRequest addressServiceRequest) {
         AddressDTO addressDTO = addressServiceRequest.getAddressDTO();
         Address address = (Address) conversionUtility.convert(addressDTO, AddressDTO.class, Address.class);
-        addressRepo.save(address);
-        return null;
+        address = addressRepo.save(address);
+
+        AddressDTO responseAddressDTO = (AddressDTO) conversionUtility.convert(address, Address.class,
+                AddressDTO.class);
+        AddressServiceResponse addressServiceResponse = new AddressServiceResponse();
+        addressServiceResponse.setAddressDTO(responseAddressDTO);
+        return addressServiceResponse;
     }
 
     @Override
@@ -93,8 +98,12 @@ public class AddressComponentImpl implements AddressComponent {
         target.setMobNo(source.getMobNo());
         target.setPincode(source.getPincode());
 
-        addressRepo.save(target);
-        return null;
+        target = addressRepo.save(target);
+
+        AddressDTO responseAddressDTO = (AddressDTO) conversionUtility.convert(target, Address.class, AddressDTO.class);
+        AddressServiceResponse addressServiceResponse = new AddressServiceResponse();
+        addressServiceResponse.setAddressDTO(responseAddressDTO);
+        return addressServiceResponse;
     }
 
     @Override

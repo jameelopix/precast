@@ -32,8 +32,13 @@ public class FinancialDetailComponentImpl implements FinancialDetailComponent {
         FinancialDetailDTO financialDetailDTO = financialDetailServiceRequest.getFinancialDetailDTO();
         FinancialDetail financialdetail = (FinancialDetail) conversionUtility.convert(financialDetailDTO,
                 FinancialDetailDTO.class, FinancialDetail.class);
-        financialDetailRepo.save(financialdetail);
-        return null;
+        financialdetail = financialDetailRepo.save(financialdetail);
+
+        FinancialDetailDTO responseFinancialDetailDTO = (FinancialDetailDTO) conversionUtility.convert(financialdetail,
+                FinancialDetail.class, FinancialDetailDTO.class);
+        FinancialDetailServiceResponse financialDetailServiceResponse = new FinancialDetailServiceResponse();
+        financialDetailServiceResponse.setFinancialDetailDTO(responseFinancialDetailDTO);
+        return financialDetailServiceResponse;
     }
 
     @Override
@@ -80,8 +85,13 @@ public class FinancialDetailComponentImpl implements FinancialDetailComponent {
         target.setGst(source.getGst());
         target.setPan(source.getPan());
 
-        financialDetailRepo.save(target);
-        return null;
+        target = financialDetailRepo.save(target);
+
+        FinancialDetailDTO responseFinancialDetailDTO = (FinancialDetailDTO) conversionUtility.convert(target,
+                FinancialDetail.class, FinancialDetailDTO.class);
+        FinancialDetailServiceResponse financialDetailServiceResponse = new FinancialDetailServiceResponse();
+        financialDetailServiceResponse.setFinancialDetailDTO(responseFinancialDetailDTO);
+        return financialDetailServiceResponse;
     }
 
     @Override

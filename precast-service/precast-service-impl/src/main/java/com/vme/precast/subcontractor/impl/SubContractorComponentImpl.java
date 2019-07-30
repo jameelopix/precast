@@ -6,10 +6,15 @@ import java.util.List;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.vme.precast.address.api.AddressDTO;
+import com.vme.precast.address.api.AddressServiceRequest;
+import com.vme.precast.address.api.AddressServiceResponse;
 import com.vme.precast.domain.Address;
 import com.vme.precast.domain.FinancialDetail;
 import com.vme.precast.domain.SubContractor;
-import com.vme.precast.element.api.ElementSearchDTO;
+import com.vme.precast.financialdetail.api.FinancialDetailDTO;
+import com.vme.precast.financialdetail.api.FinancialDetailServiceRequest;
+import com.vme.precast.financialdetail.api.FinancialDetailServiceResponse;
 import com.vme.precast.repository.AddressRepo;
 import com.vme.precast.repository.FinancialDetailRepo;
 import com.vme.precast.repository.SubContractorRepo;
@@ -27,10 +32,13 @@ import coliseum.service.ConversionUtility;
 import coliseum.service.FilterUtils;
 
 public class SubContractorComponentImpl implements SubContractorComponent {
+
     @Autowired
     SubContractorRepo subContractorRepo;
+
     @Autowired
     AddressRepo addressRepo;
+
     @Autowired
     FinancialDetailRepo financialDetailRepo;
 
@@ -140,5 +148,31 @@ public class SubContractorComponentImpl implements SubContractorComponent {
         SubContractorDTO subContractorDTO = subContractorServiceRequest.getSubContractorDTO();
         subContractorRepo.deleteById(subContractorDTO.getId());
         return null;
+    }
+
+    @Override
+    public AddressServiceRequest createAddressServiceRequest(SubContractorServiceRequest subContractorServiceRequest) {
+        AddressServiceRequest addressServiceRequest = new AddressServiceRequest();
+        AddressDTO addressDTO = new AddressDTO();
+        addressServiceRequest.setAddressDTO(addressDTO);
+        return addressServiceRequest;
+    }
+
+    @Override
+    public FinancialDetailServiceRequest createFinancialDetailServiceRequest(
+            SubContractorServiceRequest subContractorServiceRequest) {
+        FinancialDetailServiceRequest financialDetailServiceRequest = new FinancialDetailServiceRequest();
+        FinancialDetailDTO financialDetailDTO = new FinancialDetailDTO();
+        financialDetailServiceRequest.setFinancialDetailDTO(financialDetailDTO);
+        return financialDetailServiceRequest;
+    }
+
+    @Override
+    public void updateSubContractorServiceRequest(SubContractorServiceRequest subContractorServiceRequest,
+            AddressServiceResponse addressServiceResponse,
+            FinancialDetailServiceResponse financialDetailServiceResponse) {
+        SubContractorDTO subContractorDTO = subContractorServiceRequest.getSubContractorDTO();
+        subContractorDTO.setFinancialDetailId(financialDetailServiceResponse.getFinancialDetailDTO().getId());
+        subContractorDTO.setAddressId(addressServiceResponse.getAddressDTO().getId());
     }
 }

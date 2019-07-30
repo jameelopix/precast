@@ -6,15 +6,25 @@ import coliseum.service.BaseServiceResponse;
 
 public class FinancialDetailServiceResponse extends BaseServiceResponse {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
- private List<FinancialDetailDTO> financialDetailDTOList;
+    private List<FinancialDetailDTO> financialDetailDTOList;
 
- public List<FinancialDetailDTO> getFinancialDetailDTOList() {
- return financialDetailDTOList;
- }
+    private FinancialDetailDTO financialDetailDTO;
 
- public void setFinancialDetailDTOList(List<FinancialDetailDTO> financialDetailDTOList) {
- this.financialDetailDTOList = financialDetailDTOList;
- }
+    public List<FinancialDetailDTO> getFinancialDetailDTOList() {
+        return financialDetailDTOList;
+    }
+
+    public void setFinancialDetailDTOList(List<FinancialDetailDTO> financialDetailDTOList) {
+        this.financialDetailDTOList = financialDetailDTOList;
+    }
+
+    public FinancialDetailDTO getFinancialDetailDTO() {
+        return financialDetailDTO;
+    }
+
+    public void setFinancialDetailDTO(FinancialDetailDTO financialDetailDTO) {
+        this.financialDetailDTO = financialDetailDTO;
+    }
 }
