@@ -1,0 +1,200 @@
+`VMEDB`.`Raw Material Cost Query`
+=================================
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `precast_admin`@`%` 
+    SQL SECURITY DEFINER
+VIEW `VMEDB`.`Raw Material Cost Query` AS
+    SELECT 
+        `Raw Material Combined Query`.`Project Name` AS `Project Name`,
+        `VMEDB`.`Element Data`.`Floor` AS `Floor`,
+        `VMEDB`.`Element Data`.`Element type` AS `Element type`,
+        `Raw Material Combined Query`.`Element ID` AS `Element ID`,
+        `VMEDB`.`Raw Materials`.`Type` AS `Type`,
+        `Raw Material Combined Query`.`Raw Materials` AS `Raw Materials`,
+        `VMEDB`.`Raw Materials`.`Unit` AS `Unit`,
+        `Raw Material Combined Query`.`Theoritical Quantity` AS `Theoritical Quantity`,
+        `Raw Material Combined Query`.`Actual Quantity` AS `Actual Quantity`,
+        `VMEDB`.`Production Plan`.`Casted Date` AS `Casted Date`,
+        `VMEDB`.`Production Plan`.`Planned Date` AS `Planned Date`,
+        `VMEDB`.`Raw Materials`.`Rate` AS `Rate`,
+        (`VMEDB`.`Raw Materials`.`Rate` * `Raw Material Combined Query`.`Theoritical Quantity`) AS `Estimated Amount`,
+        (`Raw Material Combined Query`.`Actual Quantity` * `VMEDB`.`Raw Materials`.`Rate`) AS `Actual Amount`
+    FROM
+        ((((`VMEDB`.`Raw Material Combined Query`
+        JOIN `VMEDB`.`Project Master` ON ((`VMEDB`.`Project Master`.`Project Name` = `Raw Material Combined Query`.`Project Name`)))
+        JOIN `VMEDB`.`Element Data` ON (((`VMEDB`.`Element Data`.`Project Code` = `VMEDB`.`Project Master`.`Project Code`)
+            AND (`VMEDB`.`Element Data`.`Element ID` = `Raw Material Combined Query`.`Element ID`))))
+        JOIN `VMEDB`.`Raw Materials` ON ((`Raw Material Combined Query`.`Raw Materials` = `VMEDB`.`Raw Materials`.`Raw Materials`)))
+        JOIN `VMEDB`.`Production Plan` ON (((`VMEDB`.`Production Plan`.`Project Code` = `VMEDB`.`Project Master`.`Project Code`)
+            AND (`VMEDB`.`Production Plan`.`Element ID` = `Raw Material Combined Query`.`Element ID`))))
+-----------------------------------------------------------------------------------------------------------------------------
+`VMEDB`.`Raw Material Combined Query`
+======================================
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `precast_admin`@`%` 
+    SQL SECURITY DEFINER
+VIEW `VMEDB`.`Raw Material Combined Query` AS
+    SELECT 
+        `VMEDB`.`Project Master`.`Project Name` AS `Project Name`,
+        `VMEDB`.`Element Data`.`Element ID` AS `Element ID`,
+        `VMEDB`.`Mix Design`.`Raw Materials` AS `Raw Materials`,
+        (`VMEDB`.`Mix Design`.`Quantity/CUM` * `VMEDB`.`Element Data`.`Theoritical Concrete Qty`) AS `Theoritical Quantity`,
+        (`VMEDB`.`Production Plan`.`Actual Concrete Quantity` * `VMEDB`.`Mix Design`.`Quantity/CUM`) AS `Actual Quantity`
+    FROM
+        ((((`VMEDB`.`Element Data`
+        JOIN `VMEDB`.`Project Master` ON ((`VMEDB`.`Project Master`.`Project Code` = `VMEDB`.`Element Data`.`Project Code`)))
+        LEFT JOIN `VMEDB`.`Production Plan` ON (((`VMEDB`.`Production Plan`.`Project Code` = `VMEDB`.`Element Data`.`Project Code`)
+            AND (`VMEDB`.`Production Plan`.`Element ID` = `VMEDB`.`Element Data`.`Element ID`))))
+        JOIN `VMEDB`.`Mix Design` ON ((`VMEDB`.`Mix Design`.`Mix Design` = `VMEDB`.`Element Data`.`Mix Design`)))
+        JOIN `VMEDB`.`Raw Materials` ON ((`VMEDB`.`Raw Materials`.`Raw Materials` = `VMEDB`.`Mix Design`.`Raw Materials`))) 
+    UNION SELECT 
+        `VMEDB`.`Project Master`.`Project Name` AS `Project Name`,
+        `VMEDB`.`Element Data`.`Element ID` AS `Element ID`,
+        'Concrete Qty' AS `Raw Materials`,
+        `VMEDB`.`Element Data`.`Theoritical Concrete Qty` AS `Theoritical Quantity`,
+        `VMEDB`.`Production Plan`.`Actual Concrete Quantity` AS `Actual Quantity`
+    FROM
+        ((`VMEDB`.`Element Data`
+        JOIN `VMEDB`.`Project Master` ON ((`VMEDB`.`Project Master`.`Project Code` = `VMEDB`.`Element Data`.`Project Code`)))
+        LEFT JOIN `VMEDB`.`Production Plan` ON (((`VMEDB`.`Production Plan`.`Project Code` = `VMEDB`.`Element Data`.`Project Code`)
+            AND (`VMEDB`.`Production Plan`.`Element ID` = `VMEDB`.`Element Data`.`Element ID`)))) 
+    UNION SELECT 
+        `VMEDB`.`Project Master`.`Project Name` AS `Project Name`,
+        `VMEDB`.`Element Data`.`Element ID` AS `Element ID`,
+        `VMEDB`.`Steel Data`.`Raw Materials` AS `Raw Materials`,
+        `VMEDB`.`Steel Data`.`Theoritical Quantity` AS `Theoritical Quantity`,
+        `VMEDB`.`Steel Data`.`Actual Quantity` AS `Actual Quantity`
+    FROM
+        ((`VMEDB`.`Steel Data`
+        JOIN `VMEDB`.`Project Master` ON ((`VMEDB`.`Project Master`.`Project Code` = `VMEDB`.`Steel Data`.`Project Code`)))
+        LEFT JOIN `VMEDB`.`Element Data` ON (((`VMEDB`.`Element Data`.`Project Code` = `VMEDB`.`Steel Data`.`Project Code`)
+            AND (`VMEDB`.`Element Data`.`Element ID` = `VMEDB`.`Steel Data`.`Element ID`))))
+-----------------------------------------------------------------------------------------------------------------------------
+`VMEDB`.`Project Status`
+======================================
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `precast_admin`@`%` 
+    SQL SECURITY DEFINER
+VIEW `VMEDB`.`Project Status` AS
+    SELECT 
+        `VMEDB`.`Element Data`.`Project Code` AS `Project Code`,
+        `VMEDB`.`Element Data`.`Floor` AS `Floor`,
+        `VMEDB`.`Element Data`.`Element type` AS `Element type`,
+        `VMEDB`.`Element Data`.`Element ID` AS `Element ID`,
+        `VMEDB`.`Element Data`.`Theoritical Concrete Qty` AS `Theoritical Concrete Qty`,
+        `VMEDB`.`Element Data`.`Mould Drawing Revision` AS `Mould Drawing Revision`,
+        `VMEDB`.`Element Data`.`Steel Drawing Revision` AS `Steel Drawing Revision`,
+        `VMEDB`.`Production Plan`.`Planned Date` AS `Planned Date`,
+        `VMEDB`.`Production Plan`.`Casted Date` AS `Casted Date`,
+        `VMEDB`.`Production Plan`.`Actual Concrete Quantity` AS `Actual Concrete Quantity`,
+        `VMEDB`.`Production Plan`.`Delivered Date` AS `Delivered Date`
+    FROM
+        (`VMEDB`.`Element Data`
+        JOIN `VMEDB`.`Production Plan` ON (((`VMEDB`.`Element Data`.`Element ID` = `VMEDB`.`Production Plan`.`Element ID`)
+            AND (`VMEDB`.`Element Data`.`Project Code` = `VMEDB`.`Production Plan`.`Project Code`))))
+-----------------------------------------------------------------------------------------------------------------------------
+`VMEDB`.`Ledger Statement`
+======================================
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `precast_admin`@`%` 
+    SQL SECURITY DEFINER
+VIEW `VMEDB`.`Ledger Statement` AS
+    SELECT 
+        `VMEDB`.`Credit`.`Date` AS `Date`,
+        `VMEDB`.`Credit`.`Company` AS `Company`,
+        'Credit' AS `Nature of Transaction`,
+        `VMEDB`.`Credit`.`Accounthead` AS `Accounthead`,
+        `VMEDB`.`Credit`.`Costcentre` AS `Cost Centre`,
+        `VMEDB`.`Credit`.`PartyType` AS `Party Type`,
+        `VMEDB`.`Credit`.`PartyName` AS `Party Name`,
+        CONCAT(`VMEDB`.`Credit`.`BillType`,
+                '-',
+                `VMEDB`.`Credit`.`BillID`) AS `Description`,
+        `VMEDB`.`Credit`.`Amount` AS `Amount`
+    FROM
+        `VMEDB`.`Credit` 
+    UNION SELECT 
+        `VMEDB`.`Cash & Bank`.`Date` AS `Date`,
+        `VMEDB`.`Account Master`.`Company` AS `Company`,
+        `VMEDB`.`Cash & Bank`.`Nature of Transaction` AS `Nature of Transaction`,
+        `VMEDB`.`Cash & Bank`.`Accounthead` AS `Accounthead`,
+        `VMEDB`.`Cash & Bank`.`Cost Centre` AS `Cost Centre`,
+        `VMEDB`.`Cash & Bank`.`Party Type` AS `Party Type`,
+        `VMEDB`.`Cash & Bank`.`Party Name` AS `Party Name`,
+        `VMEDB`.`Cash & Bank`.`Description` AS `Description`,
+        (0 - `VMEDB`.`Cash & Bank`.`Amount`) AS `Amount`
+    FROM
+        (`VMEDB`.`Account Master`
+        JOIN `VMEDB`.`Cash & Bank` ON ((`VMEDB`.`Account Master`.`idAccount Master` = `VMEDB`.`Cash & Bank`.`AccountID`)))
+    HAVING (`VMEDB`.`Cash & Bank`.`Nature of Transaction` = 'Debit')
+-----------------------------------------------------------------------------------------------------------------------------
+`VMEDB`.`Batching Plant query`
+======================================
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `precast_admin`@`%` 
+    SQL SECURITY DEFINER
+VIEW `VMEDB`.`Batching Plant query` AS
+    SELECT 
+        `VMEDB`.`Batching Plant Report`.`Date Batched` AS `Date Batched`,
+        `VMEDB`.`Batching Plant Report`.`Project Name` AS `Project Name`,
+        `VMEDB`.`Batching Plant Report`.`Element Type` AS `Element Type`,
+        `VMEDB`.`Mix Design`.`Raw Materials` AS `Raw Materials`,
+        `VMEDB`.`Mix Design`.`Unit` AS `Unit`,
+        `VMEDB`.`Mix Design`.`Quantity/CUM` AS `Quantity/CUM`,
+        `VMEDB`.`Batching Plant Report`.`Concrete Qty` AS `Concrete Qty`,
+        (`VMEDB`.`Batching Plant Report`.`Concrete Qty` * `VMEDB`.`Mix Design`.`Quantity/CUM`) AS `Actual Quantity Consumed`
+    FROM
+        (`VMEDB`.`Batching Plant Report`
+        JOIN `VMEDB`.`Mix Design` ON ((`VMEDB`.`Batching Plant Report`.`Mix Design` = `VMEDB`.`Mix Design`.`Mix Design`)))
+-----------------------------------------------------------------------------------------------------------------------------
+`VMEDB`.`Account Balance`
+======================================
+CREATE 
+    ALGORITHM = UNDEFINED 
+    DEFINER = `precast_admin`@`%` 
+    SQL SECURITY DEFINER
+VIEW `VMEDB`.`Account Balance` AS
+    SELECT 
+        `VMEDB`.`Cash & Bank`.`idCash & Bank` AS `ID`,
+        `VMEDB`.`Cash & Bank`.`Date` AS `Date`,
+        `VMEDB`.`Account Master`.`Company` AS `Company`,
+        `VMEDB`.`Account Master`.`Branch` AS `Branch`,
+        `VMEDB`.`Account Master`.`Account Type` AS `Account Type`,
+        `VMEDB`.`Account Master`.`Account Name` AS `Account Name`,
+        `VMEDB`.`Account Master`.`Account Number` AS `Account Number`,
+        `VMEDB`.`Cash & Bank`.`Nature of Transaction` AS `Nature of Transaction`,
+        `VMEDB`.`Cash & Bank`.`Cost Centre` AS `Cost Centre`,
+        `VMEDB`.`Cash & Bank`.`Accounthead` AS `AccountHead`,
+        `VMEDB`.`Cash & Bank`.`Party Type` AS `Party Type`,
+        `VMEDB`.`Cash & Bank`.`Party Name` AS `Party Name`,
+        `VMEDB`.`Cash & Bank`.`Description` AS `Description`,
+        (`VMEDB`.`Cash & Bank`.`Amount` - 0) AS `Net Amount`
+    FROM
+        (`VMEDB`.`Account Master`
+        JOIN `VMEDB`.`Cash & Bank` ON ((`VMEDB`.`Account Master`.`idAccount Master` = `VMEDB`.`Cash & Bank`.`AccountID`)))
+    HAVING (`VMEDB`.`Cash & Bank`.`Nature of Transaction` = 'Credit') 
+    UNION SELECT 
+        `VMEDB`.`Cash & Bank`.`idCash & Bank` AS `ID`,
+        `VMEDB`.`Cash & Bank`.`Date` AS `Date`,
+        `VMEDB`.`Account Master`.`Company` AS `Company`,
+        `VMEDB`.`Account Master`.`Branch` AS `Branch`,
+        `VMEDB`.`Account Master`.`Account Type` AS `Account Type`,
+        `VMEDB`.`Account Master`.`Account Name` AS `Account Name`,
+        `VMEDB`.`Account Master`.`Account Number` AS `Account Number`,
+        `VMEDB`.`Cash & Bank`.`Nature of Transaction` AS `Nature of Transaction`,
+        `VMEDB`.`Cash & Bank`.`Cost Centre` AS `Cost Centre`,
+        `VMEDB`.`Cash & Bank`.`Accounthead` AS `AccountHead`,
+        `VMEDB`.`Cash & Bank`.`Party Type` AS `Party Type`,
+        `VMEDB`.`Cash & Bank`.`Party Name` AS `Party Name`,
+        `VMEDB`.`Cash & Bank`.`Description` AS `Description`,
+        (0 - `VMEDB`.`Cash & Bank`.`Amount`) AS `Net Amount`
+    FROM
+        (`VMEDB`.`Account Master`
+        JOIN `VMEDB`.`Cash & Bank` ON ((`VMEDB`.`Account Master`.`idAccount Master` = `VMEDB`.`Cash & Bank`.`AccountID`)))
+    HAVING (`VMEDB`.`Cash & Bank`.`Nature of Transaction` = 'Debit')
+-----------------------------------------------------------------------------------------------------------------------------
