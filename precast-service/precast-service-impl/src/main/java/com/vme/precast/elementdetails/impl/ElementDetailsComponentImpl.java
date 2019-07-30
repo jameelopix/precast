@@ -62,6 +62,8 @@ public class ElementDetailsComponentImpl implements ElementDetailsComponent {
             List<Double> lengthList = elementDetailsSearchDTO.getLengthList();
             List<Double> widthList = elementDetailsSearchDTO.getWidthList();
             List<Double> thicknessList = elementDetailsSearchDTO.getThicknessList();
+            List<Double> theoriticalQuantityList = elementDetailsSearchDTO.getTheoriticalQuantityList();
+            List<String> unitList = elementDetailsSearchDTO.getUnitList();
             List<String> mixDesignNameList = elementDetailsSearchDTO.getMixDesignNameList();
             List<Long> elementIdList = elementDetailsSearchDTO.getElementIdList();
 
@@ -71,6 +73,9 @@ public class ElementDetailsComponentImpl implements ElementDetailsComponent {
             FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.LENGTH, lengthList);
             FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.WIDTH, widthList);
             FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.THICKNESS, thicknessList);
+            FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.THEORITICALQUANTITY,
+                    theoriticalQuantityList);
+            FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.UNIT, unitList);
             FilterUtils.createEqualFilter(filters, ElementDetailsSearchDTO.ELEMENTID, elementIdList);
 
             if (CollectionUtils.isNotEmpty(filters)) {
@@ -109,6 +114,8 @@ public class ElementDetailsComponentImpl implements ElementDetailsComponent {
         target.setLength(source.getLength());
         target.setWidth(source.getWidth());
         target.setThickness(source.getThickness());
+        target.setTheoriticalQuantity(source.getTheoriticalQuantity());
+        target.setUnit(source.getUnit());
 
         if (source.getElementId() != null && !source.getElementId().equals(target.getElementId())) {
             Element element = elementRepo.findById(source.getElementId()).get();

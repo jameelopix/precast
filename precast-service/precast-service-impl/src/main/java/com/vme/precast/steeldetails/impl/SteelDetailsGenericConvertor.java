@@ -46,7 +46,6 @@ public class SteelDetailsGenericConvertor implements GenericConverter {
         target.setRawMaterialName(source.getRawMaterialName());
         target.setUnit(source.getUnit());
         target.setTheoriticalQuantity(source.getTheoriticalQuantity());
-        target.setActualQuantity(source.getActualQuantity());
         return target;
     }
 
@@ -56,7 +55,6 @@ public class SteelDetailsGenericConvertor implements GenericConverter {
         target.setRawMaterialName(source.getRawMaterialName());
         target.setUnit(source.getUnit());
         target.setTheoriticalQuantity(source.getTheoriticalQuantity());
-        target.setActualQuantity(source.getActualQuantity());
 
         if (RepoUtils.isNotProxy(source.getElement())) {
             target.setElementDTO(

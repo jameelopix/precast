@@ -13,7 +13,6 @@ public class SteelDetailsSearchDTO extends BaseSearchDTO {
     private List<String> rawMaterialNameList;
     private List<String> unitList;
     private List<Double> theoriticalQuantityList;
-    private List<Double> actualQuantityList;
     private List<ElementDTO> elementDTOList;
     private List<Long> elementIdList;
 
@@ -23,7 +22,6 @@ public class SteelDetailsSearchDTO extends BaseSearchDTO {
     public static String RAWMATERIALNAME = "rawMaterialName";
     public static String UNIT = "unit";
     public static String THEORITICALQUANTITY = "theoriticalQuantity";
-    public static String ACTUALQUANTITY = "actualQuantity";
     public static String ELEMENT = "element";
     public static String ELEMENTID = "element.id";
 
@@ -57,14 +55,6 @@ public class SteelDetailsSearchDTO extends BaseSearchDTO {
 
     public void setTheoriticalQuantityList(List<Double> theoriticalQuantityList) {
         this.theoriticalQuantityList = theoriticalQuantityList;
-    }
-
-    public List<Double> getActualQuantityList() {
-        return actualQuantityList;
-    }
-
-    public void setActualQuantityList(List<Double> actualQuantityList) {
-        this.actualQuantityList = actualQuantityList;
     }
 
     public List<ElementDTO> getElementDTOList() {

@@ -14,14 +14,6 @@ public interface SubContractorService extends BaseService {
     @FlowDescriptor(flow = "updatesubcontractor", request = "subContractorServiceRequest", response = "subContractorServiceResponse")
     public SubContractorServiceResponse updateSubContractor(SubContractorServiceRequest subContractorServiceRequest);
 
-    @FlowDescriptor(flow = "updatesubcontractoraddress", request = "subContractorServiceRequest", response = "subContractorServiceResponse")
-    public SubContractorServiceResponse updateSubContractorAddress(
-            SubContractorServiceRequest subContractorServiceRequest);
-
-    @FlowDescriptor(flow = "updatesubcontractorfinance", request = "subContractorServiceRequest", response = "subContractorServiceResponse")
-    public SubContractorServiceResponse updateSubContractorFinance(
-            SubContractorServiceRequest subContractorServiceRequest);
-
     @FlowDescriptor(flow = "deletesubcontractor", request = "subContractorServiceRequest", response = "subContractorServiceResponse")
     public SubContractorServiceResponse deleteSubContractor(SubContractorServiceRequest subContractorServiceRequest);
 }

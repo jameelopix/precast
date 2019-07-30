@@ -48,6 +48,8 @@ public class ElementDetailsGenericConvertor implements GenericConverter {
         target.setLength(source.getLength());
         target.setWidth(source.getWidth());
         target.setThickness(source.getThickness());
+        target.setTheoriticalQuantity(source.getTheoriticalQuantity());
+        target.setUnit(source.getUnit());
         return target;
     }
 
@@ -59,6 +61,8 @@ public class ElementDetailsGenericConvertor implements GenericConverter {
         target.setLength(source.getLength());
         target.setWidth(source.getWidth());
         target.setThickness(source.getThickness());
+        target.setTheoriticalQuantity(source.getTheoriticalQuantity());
+        target.setUnit(source.getUnit());
 
         if (RepoUtils.isNotProxy(source.getElement())) {
             target.setElementDTO(

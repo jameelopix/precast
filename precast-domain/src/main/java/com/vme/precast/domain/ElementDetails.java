@@ -29,6 +29,10 @@ public class ElementDetails extends BaseEntity {
 
     private Double thickness;
 
+    private Double theoriticalQuantity;
+
+    private String unit;
+
     @OneToOne(fetch = FetchType.LAZY)
     private Element element;
 
@@ -97,5 +101,21 @@ public class ElementDetails extends BaseEntity {
 
     public void setMixDesignName(String mixDesignName) {
         this.mixDesignName = mixDesignName;
+    }
+
+    public Double getTheoriticalQuantity() {
+        return theoriticalQuantity;
+    }
+
+    public void setTheoriticalQuantity(Double theoriticalQuantity) {
+        this.theoriticalQuantity = theoriticalQuantity;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 }

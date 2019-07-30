@@ -17,6 +17,8 @@ public class ProductionPlanSearchDTO extends BaseSearchDTO {
     private List<ProductionPlanStatus> productionPlanStatusList;
     private List<Date> plannedDateList;
     private List<Date> deliveredDateList;
+    private List<Date> erectedDateList;
+    private List<Integer> castedCountList;
 
     private boolean elementNeeded;
 
@@ -26,6 +28,8 @@ public class ProductionPlanSearchDTO extends BaseSearchDTO {
     public static String PRODUCTIONPLANSTATUS = "productionPlanStatus";
     public static String PLANNEDDATE = "plannedDate";
     public static String DELIVEREDDATE = "deliveredDate";
+    public static String ERECTEDDATE = "erectedDate";
+    public static String CASTEDCOUNT = "castedCount";
 
     public List<Long> getIdList() {
         return idList;
@@ -81,5 +85,21 @@ public class ProductionPlanSearchDTO extends BaseSearchDTO {
 
     public void setElementNeeded(boolean elementNeeded) {
         this.elementNeeded = elementNeeded;
+    }
+
+    public List<Integer> getCastedCountList() {
+        return castedCountList;
+    }
+
+    public void setCastedCountList(List<Integer> castedCountList) {
+        this.castedCountList = castedCountList;
+    }
+
+    public List<Date> getErectedDateList() {
+        return erectedDateList;
+    }
+
+    public void setErectedDateList(List<Date> erectedDateList) {
+        this.erectedDateList = erectedDateList;
     }
 }

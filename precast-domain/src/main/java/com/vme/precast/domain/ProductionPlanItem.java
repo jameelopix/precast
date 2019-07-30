@@ -25,7 +25,7 @@ public class ProductionPlanItem extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ProductionPlan productionPlan;
-    
+
     @Column(insertable = false, updatable = false, name = "productionPlan_id")
     private Long productionPlanId;
 

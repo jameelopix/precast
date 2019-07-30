@@ -25,8 +25,6 @@ public class SteelDetails extends BaseEntity {
 
     private Double theoriticalQuantity;
 
-    private Double actualQuantity;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Element element;
 
@@ -63,14 +61,6 @@ public class SteelDetails extends BaseEntity {
 
     public void setTheoriticalQuantity(Double theoriticalQuantity) {
         this.theoriticalQuantity = theoriticalQuantity;
-    }
-
-    public Double getActualQuantity() {
-        return actualQuantity;
-    }
-
-    public void setActualQuantity(Double actualQuantity) {
-        this.actualQuantity = actualQuantity;
     }
 
     public Element getElement() {

@@ -7,12 +7,14 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vme.precast.address.api.AddressDTO;
+import com.vme.precast.address.api.AddressService;
 import com.vme.precast.address.api.AddressServiceRequest;
 import com.vme.precast.address.api.AddressServiceResponse;
 import com.vme.precast.domain.Address;
 import com.vme.precast.domain.FinancialDetail;
 import com.vme.precast.domain.SubContractor;
 import com.vme.precast.financialdetail.api.FinancialDetailDTO;
+import com.vme.precast.financialdetail.api.FinancialDetailService;
 import com.vme.precast.financialdetail.api.FinancialDetailServiceRequest;
 import com.vme.precast.financialdetail.api.FinancialDetailServiceResponse;
 import com.vme.precast.repository.AddressRepo;
@@ -45,8 +47,17 @@ public class SubContractorComponentImpl implements SubContractorComponent {
     @Autowired
     ConversionUtility conversionUtility;
 
+    @Autowired
+    AddressService addressService;
+
+    @Autowired
+    FinancialDetailService financialDetailService;
+
     @Override
     public SubContractorServiceResponse createSubContractor(SubContractorServiceRequest subContractorServiceRequest) {
+        this.createAddress(subContractorServiceRequest);
+        this.createFinancialDetail(subContractorServiceRequest);
+
         SubContractorDTO subContractorDTO = subContractorServiceRequest.getSubContractorDTO();
         SubContractor subcontractor = (SubContractor) conversionUtility.convert(subContractorDTO,
                 SubContractorDTO.class, SubContractor.class);
@@ -150,7 +161,31 @@ public class SubContractorComponentImpl implements SubContractorComponent {
         return null;
     }
 
-    @Override
+//    @Override
+    private void createAddress(SubContractorServiceRequest subContractorServiceRequest) {
+        AddressServiceRequest addressServiceRequest = new AddressServiceRequest();
+        AddressDTO addressDTO = new AddressDTO();
+        addressServiceRequest.setAddressDTO(addressDTO);
+
+        long addressId = addressService.createAddress(addressServiceRequest).getAddressDTO().getId();
+
+        SubContractorDTO subContractorDTO = subContractorServiceRequest.getSubContractorDTO();
+        subContractorDTO.setAddressId(addressId);
+    }
+
+//    @Override
+    private void createFinancialDetail(SubContractorServiceRequest subContractorServiceRequest) {
+        FinancialDetailServiceRequest financialDetailServiceRequest = new FinancialDetailServiceRequest();
+        FinancialDetailDTO financialDetailDTO = new FinancialDetailDTO();
+        financialDetailServiceRequest.setFinancialDetailDTO(financialDetailDTO);
+
+        long financialDetailId = financialDetailService.createFinancialDetail(financialDetailServiceRequest)
+                .getFinancialDetailDTO().getId();
+
+        SubContractorDTO subContractorDTO = subContractorServiceRequest.getSubContractorDTO();
+        subContractorDTO.setFinancialDetailId(financialDetailId);
+    }
+
     public AddressServiceRequest createAddressServiceRequest(SubContractorServiceRequest subContractorServiceRequest) {
         AddressServiceRequest addressServiceRequest = new AddressServiceRequest();
         AddressDTO addressDTO = new AddressDTO();
@@ -158,7 +193,6 @@ public class SubContractorComponentImpl implements SubContractorComponent {
         return addressServiceRequest;
     }
 
-    @Override
     public FinancialDetailServiceRequest createFinancialDetailServiceRequest(
             SubContractorServiceRequest subContractorServiceRequest) {
         FinancialDetailServiceRequest financialDetailServiceRequest = new FinancialDetailServiceRequest();
@@ -167,7 +201,6 @@ public class SubContractorComponentImpl implements SubContractorComponent {
         return financialDetailServiceRequest;
     }
 
-    @Override
     public void updateSubContractorServiceRequest(SubContractorServiceRequest subContractorServiceRequest,
             AddressServiceResponse addressServiceResponse,
             FinancialDetailServiceResponse financialDetailServiceResponse) {

@@ -58,13 +58,11 @@ public class SteelDetailsComponentImpl implements SteelDetailsComponent {
             List<String> rawMaterialNameList = steelDetailsSearchDTO.getRawMaterialNameList();
             List<Long> elementIdList = steelDetailsSearchDTO.getElementIdList();
             List<String> unitList = steelDetailsSearchDTO.getUnitList();
-            List<Double> actualQuantityList = steelDetailsSearchDTO.getActualQuantityList();
             List<Double> theoriticalQuantityList = steelDetailsSearchDTO.getTheoriticalQuantityList();
 
             FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.ID, idList);
             FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.RAWMATERIALNAME, rawMaterialNameList);
             FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.UNIT, unitList);
-            FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.ACTUALQUANTITY, actualQuantityList);
             FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.THEORITICALQUANTITY, theoriticalQuantityList);
             FilterUtils.createEqualFilter(filters, SteelDetailsSearchDTO.ELEMENTID, elementIdList);
 
@@ -101,7 +99,6 @@ public class SteelDetailsComponentImpl implements SteelDetailsComponent {
         target.setRawMaterialName(source.getRawMaterialName());
         target.setUnit(source.getUnit());
         target.setTheoriticalQuantity(source.getTheoriticalQuantity());
-        target.setActualQuantity(source.getActualQuantity());
 
         if (source.getElementId() != null && !source.getElementId().equals(target.getElementId())) {
             Element element = elementRepo.findById(source.getElementId()).get();

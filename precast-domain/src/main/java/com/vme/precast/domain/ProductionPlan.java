@@ -33,11 +33,16 @@ public class ProductionPlan extends BaseEntity {
 
     private ProductionPlanStatus productionPlanStatus;
 
+    private int castedCount;
+
     @Temporal(TemporalType.DATE)
     private Date plannedDate;
 
     @Temporal(TemporalType.DATE)
     private Date deliveredDate;
+
+    @Temporal(TemporalType.DATE)
+    private Date erectedDate;
 
     public Long getId() {
         return id;
@@ -85,5 +90,21 @@ public class ProductionPlan extends BaseEntity {
 
     public void setElementId(Long elementId) {
         this.elementId = elementId;
+    }
+
+    public int getCastedCount() {
+        return castedCount;
+    }
+
+    public void setCastedCount(int castedCount) {
+        this.castedCount = castedCount;
+    }
+
+    public Date getErectedDate() {
+        return erectedDate;
+    }
+
+    public void setErectedDate(Date erectedDate) {
+        this.erectedDate = erectedDate;
     }
 }

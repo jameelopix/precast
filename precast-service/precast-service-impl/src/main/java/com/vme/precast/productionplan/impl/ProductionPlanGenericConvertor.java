@@ -46,6 +46,8 @@ public class ProductionPlanGenericConvertor implements GenericConverter {
         target.setProductionPlanStatus(source.getProductionPlanStatus());
         target.setPlannedDate(source.getPlannedDate());
         target.setDeliveredDate(source.getDeliveredDate());
+        target.setErectedDate(source.getErectedDate());
+        target.setCastedCount(source.getCastedCount());
 
         if (source.getElementDTO() != null) {
             target.setElement(
@@ -61,6 +63,8 @@ public class ProductionPlanGenericConvertor implements GenericConverter {
         target.setProductionPlanStatus(source.getProductionPlanStatus());
         target.setPlannedDate(source.getPlannedDate());
         target.setDeliveredDate(source.getDeliveredDate());
+        target.setErectedDate(source.getErectedDate());
+        target.setCastedCount(source.getCastedCount());
 
         if (RepoUtils.isNotProxy(source.getElement())) {
             target.setElementDTO(

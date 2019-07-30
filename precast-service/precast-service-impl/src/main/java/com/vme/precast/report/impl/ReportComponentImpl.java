@@ -49,19 +49,10 @@ public class ReportComponentImpl implements ReportComponent {
     }
 
     private ReportServiceResponse createProductionPlanReport(ReportServiceRequest reportServiceRequest) {
-        ReportSearchDTO reportSearchDTO = reportServiceRequest.getReportSearchDTO();
-
-        List<Long> projectIdList = reportSearchDTO.getProjectIdList();
-        List<Long> elementTypeIdList = reportSearchDTO.getElementTypeIdList();
-        List<Long> elementIdList = reportSearchDTO.getElementIdList();
-        List<Element> elementList = getElementList(projectIdList, elementTypeIdList, elementIdList);
-
         List<Long> elementIds = new LinkedList<Long>();
         Map<Long, Element> elementMap = new HashMap<>();
-        for (Element element : elementList) {
-            elementIds.add(element.getId());
-            elementMap.put(element.getId(), element);
-        }
+
+        populateElementIds(reportServiceRequest.getReportSearchDTO(), elementIds, elementMap);
 
         List<ProductionPlanReportDTO> productionPlanReportDTOList = new LinkedList<>();
         if (!elementIds.isEmpty()) {
@@ -93,6 +84,19 @@ public class ReportComponentImpl implements ReportComponent {
         ReportServiceResponse reportServiceResponse = new ReportServiceResponse();
         reportServiceResponse.setProductionPlanReportDTOList(productionPlanReportDTOList);
         return reportServiceResponse;
+    }
+
+    private void populateElementIds(ReportSearchDTO reportSearchDTO, List<Long> elementIds,
+            Map<Long, Element> elementMap) {
+        List<Long> projectIdList = reportSearchDTO.getProjectIdList();
+        List<Long> elementTypeIdList = reportSearchDTO.getElementTypeIdList();
+        List<Long> elementIdList = reportSearchDTO.getElementIdList();
+        List<Element> elementList = getElementList(projectIdList, elementTypeIdList, elementIdList);
+
+        for (Element element : elementList) {
+            elementIds.add(element.getId());
+            elementMap.put(element.getId(), element);
+        }
     }
 
     private List<ProductionPlan> getProductionPlanList(List<Long> elementIdList) {

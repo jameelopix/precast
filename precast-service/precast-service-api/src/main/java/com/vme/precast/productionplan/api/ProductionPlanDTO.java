@@ -16,6 +16,8 @@ public class ProductionPlanDTO extends BaseDTO {
     private ProductionPlanStatus productionPlanStatus;
     private Date plannedDate;
     private Date deliveredDate;
+    private Date erectedDate;
+    private int castedCount;
 
     public Long getId() {
         return id;
@@ -63,5 +65,21 @@ public class ProductionPlanDTO extends BaseDTO {
 
     public void setDeliveredDate(Date deliveredDate) {
         this.deliveredDate = deliveredDate;
+    }
+
+    public int getCastedCount() {
+        return castedCount;
+    }
+
+    public void setCastedCount(int castedCount) {
+        this.castedCount = castedCount;
+    }
+
+    public Date getErectedDate() {
+        return erectedDate;
+    }
+
+    public void setErectedDate(Date erectedDate) {
+        this.erectedDate = erectedDate;
     }
 }

@@ -13,6 +13,8 @@ public class ElementDetailsDTO extends BaseDTO {
     private Double length;
     private Double width;
     private Double thickness;
+    private Double theoriticalQuantity;
+    private String unit;
     private ElementDTO elementDTO;
     private Long elementId;
 
@@ -78,6 +80,22 @@ public class ElementDetailsDTO extends BaseDTO {
 
     public void setElementId(Long elementId) {
         this.elementId = elementId;
+    }
+
+    public Double getTheoriticalQuantity() {
+        return theoriticalQuantity;
+    }
+
+    public void setTheoriticalQuantity(Double theoriticalQuantity) {
+        this.theoriticalQuantity = theoriticalQuantity;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
 
 }

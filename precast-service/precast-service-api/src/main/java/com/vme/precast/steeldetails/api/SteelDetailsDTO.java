@@ -10,7 +10,6 @@ public class SteelDetailsDTO extends BaseDTO {
     private String rawMaterialName;
     private String unit;
     private Double theoriticalQuantity;
-    private Double actualQuantity;
     private ElementDTO elementDTO;
     private Long elementId;
 
@@ -36,14 +35,6 @@ public class SteelDetailsDTO extends BaseDTO {
 
     public void setTheoriticalQuantity(Double theoriticalQuantity) {
         this.theoriticalQuantity = theoriticalQuantity;
-    }
-
-    public Double getActualQuantity() {
-        return actualQuantity;
-    }
-
-    public void setActualQuantity(Double actualQuantity) {
-        this.actualQuantity = actualQuantity;
     }
 
     public ElementDTO getElementDTO() {

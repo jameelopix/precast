@@ -44,6 +44,7 @@ public class ProductionPlanComponentImpl implements ProductionPlanComponent {
         ProductionPlan productionplan = new ProductionPlan();
         productionplan.setElement(element);
         productionplan.setProductionPlanStatus(ProductionPlanStatus.OPEN);
+        productionplan.setCastedCount(0);
         productionPlanRepo.save(productionplan);
         return null;
     }
@@ -60,12 +61,16 @@ public class ProductionPlanComponentImpl implements ProductionPlanComponent {
             List<Long> idList = productionPlanSearchDTO.getIdList();
             List<Date> deliveredDateList = productionPlanSearchDTO.getDeliveredDateList();
             List<Date> plannedDateList = productionPlanSearchDTO.getPlannedDateList();
+            List<Date> erectedDateList = productionPlanSearchDTO.getErectedDateList();
+            List<Integer> castedCountList = productionPlanSearchDTO.getCastedCountList();
             List<Long> elementIdList = productionPlanSearchDTO.getElementIdList();
             List<ProductionPlanStatus> productionPlanStatusList = productionPlanSearchDTO.getProductionPlanStatusList();
 
             FilterUtils.createEqualFilter(filters, ProductionPlanSearchDTO.ID, idList);
             FilterUtils.createEqualFilter(filters, ProductionPlanSearchDTO.DELIVEREDDATE, deliveredDateList);
             FilterUtils.createEqualFilter(filters, ProductionPlanSearchDTO.PLANNEDDATE, plannedDateList);
+            FilterUtils.createEqualFilter(filters, ProductionPlanSearchDTO.ERECTEDDATE, erectedDateList);
+            FilterUtils.createEqualFilter(filters, ProductionPlanSearchDTO.CASTEDCOUNT, castedCountList);
             FilterUtils.createEqualFilter(filters, ProductionPlanSearchDTO.ELEMENTID, elementIdList);
             FilterUtils.createEqualFilter(filters, ProductionPlanSearchDTO.PRODUCTIONPLANSTATUS,
                     productionPlanStatusList);
@@ -110,6 +115,9 @@ public class ProductionPlanComponentImpl implements ProductionPlanComponent {
         }
         if (source.getDeliveredDate() != null) {
             target.setDeliveredDate(source.getDeliveredDate());
+        }
+        if (source.getErectedDate() != null) {
+            target.setErectedDate(source.getErectedDate());
         }
 
         productionPlanRepo.save(target);

@@ -15,9 +15,11 @@ public class ElementDetailsSearchDTO extends BaseSearchDTO {
     private List<Double> lengthList;
     private List<Double> widthList;
     private List<Double> thicknessList;
+    private List<Double> theoriticalQuantityList;
+    private List<String> unitList;
     private List<ElementDTO> elementDTOList;
     private List<Long> elementIdList;
-    
+
     private Boolean elementNeeded;
 
     public static String ID = "id";
@@ -25,6 +27,8 @@ public class ElementDetailsSearchDTO extends BaseSearchDTO {
     public static String WEIGHT = "weight";
     public static String LENGTH = "length";
     public static String WIDTH = "width";
+    public static String THEORITICALQUANTITY = "theoriticalQuantity";
+    public static String UNIT = "unit";
     public static String THICKNESS = "thickness";
     public static String ELEMENT = "element";
     public static String ELEMENTID = "element.id";
@@ -99,6 +103,22 @@ public class ElementDetailsSearchDTO extends BaseSearchDTO {
 
     public void setElementNeeded(Boolean elementNeeded) {
         this.elementNeeded = elementNeeded;
+    }
+
+    public List<Double> getTheoriticalQuantityList() {
+        return theoriticalQuantityList;
+    }
+
+    public void setTheoriticalQuantityList(List<Double> theoriticalQuantityList) {
+        this.theoriticalQuantityList = theoriticalQuantityList;
+    }
+
+    public List<String> getUnitList() {
+        return unitList;
+    }
+
+    public void setUnitList(List<String> unitList) {
+        this.unitList = unitList;
     }
 
 }

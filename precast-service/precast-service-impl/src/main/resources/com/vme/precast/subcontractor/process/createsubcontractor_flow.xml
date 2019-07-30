@@ -12,42 +12,22 @@
 			<attribute name="name" value="endValidation"></attribute>
 		</evaluate>
 		<transition on="endValidation.success"
-			to="createAddressRequest" />
+			to="createSubContractor" />
 	</action-state>
 
-	<action-state id="createAddressRequest">
-		<evaluate
-			expression="subContractorComponent.createAddressServiceRequest(subContractorServiceRequest)"
-			result="flowScope.addressServiceRequest" />
-		<transition to="createAddress" />
-	</action-state>
+	<!-- <action-state id="createAddress"> -->
+	<!-- <evaluate -->
+	<!-- expression="subContractorComponent.createAddress(subContractorServiceRequest)" 
+		/> -->
+	<!-- <transition to="createFinancialDetail" /> -->
+	<!-- </action-state> -->
 
-	<action-state id="createAddress">
-		<evaluate
-			expression="addressService.createAddress(flowScope.addressServiceRequest)"
-			result="flowScope.addressServiceResponse" />
-		<transition to="createFinancialDetailServiceRequest" />
-	</action-state>
-
-	<action-state id="createFinancialDetailServiceRequest">
-		<evaluate
-			expression="subContractorComponent.createFinancialDetailServiceRequest(subContractorServiceRequest)"
-			result="flowScope.financialDetailServiceRequest" />
-		<transition to="createFinancialDetail" />
-	</action-state>
-
-	<action-state id="createFinancialDetail">
-		<evaluate
-			expression="financialDetailService.createFinancialDetail(flowScope.financialDetailServiceRequest)"
-			result="flowScope.financialDetailServiceResponse" />
-		<transition to="updateSubContractorServiceRequest" />
-	</action-state>
-
-	<action-state id="updateSubContractorServiceRequest">
-		<evaluate
-			expression="subContractorComponent.updateSubContractorServiceRequest(subContractorServiceRequest,flowScope.addressServiceResponse,flowScope.financialDetailServiceResponse)" />
-		<transition to="createSubContractor" />
-	</action-state>
+	<!-- <action-state id="createFinancialDetail"> -->
+	<!-- <evaluate -->
+	<!-- expression="subContractorComponent.createFinancialDetail(subContractorServiceRequest)" 
+		/> -->
+	<!-- <transition to="createSubContractor" /> -->
+	<!-- </action-state> -->
 
 	<action-state id="createSubContractor">
 		<evaluate
