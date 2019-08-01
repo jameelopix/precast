@@ -1,56 +1,27 @@
-package com.vme.precast.domain;
+package com.vme.precast.productionplan.api;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import coliseum.service.BaseDTO;
 
-import coliseum.jpa.domain.BaseEntity;
-
-@Entity
-public class ProductionPlanItem extends BaseEntity {
+public class ProductionPlanItemDTO extends BaseDTO {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ProductionPlan productionPlan;
-
-    @Column(insertable = false, updatable = false, name = "productionPlan_id")
+    private ProductionPlanDTO productionPlanDTO;
     private Long productionPlanId;
-
     private int sequenceOrder;
-
-    @Temporal(TemporalType.DATE)
     private Date plannedDate;
-
-    @Temporal(TemporalType.DATE)
     private Date castStartDate;
-
-    @Temporal(TemporalType.DATE)
     private Date castEndDate;
-
-    @Temporal(TemporalType.DATE)
     private Date deliveredDate;
-
-    @Temporal(TemporalType.DATE)
     private Date erectedDate;
-
     private String disapprovedReason;
-
     private String disapprovedDesc;
-
     private Boolean disapproved;
+
+    private List<ProductionPlanItemDetailDTO> productionPlanItemDetailDTOList;
 
     public Long getId() {
         return id;
@@ -60,12 +31,12 @@ public class ProductionPlanItem extends BaseEntity {
         this.id = id;
     }
 
-    public ProductionPlan getProductionPlan() {
-        return productionPlan;
+    public ProductionPlanDTO getProductionPlanDTO() {
+        return productionPlanDTO;
     }
 
-    public void setProductionPlan(ProductionPlan productionPlan) {
-        this.productionPlan = productionPlan;
+    public void setProductionPlanDTO(ProductionPlanDTO productionPlanDTO) {
+        this.productionPlanDTO = productionPlanDTO;
     }
 
     public Long getProductionPlanId() {
@@ -146,5 +117,13 @@ public class ProductionPlanItem extends BaseEntity {
 
     public void setDisapproved(Boolean disapproved) {
         this.disapproved = disapproved;
+    }
+
+    public List<ProductionPlanItemDetailDTO> getProductionPlanItemDetailDTOList() {
+        return productionPlanItemDetailDTOList;
+    }
+
+    public void setProductionPlanItemDetailDTOList(List<ProductionPlanItemDetailDTO> productionPlanItemDetailDTOList) {
+        this.productionPlanItemDetailDTOList = productionPlanItemDetailDTOList;
     }
 }

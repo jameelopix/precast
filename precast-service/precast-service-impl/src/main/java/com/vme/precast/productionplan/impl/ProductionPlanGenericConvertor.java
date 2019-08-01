@@ -44,33 +44,22 @@ public class ProductionPlanGenericConvertor implements GenericConverter {
         ProductionPlan target = new ProductionPlan();
         target.setId(source.getId());
         target.setProductionPlanStatus(source.getProductionPlanStatus());
-        target.setPlannedDate(source.getPlannedDate());
-        target.setDeliveredDate(source.getDeliveredDate());
-        target.setErectedDate(source.getErectedDate());
         target.setCastedCount(source.getCastedCount());
-
-        if (source.getElementDTO() != null) {
-            target.setElement(
-                    (Element) conversionUtility.convert(source.getElementDTO(), ElementDTO.class, Element.class));
-        }
-        target.setElementId(source.getElementId());
         return target;
+
     }
 
     private Object convertToProductionPlanDTO(ProductionPlan source) {
         ProductionPlanDTO target = new ProductionPlanDTO();
         target.setId(source.getId());
         target.setProductionPlanStatus(source.getProductionPlanStatus());
-        target.setPlannedDate(source.getPlannedDate());
-        target.setDeliveredDate(source.getDeliveredDate());
-        target.setErectedDate(source.getErectedDate());
         target.setCastedCount(source.getCastedCount());
 
         if (RepoUtils.isNotProxy(source.getElement())) {
             target.setElementDTO(
                     (ElementDTO) conversionUtility.convert(source.getElement(), Element.class, ElementDTO.class));
         }
-        target.setElementId(source.getElement().getId());
+        target.setElementId(source.getElementId());
         return target;
     }
 }

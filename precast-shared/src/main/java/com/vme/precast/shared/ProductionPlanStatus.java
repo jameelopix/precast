@@ -1,5 +1,5 @@
 package com.vme.precast.shared;
 
 public enum ProductionPlanStatus {
-    OPEN, PLANNED, CASTED, RECASTED, DELIVERED, ERECTED
+    OPEN, PLANNED, INPROGRESS, CASTED, REJECTED, DELIVERED, ERECTED
 }

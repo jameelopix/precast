@@ -10,6 +10,8 @@ public class ProductionPlanServiceRequest extends BaseServiceRequest {
 
     private ProductionPlanDTO productionPlanDTO;
 
+    private ProductionPlanItemDTO productionPlanItemDTO;
+
     private ElementDTO elementDTO;
 
     private ProductionPlanSearchDTO productionPlanSearchDTO;
@@ -36,5 +38,13 @@ public class ProductionPlanServiceRequest extends BaseServiceRequest {
 
     public void setElementDTO(ElementDTO elementDTO) {
         this.elementDTO = elementDTO;
+    }
+
+    public ProductionPlanItemDTO getProductionPlanItemDTO() {
+        return productionPlanItemDTO;
+    }
+
+    public void setProductionPlanItemDTO(ProductionPlanItemDTO productionPlanItemDTO) {
+        this.productionPlanItemDTO = productionPlanItemDTO;
     }
 }

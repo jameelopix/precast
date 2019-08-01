@@ -3,42 +3,53 @@ package com.vme.precast.productionplan.controller;
 import java.util.List;
 
 import com.vme.precast.productionplan.api.ProductionPlanDTO;
+import com.vme.precast.productionplan.api.ProductionPlanItemDTO;
 import com.vme.precast.productionplan.api.ProductionPlanSearchDTO;
 
 import coliseum.web.BaseClientModel;
 
 public class ProductionPlanClientModel extends BaseClientModel {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
- private ProductionPlanDTO productionPlanDTO;
+    private ProductionPlanDTO productionPlanDTO;
 
- private ProductionPlanSearchDTO productionPlanSearchDTO;
+    private ProductionPlanItemDTO productionPlanItemDTO;
 
- private List<ProductionPlanDTO> productionPlanDTOList;
+    private ProductionPlanSearchDTO productionPlanSearchDTO;
 
- public ProductionPlanDTO getProductionPlanDTO() {
- return productionPlanDTO;
- }
+    private List<ProductionPlanDTO> productionPlanDTOList;
 
- public void setProductionPlanDTO(ProductionPlanDTO productionPlanDTO) {
- this.productionPlanDTO = productionPlanDTO;
- }
+    public ProductionPlanDTO getProductionPlanDTO() {
+        return productionPlanDTO;
+    }
 
- public List<ProductionPlanDTO> getProductionPlanDTOList() {
- return productionPlanDTOList;
- }
+    public void setProductionPlanDTO(ProductionPlanDTO productionPlanDTO) {
+        this.productionPlanDTO = productionPlanDTO;
+    }
 
- public void setProductionPlanDTOList(List<ProductionPlanDTO> productionPlanDTOList) {
- this.productionPlanDTOList = productionPlanDTOList;
- }
+    public List<ProductionPlanDTO> getProductionPlanDTOList() {
+        return productionPlanDTOList;
+    }
 
- public ProductionPlanSearchDTO getProductionPlanSearchDTO() {
- return productionPlanSearchDTO;
- }
+    public void setProductionPlanDTOList(List<ProductionPlanDTO> productionPlanDTOList) {
+        this.productionPlanDTOList = productionPlanDTOList;
+    }
 
- public void setProductionPlanSearchDTO(ProductionPlanSearchDTO productionPlanSearchDTO) {
- this.productionPlanSearchDTO = productionPlanSearchDTO;
- }
+    public ProductionPlanSearchDTO getProductionPlanSearchDTO() {
+        return productionPlanSearchDTO;
+    }
+
+    public void setProductionPlanSearchDTO(ProductionPlanSearchDTO productionPlanSearchDTO) {
+        this.productionPlanSearchDTO = productionPlanSearchDTO;
+    }
+
+    public ProductionPlanItemDTO getProductionPlanItemDTO() {
+        return productionPlanItemDTO;
+    }
+
+    public void setProductionPlanItemDTO(ProductionPlanItemDTO productionPlanItemDTO) {
+        this.productionPlanItemDTO = productionPlanItemDTO;
+    }
 
 }

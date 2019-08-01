@@ -74,8 +74,8 @@ public class ReportComponentImpl implements ReportComponent {
                 reportDTO.setFloor(element.getFloor());
 
                 reportDTO.setProductionPlanStatus(productionPlan.getProductionPlanStatus());
-                reportDTO.setDeliveredDate(productionPlan.getDeliveredDate());
-                reportDTO.setPlannedDate(productionPlan.getPlannedDate());
+//                reportDTO.setDeliveredDate(productionPlan.getDeliveredDate());
+//                reportDTO.setPlannedDate(productionPlan.getPlannedDate());
 
                 productionPlanReportDTOList.add(reportDTO);
             }

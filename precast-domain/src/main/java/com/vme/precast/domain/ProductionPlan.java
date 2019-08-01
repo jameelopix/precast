@@ -1,16 +1,13 @@
 package com.vme.precast.domain;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import com.vme.precast.shared.ProductionPlanStatus;
 
@@ -31,18 +28,21 @@ public class ProductionPlan extends BaseEntity {
     @Column(insertable = false, updatable = false, name = "element_id")
     private Long elementId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Project project;
+
+    @Column(insertable = false, updatable = false, name = "project_id")
+    private Long projectId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private ElementType elementType;
+
+    @Column(insertable = false, updatable = false, name = "elementType_id")
+    private Long elementTypeId;
+
     private ProductionPlanStatus productionPlanStatus;
 
     private int castedCount;
-
-    @Temporal(TemporalType.DATE)
-    private Date plannedDate;
-
-    @Temporal(TemporalType.DATE)
-    private Date deliveredDate;
-
-    @Temporal(TemporalType.DATE)
-    private Date erectedDate;
 
     public Long getId() {
         return id;
@@ -50,6 +50,38 @@ public class ProductionPlan extends BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
+
+    public ElementType getElementType() {
+        return elementType;
+    }
+
+    public void setElementType(ElementType elementType) {
+        this.elementType = elementType;
+    }
+
+    public Long getElementTypeId() {
+        return elementTypeId;
+    }
+
+    public void setElementTypeId(Long elementTypeId) {
+        this.elementTypeId = elementTypeId;
     }
 
     public Element getElement() {
@@ -60,30 +92,6 @@ public class ProductionPlan extends BaseEntity {
         this.element = element;
     }
 
-    public ProductionPlanStatus getProductionPlanStatus() {
-        return productionPlanStatus;
-    }
-
-    public void setProductionPlanStatus(ProductionPlanStatus productionPlanStatus) {
-        this.productionPlanStatus = productionPlanStatus;
-    }
-
-    public Date getPlannedDate() {
-        return plannedDate;
-    }
-
-    public void setPlannedDate(Date plannedDate) {
-        this.plannedDate = plannedDate;
-    }
-
-    public Date getDeliveredDate() {
-        return deliveredDate;
-    }
-
-    public void setDeliveredDate(Date deliveredDate) {
-        this.deliveredDate = deliveredDate;
-    }
-
     public Long getElementId() {
         return elementId;
     }
@@ -92,19 +100,19 @@ public class ProductionPlan extends BaseEntity {
         this.elementId = elementId;
     }
 
+    public ProductionPlanStatus getProductionPlanStatus() {
+        return productionPlanStatus;
+    }
+
+    public void setProductionPlanStatus(ProductionPlanStatus productionPlanStatus) {
+        this.productionPlanStatus = productionPlanStatus;
+    }
+
     public int getCastedCount() {
         return castedCount;
     }
 
     public void setCastedCount(int castedCount) {
         this.castedCount = castedCount;
-    }
-
-    public Date getErectedDate() {
-        return erectedDate;
-    }
-
-    public void setErectedDate(Date erectedDate) {
-        this.erectedDate = erectedDate;
     }
 }

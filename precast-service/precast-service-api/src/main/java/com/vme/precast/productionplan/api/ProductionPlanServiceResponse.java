@@ -6,15 +6,25 @@ import coliseum.service.BaseServiceResponse;
 
 public class ProductionPlanServiceResponse extends BaseServiceResponse {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
- private List<ProductionPlanDTO> productionPlanDTOList;
+    private List<ProductionPlanDTO> productionPlanDTOList;
 
- public List<ProductionPlanDTO> getProductionPlanDTOList() {
- return productionPlanDTOList;
- }
+    private ProductionPlanItemDTO productionPlanItemDTO;
 
- public void setProductionPlanDTOList(List<ProductionPlanDTO> productionPlanDTOList) {
- this.productionPlanDTOList = productionPlanDTOList;
- }
+    public List<ProductionPlanDTO> getProductionPlanDTOList() {
+        return productionPlanDTOList;
+    }
+
+    public void setProductionPlanDTOList(List<ProductionPlanDTO> productionPlanDTOList) {
+        this.productionPlanDTOList = productionPlanDTOList;
+    }
+
+    public ProductionPlanItemDTO getProductionPlanItemDTO() {
+        return productionPlanItemDTO;
+    }
+
+    public void setProductionPlanItemDTO(ProductionPlanItemDTO productionPlanItemDTO) {
+        this.productionPlanItemDTO = productionPlanItemDTO;
+    }
 }

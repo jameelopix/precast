@@ -1,15 +1,24 @@
-package com.vme.precast.productionplanitem.impl;
+package com.vme.precast.productionplan.impl;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.TypeDescriptor;
 import org.springframework.core.convert.converter.GenericConverter;
 
+import com.vme.precast.domain.ProductionPlan;
 import com.vme.precast.domain.ProductionPlanItem;
-import com.vme.precast.productionplanitem.api.ProductionPlanItemDTO;
+import com.vme.precast.productionplan.api.ProductionPlanDTO;
+import com.vme.precast.productionplan.api.ProductionPlanItemDTO;
+
+import coliseum.jpa.RepoUtils;
+import coliseum.service.ConversionUtility;
 
 public class ProductionPlanItemGenericConvertor implements GenericConverter {
+
+    @Autowired
+    ConversionUtility conversionUtility;
 
     @Override
     public Set<ConvertiblePair> getConvertibleTypes() {
@@ -35,11 +44,14 @@ public class ProductionPlanItemGenericConvertor implements GenericConverter {
         ProductionPlanItem target = new ProductionPlanItem();
         target.setId(source.getId());
         target.setSequenceOrder(source.getSequenceOrder());
-        target.setCastedDate(source.getCastedDate());
+        target.setPlannedDate(source.getPlannedDate());
+        target.setCastStartDate(source.getCastStartDate());
+        target.setCastEndDate(source.getCastEndDate());
+        target.setDeliveredDate(source.getDeliveredDate());
+        target.setErectedDate(source.getErectedDate());
         target.setDisapprovedReason(source.getDisapprovedReason());
-        target.setDisapproved(source.isDisapproved());
-
-//        target.setProductionPlan(source.getProductionPlan());
+        target.setDisapprovedDesc(source.getDisapprovedDesc());
+        target.setDisapproved(source.getDisapproved());
         return target;
     }
 
@@ -47,11 +59,20 @@ public class ProductionPlanItemGenericConvertor implements GenericConverter {
         ProductionPlanItemDTO target = new ProductionPlanItemDTO();
         target.setId(source.getId());
         target.setSequenceOrder(source.getSequenceOrder());
-        target.setCastedDate(source.getCastedDate());
+        target.setPlannedDate(source.getPlannedDate());
+        target.setCastStartDate(source.getCastStartDate());
+        target.setCastEndDate(source.getCastEndDate());
+        target.setDeliveredDate(source.getDeliveredDate());
+        target.setErectedDate(source.getErectedDate());
         target.setDisapprovedReason(source.getDisapprovedReason());
-        target.setDisapproved(source.isDisapproved());
+        target.setDisapprovedDesc(source.getDisapprovedDesc());
+        target.setDisapproved(source.getDisapproved());
 
-//        target.setProductionPlan(source.getProductionPlan());
+        if (RepoUtils.isNotProxy(source.getProductionPlan())) {
+            target.setProductionPlanDTO((ProductionPlanDTO) conversionUtility.convert(source.getProductionPlan(),
+                    ProductionPlan.class, ProductionPlanDTO.class));
+        }
+        target.setProductionPlanId(source.getProductionPlanId());
         return target;
     }
 }
